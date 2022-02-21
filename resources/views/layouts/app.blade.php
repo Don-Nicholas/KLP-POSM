@@ -77,11 +77,11 @@
 
 
                     <li class="active">
-                        <a href="/customer"> <i class="menu-icon fa fa-tree"></i>Customer List </a>
+                        <a href="/customers"> <i class="menu-icon fa fa-tree"></i>Customer List </a>
                     </li>
 
                     <li class="active">
-                        <a href="/supplier2"> <i class="menu-icon fa fa-list-alt"></i>Supplier</a>
+                        <a href="/suppliers"> <i class="menu-icon fa fa-list-alt"></i>Supplier</a>
                     </li>
 
                     <li class="active">
@@ -101,7 +101,7 @@
                     </li>
 
                     <li class="active">
-                        <a href="/flagcustomer"> <i class="menu-icon fa fa-cog"></i>User Logs</a>
+                        <a href="/userlogs"> <i class="menu-icon fa fa-cog"></i>User Logs</a>
                     </li>
 
             </div>
