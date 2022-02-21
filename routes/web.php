@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('dashboards.dashboard');
 });
 
-Route::get('/sales', function() {
-    return view('sales.index');
-});
+Route::resource('/customers', 'CustomersController');
+Route::resource('/suppliers', 'SuppliersController');
+Route::resource('/sales', 'SalesController');
+Route::resource('/inventory', 'InventoryController');
+Route::resource('/purchase', 'SalesInvoicesController');
+Route::resource('/beverages_list', 'BeveragesListsController');
+Route::resource('/flagcustomer', 'AccountPayablesController');
+Route::resource('/userlogs', 'UserLogsController');
