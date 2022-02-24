@@ -85,7 +85,7 @@ Route::get('/payments', function(){
 
 Route::get('/payments', function(){
     return view('payments.bayadformcheck');
-})
+});
 
 Route::get('/beverages', function(){
     return view('beverages.beverages');

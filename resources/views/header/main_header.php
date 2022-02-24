@@ -17,49 +17,51 @@
     <link rel="shortcut icon" href="favicon.ico">
 
 
-    <link rel="stylesheet" href="{{asset('vendors/bootstrap/dist/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('vendors/font-awesome/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('vendors/themify-icons/css/themify-icons.css')}}">
-    <link rel="stylesheet" href="{{asset('vendors/flag-icon-css/css/flag-icon.min.css')}}">
-    <link rel="stylesheet" href="{{asset('vendors/selectFX/css/cs-skin-elastic.css')}}">
-    <link rel="stylesheet" href="{{asset('vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{asset('vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
 
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="assets/css/style.css">
 
-    <link rel="stylesheet" href="{{asset(vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css)}}">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" 
-    rel="stylesheet">
-	
-	 <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css" rel="stylesheet">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" rel="stylesheet">
-    
-	<script src="js/sweetalert.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
 
-<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
- 
+    <script src="js/sweetalert.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
 </head>
 
 <body>
     <!-- Left Panel -->
 
-       <aside id="left-panel" class="left-panel">
+    <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
 
             <div class="navbar-header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
+                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
                 <div class="">
-				
+
                     <h3 style="color: #fff">&nbsp;&nbsp;Point of Sale Monitoring System </h3>
-   
+
                 </div>
-				
+
                 <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
             </div>
 
@@ -68,40 +70,40 @@
                     <li class="active">
                         <a href="index.php"> <i class="menu-icon fa fa-dashboard"></i>Dashboard</a>
                     </li>
-          
+
                     <li class="active">
-                         <a href="sales.php"> <i class="menu-icon fa fa-money"></i>Sales </a>
+                        <a href="sales.php"> <i class="menu-icon fa fa-money"></i>Sales </a>
                     </li>
-					
-					
-                   <li class="active">
-                         <a href="customer.php"> <i class="menu-icon fa fa-tree"></i>Customer List </a>
+
+
+                    <li class="active">
+                        <a href="customer.php"> <i class="menu-icon fa fa-tree"></i>Customer List </a>
                     </li>
-					
-                   <li class="active">
+
+                    <li class="active">
                         <a href="supplier2.php"> <i class="menu-icon fa fa-list-alt"></i>Supplier</a>
                     </li>
-					
-					<li class="active">
-                         <a href="inventory.php"> <i class="menu-icon fa fa-tree"></i>Inventory</a>
+
+                    <li class="active">
+                        <a href="inventory.php"> <i class="menu-icon fa fa-tree"></i>Inventory</a>
                     </li>
-					
+
                     <li class="active">
                         <a href="purchase.php"> <i class="menu-icon fa fa-cog"></i>Sales Invoice</a>
                     </li>
-					
-					 <li class="active">
+
+                    <li class="active">
                         <a href="beverages_list.php"> <i class="menu-icon fa fa-cog"></i>Beverages List</a>
                     </li>
-					
-					<li class="active">
+
+                    <li class="active">
                         <a href="flagcustomer.php"> <i class="menu-icon fa fa-cog"></i>Account Payables</a>
                     </li>
-					
-					<li class="active">
+
+                    <li class="active">
                         <a href="flagcustomer.php"> <i class="menu-icon fa fa-cog"></i>User Logs</a>
                     </li>
-				 
+
             </div>
         </nav>
     </aside>
