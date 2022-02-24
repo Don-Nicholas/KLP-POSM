@@ -63,16 +63,22 @@
                         <th>Action</th>
                       </tr>
                
-					<tr>
-						<td>e</td>
-						<td>e</td>
-						<td>e</td>
-						
-			
-						<td><a href="#"
-								class="btn btn-primary bg-gradient-primary" style="width: 90px;">Details</a></td>
-								
-					</tr>
+					@if (count($customers) > 0)
+                      @foreach ($customers as $customer)
+                      <tr>
+                        <td>{{$customer->name}}</td>
+                        <td>{{$customer->address}}</td>
+                        <td>{{$customer->contact}}</td>
+                        
+                  
+                        <td><a href="/customers/{{$customer->id}}"
+                            class="btn btn-primary bg-gradient-primary" style="width: 90px;">Details</a></td>
+                            
+                      </tr>
+                      @endforeach
+          @else
+              <h1>No information.</h1>
+          @endif
 	
                 </table>
               </div>
