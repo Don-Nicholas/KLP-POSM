@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Customer;
 
 class CustomersController extends Controller
 {
@@ -14,7 +15,12 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        return view('customers.index');
+        //get route
+
+        $customers = Customer::all();
+        // return $customers;
+        return view('customers.index')->with('customers', $customers);
+
     }
 
     /**
@@ -24,7 +30,7 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -46,7 +52,8 @@ class CustomersController extends Controller
      */
     public function show($id)
     {
-        //
+        $customer = Customer::find($id);
+        return view('customers.show')->with('customer', $customer);
     }
 
     /**
