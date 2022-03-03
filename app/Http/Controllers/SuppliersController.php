@@ -37,7 +37,23 @@ class SuppliersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name'=> 'required',
+            'address' => 'required',
+            'number' => 'required'
+        ]);
+
+
+        $supplier = new Supplier;
+
+        $supplier->name = $request->input('name');
+        $supplier->address = $request->input('address');
+        $supplier->number = $request->input('number');
+
+
+        $supplier->save();
+
+        return redirect('/suppliers')->with('success', 'Inserted Successfully');
     }
 
     /**
@@ -48,7 +64,7 @@ class SuppliersController extends Controller
      */
     public function show($id)
     {
-        $suppliers = Suppliers::find($id);
+        $suppliers = Supplier::find($id);
         return view('suppliers.show')->with('suppliers', $suppliers);
     }
 
@@ -60,7 +76,8 @@ class SuppliersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $supplier = Supplier::find($id);
+        return view('suppliers.edit')->with('supplier', $supplier);
     }
 
     /**
@@ -72,7 +89,28 @@ class SuppliersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+            $this->validate($request, [
+                'name'=> 'required',
+                'address' => 'required',
+                'number' => 'required'
+            ]);
+
+            return $request;
+    
+            // $supplier = Supplier::find($id);
+    
+            // $supplier->name = $request->input('name');
+            // $supplier->address = $request->input('address');
+            // $supplier->number = $request->input('number');
+            
+
+    
+            // $supplier->save();
+    
+            // return redirect('/suppliers')->with('success', 'Updated Successfully');
+        
+    
     }
 
     /**

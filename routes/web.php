@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 #route for sales transaction monitoring
 Route::resource('/customers', 'CustomersController' );
-Route::resource('/inventory', 'InventoryController' );
+Route::resource('/inventories', 'InventoryController' );
 Route::resource('/sales', 'SalesController' );
 Route::resource('/beverages_list', 'BeveragesListsController' );
 Route::resource('/purchase', 'SalesInvoicesController' );
