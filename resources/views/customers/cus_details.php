@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 	
 
@@ -224,4 +224,4 @@ purchase.pur_id ASC
     <script src="assets/js/init-scripts/data-table/datatables-init.js"></script>
 
 
-</html>
+</html> -->

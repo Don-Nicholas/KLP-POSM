@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Inventory;
 
 class InventoryController extends Controller
 {
@@ -14,7 +15,9 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        return view('inventories.index');
+        $inventory = Inventory::all();
+        return view('inventory.inventory')->with('inventories', $inventory);
+        
     }
 
     /**
@@ -47,6 +50,8 @@ class InventoryController extends Controller
     public function show($id)
     {
         //
+        $inventory = Inventory::all();
+        return view('inventory.inventory')->with('inventory', $inventory);
     }
 
     /**

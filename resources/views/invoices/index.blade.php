@@ -196,8 +196,15 @@
                            <td colspan="2">
                            <select name="customer" style="width: 200px;">
                            
-       
-                       <option disabled selected>-- Select Customer --</option>
+                            @if (count($customers)>0)
+                            @foreach ($customers as $customer)
+                                <option value="{{$customer->name}}">{{$customer->name}}</option>
+                            @endforeach
+                            <option disabled selected>-- Select Customer --</option> 
+                            @else
+                            <option disabled selected>-- Select Customer --</option>
+                            @endif
+                           
                        
                    {{-- <?php 
    

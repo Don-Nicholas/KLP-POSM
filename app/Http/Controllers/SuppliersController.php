@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Supplier;
 
 class SuppliersController extends Controller
 {
@@ -14,7 +15,8 @@ class SuppliersController extends Controller
      */
     public function index()
     {
-        return view('suppliers.index');
+        $suppliers = Supplier::all();
+        return view('suppliers.index')->with('suppliers', $suppliers);
     }
 
     /**
@@ -46,7 +48,8 @@ class SuppliersController extends Controller
      */
     public function show($id)
     {
-        //
+        $suppliers = Suppliers::find($id);
+        return view('suppliers.show')->with('suppliers', $suppliers);
     }
 
     /**

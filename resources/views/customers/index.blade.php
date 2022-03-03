@@ -1,99 +1,72 @@
 @extends('layouts.app')
 @section('content')
-
-
-<div id="right-panel" class="right-panel">
-
-        <!-- Header-->
-        <header id="header" class="header">
-
-            <div class="header-menu">
-
-                <div class="col-sm-7">
-                  <h2> Point of Sale Monitoring System</h2>
-   
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h6>Customers&nbsp;
+                        <a href="#myModal" role="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i></a></h6>
                 </div>
-
-                <div class="col-sm-5">
-                    <div class="user-area dropdown float-right">
-                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             <strong style="color: #007bff;" class="mt-2">Welcome!</strong> &nbsp;
-                        </a>
-
-                        <div class="user-menu dropdown-menu">
- <!--                            <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a> -->
-
-                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
-                        </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Address</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Contact</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Created At</th>
+                                    <th class="text-secondary opacity-7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (count($customers) > 0)
+                                    @foreach ($customers as $customer)
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div>
+                                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
+                                                            alt="user1">
+                                                    </div>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">{{$customer->name}}</h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">{{$customer->address}}</p>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <span class="badge badge-sm bg-gradient-success">{{$customer->contact}}</span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="text-secondary text-xs font-weight-bold">{{$customer->created_at}}/span>
+                                            </td>
+                                            <td class="align-middle">
+                                                <a href="/customers/{{$customer->id}}" class="text-secondary font-weight-bold text-xs"
+                                                    data-toggle="tooltip" data-original-title="Edit user">
+                                                    Edit
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <h1>No customers information.</h1>
+                                @endif
+                            </tbody>
+                        </table>
                     </div>
-
                 </div>
             </div>
-
-        </header><!-- /header -->
-        <!-- Header-->
-
-       
-
-        <div class="content mt-3">
-		<div class="row justify-content-center">
-            <div class="animated fadeIn">
-                <div class="row">
-
-
-
-   <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h4 class="m-2 font-weight-bold text-primary">Customer&nbsp;
-                
-			  <a href="#myModal" role="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i></a>
-			</h4>
-            </div>
-            
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">        
-                  <thead>
-                      <tr>
-                        <th>Customer's Name</th>
-                        <th>Address</th>
-                        <th>Phone Number</th>
-                        <th>Action</th>
-                      </tr>
-               
-					@if (count($customers) > 0)
-                      @foreach ($customers as $customer)
-                      <tr>
-                        <td>{{$customer->name}}</td>
-                        <td>{{$customer->address}}</td>
-                        <td>{{$customer->contact}}</td>
-                        
-                  
-                        <td><a href="/customers/{{$customer->id}}"
-                            class="btn btn-primary bg-gradient-primary" style="width: 90px;">Details</a></td>
-                            
-                      </tr>
-                      @endforeach
-          @else
-              <h1>No information.</h1>
-          @endif
-	
-                </table>
-              </div>
-            </div>
-          </div>
-		  
-		  </div>
-
-
-		</div>
-        </div><!-- .animated -->
-        </div><!-- .content -->
-		<!--/.col-->
-		<!-- Right Panel -->		
-		
+        </div>
+    </div>
 
 <!-- Button HTML (to Trigger Modal) -->
    
@@ -106,15 +79,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                     <form role="form" method="post" action="process_customer.php">
+                     <form role="form" method="post" action="process_supplierbev.php">
             <div class="form-group">
-              <input class="form-control" placeholder="Name" name="custname" required>
+              <input class="form-control" placeholder="Supplier's Name" name="supname" required>
             </div>
             <div class="form-group">
-              <input class="form-control" placeholder="Address" name="custadd" required>
+              <input class="form-control" placeholder="Address" name="supadd" required>
             </div>
             <div class="form-group">
-              <input class="form-control" placeholder="Contact Number" name="custnum" required>
+              <input class="form-control" placeholder="Contact Number" name="supnum" required>
             </div>
          
                 </div>
@@ -126,5 +99,5 @@
             </div>
         </div>
     </div>
-</html>
+
 @endsection

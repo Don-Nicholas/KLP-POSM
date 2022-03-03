@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Customer;
 
 class SalesInvoicesController extends Controller
 {
@@ -13,8 +14,10 @@ class SalesInvoicesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('invoices.index');
+    { 
+        $customers = Customer::all();
+        //return $customers;
+        return view('invoices.index')->with('customers', $customers);
     }
 
     /**

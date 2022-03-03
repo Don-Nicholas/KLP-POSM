@@ -43,11 +43,7 @@
                             data-target="#update_modal<?php echo $fetch['user_id']?>"><span
                                 class="glyphicon glyphicon-edit"></span> Edit</button></td>
                 </tr>
-                <?php
- 
-          include 'update_user.php';
- }
-        ?>
+               
             </tbody>
         </table>
     </div>
