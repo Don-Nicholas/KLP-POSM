@@ -41,7 +41,21 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name'=> 'required',
+            'address' => 'required',
+            'contact' => 'required'
+        ]);
+
+        $customer = new Customer;
+
+        $customer->name = $request->input('name');
+        $customer->address = $request->input('address');
+        $customer->contact = $request->input('contact');
+
+        $customer->save();
+
+        return redirect('/customers')->with('sucess', 'Inserted Successfully');
     }
 
     /**
@@ -65,6 +79,8 @@ class CustomersController extends Controller
     public function edit($id)
     {
         //
+        $customer = Customer::find($id);
+        return view('customers.edit')->with('customer', $customer);
     }
 
     /**
@@ -76,7 +92,21 @@ class CustomersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name'=> 'required',
+            'address' => 'required',
+            'contact' => 'required'
+        ]);
+
+        $customer = Customer::find($id);
+
+        $customer->name = $request->input('name');
+        $customer->address = $request->input('address');
+        $customer->contact = $request->input('contact');
+
+        $customer->save();
+
+        return redirect('/customers')->with('success', 'Updated Successfully');
     }
 
     /**

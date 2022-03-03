@@ -1,6 +1,6 @@
 @extends('layouts.app')
     @section('content')
-        <h1>Customer Name: {{$suppliers->name}}</h1>
-        <p>Customer Address: {{$suppliers->address}}</p>
-        <p>Phone Number: {{$suppliers->contact}}</p>
+        <h1>Supplier's Name: {{$suppliers->name}}</h1>
+        <p>Supplier's Address: {{$suppliers->address}}</p>
+        <p>Contact Number: {{$suppliers->number}}</p>
     @endsection

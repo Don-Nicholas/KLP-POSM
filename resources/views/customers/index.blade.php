@@ -5,7 +5,9 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <h6>Customers&nbsp;
-                        <a href="#myModal" role="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i></a></h6>
+                        <a href="#myModal" role="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"><i
+                                class="fas fa-fw fa-plus"></i></a>
+                    </h6>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -22,7 +24,9 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Created At</th>
-                                    <th class="text-secondary opacity-7"></th>
+                                    <th class="text-secondary opacity-7" colspan="2">
+                                        Actions
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,22 +40,31 @@
                                                             alt="user1">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">{{$customer->name}}</h6>
+                                                        <h6 class="mb-0 text-sm">{{ $customer->name }}</h6>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{$customer->address}}</p>
+                                                <p class="text-xs font-weight-bold mb-0">{{ $customer->address }}</p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <span class="badge badge-sm bg-gradient-success">{{$customer->contact}}</span>
+                                                <span class="badge badge-sm bg-gradient-success">{{ $customer->contact }}</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">{{$customer->created_at}}/span>
+                                                <span
+                                                    class="text-secondary text-xs font-weight-bold">{{ $customer->created_at }}</span>
                                             </td>
                                             <td class="align-middle">
-                                                <a href="/customers/{{$customer->id}}" class="text-secondary font-weight-bold text-xs"
-                                                    data-toggle="tooltip" data-original-title="Edit user">
+                                                <a href="/customers/{{ $customer->id }}"
+                                                    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                    data-original-title="Edit user">
+                                                    View
+                                                </a>
+                                            </td>
+                                            <td class="align-middle">
+                                                <a href="/customers/{{ $customer->id }}/edit"
+                                                    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                    data-original-title="Edit user">
                                                     Edit
                                                 </a>
                                             </td>
@@ -68,8 +81,8 @@
         </div>
     </div>
 
-<!-- Button HTML (to Trigger Modal) -->
-   
+    <!-- Button HTML (to Trigger Modal) -->
+
     <!-- Modal HTML -->
     <div id="myModal" class="modal fade" tabindex="-1">
         <div class="modal-dialog">
@@ -79,23 +92,23 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                     <form role="form" method="post" action="process_supplierbev.php">
-            <div class="form-group">
-              <input class="form-control" placeholder="Supplier's Name" name="supname" required>
-            </div>
-            <div class="form-group">
-              <input class="form-control" placeholder="Address" name="supadd" required>
-            </div>
-            <div class="form-group">
-              <input class="form-control" placeholder="Contact Number" name="supnum" required>
-            </div>
-         
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-primary" name="save">Add</button>
-                </div>
-				 </form>  
+                    {!! Form::open(['action' => 'CustomersController@store', 'method' => 'POST']) !!}
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Customer's Name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Address" name="address" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Contact Number" name="contact" required>
+                        </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" name="save">Add</button>
+                        </div>
+                    {!! Form::close() !!}
             </div>
         </div>
     </div>
