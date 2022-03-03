@@ -22,6 +22,7 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Created At</th>
+                                    <th colspan="2">Actions</th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                             </thead>
@@ -47,10 +48,16 @@
                                                 <span class="badge badge-sm bg-gradient-success">{{$customer->contact}}</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">{{$customer->created_at}}/span>
+                                                <span class="text-secondary text-xs font-weight-bold">{{$customer->created_at}}</span>
                                             </td>
                                             <td class="align-middle">
                                                 <a href="/customers/{{$customer->id}}" class="text-secondary font-weight-bold text-xs"
+                                                    data-toggle="tooltip" data-original-title="View">
+                                                    View
+                                                </a>
+                                            </td>
+                                            <td class="align-middle">
+                                                <a href="/customers/{{$customer->id}}/edit" class="text-secondary font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
                                                 </a>
