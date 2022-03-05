@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,5 @@ Route::resource('/suppliers', 'SuppliersController' );
 Route::resource('/userlogs', 'UserLogsController' );
 Route::resource('/flagcustomer', 'AccountPayablesController' );
 Route::resource('/controller', 'Controller' );
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
 ?>

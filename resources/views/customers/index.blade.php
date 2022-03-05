@@ -9,91 +9,22 @@
                                 class="fas fa-fw fa-plus"></i></a>
                     </h6>
                 </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Address</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Contact</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Created At</th>
-
-                                    <th class="text-secondary opacity-7" colspan="2">
-                                        Actions
-                                    </th>
-
-                                    <th colspan="2">Actions</th>
-                                    <th class="text-secondary opacity-7"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (count($customers) > 0)
-                                    @foreach ($customers as $customer)
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
-                                                            alt="user1">
-                                                    </div>
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">{{ $customer->name }}</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $customer->address }}</p>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <span class="badge badge-sm bg-gradient-success">{{ $customer->contact }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-
-                                                <span
-                                                    class="text-secondary text-xs font-weight-bold">{{ $customer->created_at }}</span>
-                                            </td>
-                                            <td class="align-middle">
-                                                <a href="/customers/{{ $customer->id }}"
-                                                    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                    data-original-title="Edit user">
-                                                    View
-                                                </a>
-                                            </td>
-                                            <td class="align-middle">
-                                                <a href="/customers/{{ $customer->id }}/edit"
-                                                    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                    data-original-title="Edit user">
-
-                                                <span class="text-secondary text-xs font-weight-bold">{{$customer->created_at}}</span>
-                                            </td>
-                                            <td class="align-middle">
-                                                <a href="/customers/{{$customer->id}}" class="text-secondary font-weight-bold text-xs"
-                                                    data-toggle="tooltip" data-original-title="View">
-                                                    View
-                                                </a>
-                                            </td>
-                                            <td class="align-middle">
-                                                <a href="/customers/{{$customer->id}}/edit" class="text-secondary font-weight-bold text-xs"
-                                                    data-toggle="tooltip" data-original-title="Edit user">
-
-                                                    Edit
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @else
-                                    <h1>No customers information.</h1>
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="container">
+                    <h1>Users</h1>
+                    <table class="table table-bordered data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Contact</th>
+                                <th>Created_at</th>
+                                <th width="100px">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -130,5 +61,25 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(function () {
+            
+          var table = $('.data-table').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "{{ route('customers.index') }}",
+              columns: [
+                  {data: 'id', name: 'id'},
+                  {data: 'name', name: 'name'},
+                  {data: 'address', name: 'address'},
+                  {data: 'contact', name: 'contact'},
+                  {data: 'created_at', name: 'created_at'},
+                  {data: 'action', name: 'action', orderable: false, searchable: false},
+              ]
+          });
+            
+        });
+      </script>
 
 @endsection
