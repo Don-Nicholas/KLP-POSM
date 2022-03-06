@@ -226,7 +226,16 @@
                <tr>	
                            <td colspan="2">
                            <select name="mop" style="width: 200px;">
-                       <option disabled selected>-- Mode of Payment --</option>
+                            @if (count($m_o_p_s)>0)
+                            @foreach ($m_o_p_s as $bayadform)
+                                <option value="{{$bayadform->mode}}">{{$bayadform->mode}}</option>
+                            @endforeach
+                            <option disabled selected>-- Mode of Payment --</option> 
+                            @else
+                            <option disabled selected>-- Mode of Payment --</option>
+                            @endif
+                           
+                     
                        
                    {{-- <?php 
    
