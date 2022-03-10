@@ -28,4 +28,9 @@ Route::resource('/userlogs', 'UserLogsController' );
 Route::resource('/flagcustomer', 'AccountPayablesController' );
 Route::resource('/controller', 'Controller' );
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 ?>
+

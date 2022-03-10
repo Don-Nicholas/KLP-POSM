@@ -22,7 +22,8 @@ class CustomersController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
        
-                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                            $btn = '<a href="/customers/'.$row->id.'" class="edit btn btn-primary btn-sm">View</a>
+                                    <a href="/customers/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>';
       
                             return $btn;
                     })

@@ -19,7 +19,7 @@
                                 <th>Address</th>
                                 <th>Contact</th>
                                 <th>Created_at</th>
-                                <th width="100px">Action</th>
+                                <th width="100px" colspan="2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
