@@ -26,7 +26,7 @@ class SuppliersController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

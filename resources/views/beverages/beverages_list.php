@@ -75,7 +75,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
               </div>
               <div class="modal-body">
-                   <form role="form" method="post" action="process_beverages.php">
+                   <form role="form" method="post" action="B">
           <div class="form-group">
             <input class="form-control" placeholder="Beverages Name" name="p_name" required>
           </div>

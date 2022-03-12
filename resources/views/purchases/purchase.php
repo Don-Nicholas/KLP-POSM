@@ -256,7 +256,7 @@ INNER JOIN category ON beverages.c_id = category.c_id
                                                         <th colspan="2">Customer Name</th>
                                                     </tr>
                                                     <tr>
-                                                        <form action="process_mop.php" method="POST">
+                                                        <form action="m_o_p_s" method="POST">
                                                             <td colspan="2">
                                                                 <select name="customer" style="width: 200px;">
 
@@ -266,7 +266,7 @@ INNER JOIN category ON beverages.c_id = category.c_id
 
                                                                     <?php 
 
-					$result3 = $mysqli->query("SELECT * FROM customer")
+					$result3 = $mysqli->query("SELECT * FROM customers")
 					or die($mysqli->error);
 					while ($row = $result3->fetch_assoc()):
 					echo "<option value='" . $row['cus_id'] . "'>".$row['cus_name']."</option>";

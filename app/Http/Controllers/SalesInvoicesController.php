@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\MOP;
+use App\Models\Beverage;
+
 
 class SalesInvoicesController extends Controller
 {
@@ -15,9 +18,13 @@ class SalesInvoicesController extends Controller
      */
     public function index()
     { 
+        
         $customers = Customer::all();
-        //return $customers;
-        return view('invoices.index')->with('customers', $customers);
+        //return $customers; 
+        $mops = MOP::all();
+        $beverageslist = Beverage::all();
+        return view('invoices.index')->with('customers', $customers)->with('m_o_p_s', $mops)->with('beverages',$beverageslist);
+
     }
 
     /**
@@ -84,5 +91,8 @@ class SalesInvoicesController extends Controller
     public function destroy($id)
     {
         //
+        $post = posts::find($id);
+        $post->delete();
+        return redirect('/');
     }
 }

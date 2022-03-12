@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Beverage;
+use App\Models\BeverageList;
+use App\Models\Supplier;
 
 class BeveragesListsController extends Controller
 {
@@ -16,8 +17,9 @@ class BeveragesListsController extends Controller
     public function index()
     {
 
-        $beverages = Beverage::all();
-        return view('beverages.index')->with('beverages', $beverages);
+        $beverages = BeverageList::all();
+        $suppliers = Supplier::all();
+        return view('beverages.index')->with('beverages', $beverages)->with('suppliers', $suppliers);
 
     }
 
@@ -28,7 +30,7 @@ class BeveragesListsController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -39,7 +41,29 @@ class BeveragesListsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        return $request;
+
+        // $this->validate($request, [
+        //     'name'=> 'required',
+        //     'cat_name' => 'required',
+        //     'quantity' => 'required',
+        //     'price_case' => 'required',
+        //     'price_solo' => 'required'
+        // ]);
+
+        // $beverages = new Beverage;
+
+        // $beverages->name = $request->input('name');
+        // $beverages->cat_name = $request->input('cat_name');
+        // $beverages->quantity = $request->input('quantity');
+        // $beverages->price_case = $request->input('price_case');
+        // $beverages->price_solo = $request->input('price_solo');
+       
+
+        // $beverages->save();
+
+        // return redirect('/beverages')->with('success', 'Inserted Successfully');
     }
 
     /**
@@ -50,7 +74,8 @@ class BeveragesListsController extends Controller
      */
     public function show($id)
     {
-        //
+        $beverages= Beverage::find($id);
+        return view('beverages.show')->with('beverage', $beverages);
     }
 
     /**
@@ -73,7 +98,8 @@ class BeveragesListsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $beverages= Beverage::find($id);
+        return view('beverages.edit')->with('beverage', $beverages);
     }
 
     /**
