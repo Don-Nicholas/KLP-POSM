@@ -52,7 +52,7 @@
                             <button type="submit" class="btn btn-primary" name="save">Add</button>
                         </div>
                         <input type="hidden" name="_method" value="PUT">
-                        {!! Form::close() !!}
+                        {!! Form::open(['action' => 'CustomersController@store', 'method' => 'POST']) !!}
                     @endsection
                                           <table class="table table-bordered data-table">
                         <thead>

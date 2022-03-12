@@ -24,6 +24,7 @@ Route::resource('/sales', 'SalesController' );
 Route::resource('/beverages_list', 'BeveragesListsController' );
 Route::resource('/purchase', 'SalesInvoicesController' );
 Route::resource('/suppliers', 'SuppliersController' );
+Route::resource('/products', 'ProductController');
 Route::resource('/userlogs', 'UserLogsController' );
 Route::resource('/flagcustomer', 'AccountPayablesController' );
 Route::resource('/controller', 'Controller' );

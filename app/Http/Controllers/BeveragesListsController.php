@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BeverageList;
 use App\Models\Supplier;
+use App\Models\Product;
+use App\Models\Category;
 
 class BeveragesListsController extends Controller
 {
@@ -19,7 +21,10 @@ class BeveragesListsController extends Controller
 
         $beverages = BeverageList::all();
         $suppliers = Supplier::all();
-        return view('beverages.index')->with('beverages', $beverages)->with('suppliers', $suppliers);
+        $products = Product::all();
+        $category = Category::all();
+        return view('beverages.index')->with('beverages', $beverages)->with('suppliers', $suppliers)
+        ->with('product', $products)->with('category',$category);
 
     }
 
