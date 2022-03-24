@@ -22,7 +22,9 @@ class ProductController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
        
-                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>
+                            <a href="/products/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
+                            ';
       
                             return $btn;
                     })
@@ -119,7 +121,7 @@ class ProductController extends Controller
        
         $products->save();
 
-        return redirect('/products')->with('success', 'Inserted Successfully');
+        return redirect('/products')->with('success', 'Updated Successfully');
     
     }
 
@@ -131,6 +133,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect('/products')->with('success', 'Deleted Successfully!');
+    
     }
 }

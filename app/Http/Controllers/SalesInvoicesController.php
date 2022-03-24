@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\MOP;
-use App\Models\Beverage;
+use App\Models\BeverageList;
 
 
 class SalesInvoicesController extends Controller
@@ -22,7 +22,7 @@ class SalesInvoicesController extends Controller
         $customers = Customer::all();
         //return $customers; 
         $mops = MOP::all();
-        $beverageslist = Beverage::all();
+        $beverageslist = BeverageList::all();
         return view('invoices.index')->with('customers', $customers)->with('m_o_p_s', $mops)->with('beverages',$beverageslist);
 
     }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Inventory;
-
+use App\Models\BeverageList;
 class InventoryController extends Controller
 {
     /**
@@ -13,23 +13,28 @@ class InventoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $inventory = Inventory::all();
-        return view('inventories.index')->with('inventories', $inventory);
+        // return view('inventories.index')->with('inventories', $inventory);
         if ($request->ajax()) {
-            $data = User::select('*');
+            $data = Inventory::select('*');
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
        
-                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>
+                            <a href="/inventories/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
+                            ';
       
                             return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
+        
+        // $inventories = Inventory::all();
+
+        // return $inventories;
           
         return view('inventories.index');
     
@@ -54,7 +59,26 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'product_name'=> 'required',
+            'category-id' => 'required',
+            'quantity' => 'required',
+            'date_expire' => 'required',
+            'badorder' => 'required'
+                                 ]);
+
+        $inventory = new Inventory;
+
+        $inventory->product_name = $request->input('product_name');
+        $inventory->category_id = $request->input('category_id');
+        $inventory->quantity = $request->input('quantity');
+        $inventory->date_expire = $request->input('date_expire');
+        $inventory->badorder= $request->input('badorder');
+
+        $inventory->save();
+
+        return redirect('/inventories')->with('success', 'Inserted Successfully');
+     
     }
 
     /**
@@ -78,7 +102,9 @@ class InventoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $inventory = Inventory::find($id);
+        return view('inventory.edit')->with('inventory', $inventory);
+   
     }
 
     /**
@@ -90,7 +116,26 @@ class InventoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'product_name'=> 'required',
+            'category-id' => 'required',
+            'quantity' => 'required',
+            'date_expire' => 'required',
+            'badorder' => 'required'
+                                 ]);
+
+        $inventory = new Inventory;
+
+        $inventory->product_name = $request->input('product_name');
+        $inventory->category_id = $request->input('category_id');
+        $inventory->quantity = $request->input('quantity');
+        $inventory->date_expire = $request->input('date_expire');
+        $inventory->badorder= $request->input('badorder');
+
+        $inventory->save();
+
+        return redirect('/inventories')->with('success', 'Inserted Successfully');
+     
     }
 
     /**
@@ -101,6 +146,10 @@ class InventoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $customer = Customer::find($id);
+        $customer->delete();
+
+        return redirect('/customers')->with('success', 'Deleted Successfully!');
+  
     }
 }

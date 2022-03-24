@@ -11,9 +11,26 @@ class Userlogs extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $data = Userlogs::select('*');
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+       
+                            $btn = '<a href="/users/'.$row->id.'" class="edit btn btn-primary btn-sm">View</a>
+                            <a href="/users/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
+                            ';
+      
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
+        return view('users.index');
+
     }
 
     /**
@@ -34,7 +51,26 @@ class Userlogs extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name'=> 'required',
+            'email' => 'required',
+            'email_verified_at' => 'required',
+            'password'=> 'required',
+            'remember_token' => 'required'
+           
+                                 ]);
+
+        $userlogs = new Userlogs;
+
+        $userlogs->name = $request->input('name');
+        $userlogs->email = $request->input('email');
+        $userlogs->email_verified_at = $request->input('email_verified_at');
+        $userlogs->password = $request->input('password');
+        $userlogs->remeber_token = $request->input('remember_token');
+        $customer->save();
+
+        return redirect('/users')->with('success', 'Inserted Successfully');
+  
     }
 
     /**
@@ -45,7 +81,8 @@ class Userlogs extends Controller
      */
     public function show($id)
     {
-        //
+        $userlogs = Userlogs::find($id);
+        return view('users.show')->with('userlogs', $userlogs);
     }
 
     /**
@@ -56,7 +93,8 @@ class Userlogs extends Controller
      */
     public function edit($id)
     {
-        //
+        $userlogs = Userlogs::find($id);
+        return view('users.edit')->with('userlogs', $userlogs);
     }
 
     /**
@@ -68,7 +106,26 @@ class Userlogs extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name'=> 'required',
+            'email' => 'required',
+            'email_verified_at' => 'required',
+            'password'=> 'required',
+            'remember_token' => 'required'
+           
+                                 ]);
+
+        $userlogs = new Userlogs;
+
+        $userlogs->name = $request->input('name');
+        $userlogs->email = $request->input('email');
+        $userlogs->email_verified_at = $request->input('email_verified_at');
+        $userlogs->password = $request->input('password');
+        $userlogs->remeber_token = $request->input('remember_token');
+        $customer->save();
+
+        return redirect('/users')->with('success', 'Updated Successfully');
+  
     }
 
     /**
@@ -79,6 +136,10 @@ class Userlogs extends Controller
      */
     public function destroy($id)
     {
-        //
+        $userlogs = Userlogs::find($id);
+        $userlogs->delete();
+
+        return redirect('/users')->with('success', 'Deleted Successfully!');
+ 
     }
 }

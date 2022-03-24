@@ -14,6 +14,24 @@ class SalesController extends Controller
      */
     public function index()
     {
+        if ($request->ajax()) {
+            $data = CustomerSales::select('*');
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+       
+                            $btn = '<a href="/sales/'.$row->id.'" class="edit btn btn-primary btn-sm">View</a>
+                            <a href="/sales/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
+                            ';
+      
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
+  
+
         return view('sales.index');
     }
 
@@ -35,7 +53,26 @@ class SalesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'order_id'=> 'required',
+            'beverage_id' => 'required',
+            'quantity' => 'required',
+            'total'=> 'required',
+            'date_purchase' => 'required'
+                                 ]);
+
+        $sale = new CustomerSale;
+
+        $sale->order_id = $request->input('order_id');
+        $sale->beverage_id = $request->input('beverage_id');
+        $sale->quantity = $request->input('quantity');
+        $sale->total = $request->input('total');
+        $sale->date_purchase = $request->input('date_purchase');
+
+        $sale->save();
+
+        return redirect('/sales')->with('success', 'Inserted Successfully');
+ 
     }
 
     /**
@@ -46,7 +83,9 @@ class SalesController extends Controller
      */
     public function show($id)
     {
-        //
+        $sale = CustomerSale::find($id);
+        return view('sales.show')->with('sale', $sale);
+  
     }
 
     /**
@@ -57,7 +96,9 @@ class SalesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $sale = CustomerSale::find($id);
+        return view('sales.edit')->with('sale', $sale);
+  
     }
 
     /**
@@ -69,7 +110,26 @@ class SalesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'order_id'=> 'required',
+            'beverage_id' => 'required',
+            'quantity' => 'required',
+            'total'=> 'required',
+            'date_purchase' => 'required'
+                                 ]);
+
+        $sale = new CustomerSale;
+
+        $sale->order_id = $request->input('order_id');
+        $sale->beverage_id = $request->input('beverage_id');
+        $sale->quantity = $request->input('quantity');
+        $sale->total = $request->input('total');
+        $sale->date_purchase = $request->input('date_purchase');
+
+        $sale->save();
+
+        return redirect('/sales')->with('success', 'Updated Successfully');
+ 
     }
 
     /**
@@ -80,6 +140,10 @@ class SalesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sale = CustomerSale::find($id);
+        $sale->delete();
+
+        return redirect('/sales')->with('success', 'Deleted Successfully!');
+  
     }
 }

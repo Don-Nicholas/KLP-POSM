@@ -35,7 +35,7 @@ customer where cus_id=$upid")
 
     <div class="content">
 
-        <form action="process_customerupdate.php" method="POST">
+        <form action="CustomersController@update" method="POST">
             <table>
 
                 <tr>

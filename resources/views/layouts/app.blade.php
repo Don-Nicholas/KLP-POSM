@@ -47,6 +47,7 @@
               {{ Request::is('purchases') ? 'Purchases' : ''}}
               {{ Request::is('beverages_list') ? 'Beverages List' : ''}}
               {{ Request::is('inventory') ? 'Inventory' : ''}}
+              {{ Request::is('account_payables') ? 'Account Payables' : ''}}
               </li>
           </ol>
           <h6 class="font-weight-bolder mb-0">
@@ -56,6 +57,7 @@
             {{ Request::is('purchases') ? 'Purchases' : ''}}
             {{ Request::is('beverages_list') ? 'Beverages List' : ''}}
             {{ Request::is('inventory') ? 'Inventory' : ''}}
+            {{ Request::is('account_payables') ? 'Account Payables' : ''}}
           </h6>
 
         </nav>

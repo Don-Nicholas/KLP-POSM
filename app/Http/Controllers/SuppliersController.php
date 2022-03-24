@@ -98,17 +98,17 @@ class SuppliersController extends Controller
 
             return $request;
     
-            // $supplier = Supplier::find($id);
+            $supplier = Supplier::find($id);
     
-            // $supplier->name = $request->input('name');
-            // $supplier->address = $request->input('address');
-            // $supplier->number = $request->input('number');
+            $supplier->name = $request->input('name');
+            $supplier->address = $request->input('address');
+            $supplier->number = $request->input('number');
             
 
     
-            // $supplier->save();
+            $supplier->save();
     
-            // return redirect('/suppliers')->with('success', 'Updated Successfully');
+            return redirect('/suppliers')->with('success', 'Updated Successfully');
         
     
     }
@@ -121,6 +121,10 @@ class SuppliersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $inventory = Inventory::find($id);
+        $inventory->delete();
+
+        return redirect('/inventories')->with('success', 'Deleted Successfully!');
+ 
     }
 }

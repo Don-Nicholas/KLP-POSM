@@ -2,39 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
 use Illuminate\Http\Request;
-use Datatables;
 
-class CategoryController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
         if ($request->ajax()) {
-            $data = Category::select('*');
+            $data = Order::select('*');
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
        
                             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>
-                            <a href="/categories/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
+                            <a href="/orders/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
                             ';
       
                             return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
-        }
 
-        return view('category.index');
     }
+    return view('orders.index');
 
     /**
      * Show the form for creating a new resource.
@@ -54,21 +49,22 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, 
-        [
-            'cat_id' => 'required',
-            'cat_name'=> 'required',
+        //
+        $this->validate($request, [
+            'id'=> 'required',
+            'order_number' => 'required',
            
-        ]);
+                                 ]);
 
-        $category = new Category;
+        $order = new Order;
 
-        $category->cat_id = $request->input('cat_id');
-        $category->cat_name = $request->input('cat_name');
-       
-        $category->save();
+        $order->id = $request->input('id');
+        $order->order_number = $request->input('order_number');
+        
 
-        return redirect('/category')->with('success', 'Inserted Successfully');
+        $order->save();
+
+        return redirect('/orders')->with('success', 'Inserted Successfully');
    
     }
 
@@ -80,8 +76,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::find($cat_id);
-        return view('category.show')->with('category', $category);
+        $order = Order::find($id);
+        return view('orders.show')->with('order', $order);
+   
     }
 
     /**
@@ -92,8 +89,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($cat_id);
-        return view('category.edit')->with('category', $category);
+        $order = Order::find($id);
+        return view('orders.edit')->with('order', $order);
     }
 
     /**
@@ -105,21 +102,21 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, 
-        [
-            'cat_id' => 'required',
-            'cat_name'=> 'required',
+        $this->validate($request, [
+            'id'=> 'required',
+            'order_number' => 'required',
            
-        ]);
+                                 ]);
 
-        $category = new Category;
+        $order = new Order;
 
-        $category->cat_id = $request->input('cat_id');
-        $category->cat_name = $request->input('cat_name');
-       
-        $category->save();
+        $order->id = $request->input('id');
+        $order->order_number = $request->input('order_number');
+        
 
-        return redirect('/category')->with('success', 'Updated Successfully');
+        $order->save();
+
+        return redirect('/orders')->with('success', 'Updated Successfully');
    
     }
 
@@ -131,10 +128,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
-        $category->delete();
+        $order = Order::find($id);
+        $order->delete();
 
-        return redirect('/category')->with('success', 'Deleted Successfully!');
-  
+        return redirect('/orders')->with('success', 'Deleted Successfully!');
+    
     }
 }

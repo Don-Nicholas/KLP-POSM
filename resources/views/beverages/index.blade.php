@@ -61,31 +61,21 @@
                                                 <th>Beverages Name</th>
                                                 <th>Category</th>
                                                 <th>Cases</th>
-                                                <th>Price per Liter</th>
+                                                <th>Price per Case</th>
                                                 <th>Price per Solo</th>
                                             </thead>
                                             <tbody>
-                                                {{-- <?php if(!empty($arr_users)) { ?>
-                                                <?php foreach($arr_users as $user) { ?>
-                                                <tr>
-                                                    <td><?php echo $row['p_name']; ?></td>
-                                                    <td><?php echo $row['cat_name']; ?></td>
-                                                    <td><?php echo $row['quantity']; ?></td>
-                                                    <td><?php echo $row['price_case']; ?></td>
-                                                    <td><?php echo $row['price_solo']; ?></td>
-
-                                                </tr> --}}
-
+                                                @foreach ($beverages as $beverage)
+                                                    <tr>
+                                                        <td>{{$beverage->product_name}}</td>
+                                                        <td>{{$beverage->supplier_id}}</td>
+                                                        <td>{{$beverage->quantity}}</td>
+                                                        <td>{{$beverage->price_case}}</td>
+                                                        <td>{{$beverage->price_solo}}</td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
-                                        <script src="datatable/jquery.min.js"></script>
-                                        <script type="text/javascript" src="datatable/jquery.dataTables.min.js"></script>
-
-                                        <script>
-                                            $(document).ready(function() {
-                                                $('#userTable').DataTable();
-                                            });
-                                        </script>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +100,7 @@
                         {!! Form::open(['action' => 'BeveragesListsController@store', 'method' => 'POST']) !!}
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                                <label class="input-group-text" for="inputGroupSelect01">Supplier's Name</label>
                             </div>
                             <select name="supplier_id" class="custom-select" id="inputGroupSelect01">
                                 <option selected>Choose...</option>
@@ -123,7 +113,7 @@
                             <input class="form-control" placeholder="Beverages Name" name="p_name" required>
                         </div>
                         <select name="supplier_id" class="custom-select" id="inputGroupSelect01">
-                          <option selected>Choose...</option>
+                          <option selected>Select Category</option>
                           @foreach ($category as $category)
                           <option value="{{$category->cat_id}}">{{$category->cat_name}}</option>
                           @endforeach
@@ -140,6 +130,13 @@
                         <div class="form-group">
                             <input class="form-control" placeholder="Price per Solo" name="price_solo" required>
                         </div>
+                        <div class="form-group">
+                            <input type="date" class="form-control" placeholder="Date Expiry" name="date_expire" required>
+                        </div>
+                        <div class="form-group">
+                            <input type ="number"class="form-control" placeholder="Bad Order" name="badorder" required>
+                        </div>
+                       
 
                     </div>
                     <div class="modal-footer">

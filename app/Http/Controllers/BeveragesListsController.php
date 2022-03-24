@@ -20,7 +20,7 @@ class BeveragesListsController extends Controller
     {
 
         $beverages = BeverageList::all();
-        $suppliers = Supplier::all();
+        $suppliers = Supplier::all(); 
         $products = Product::all();
         $category = Category::all();
         return view('beverages.index')->with('beverages', $beverages)->with('suppliers', $suppliers)
@@ -47,28 +47,30 @@ class BeveragesListsController extends Controller
     public function store(Request $request)
     {
 
-        return $request;
+        $this->validate($request, [
+             'p_name'=> 'required',
+             'supplier_id' => 'required',
+             'quantity' => 'required',
+             'price_case' => 'required',
+             'price_solo' => 'required',
+             'date_expire' => 'required',
+             'badorder' => 'required'
+                        ]);
 
-        // $this->validate($request, [
-        //     'name'=> 'required',
-        //     'cat_name' => 'required',
-        //     'quantity' => 'required',
-        //     'price_case' => 'required',
-        //     'price_solo' => 'required'
-        // ]);
+             $beverages = new BeverageList;
 
-        // $beverages = new Beverage;
-
-        // $beverages->name = $request->input('name');
-        // $beverages->cat_name = $request->input('cat_name');
-        // $beverages->quantity = $request->input('quantity');
-        // $beverages->price_case = $request->input('price_case');
-        // $beverages->price_solo = $request->input('price_solo');
+         $beverages->product_name = $request->input('p_name');
+         $beverages->supplier_id = $request->input('supplier_id');
+         $beverages->quantity = $request->input('quantity');
+         $beverages->price_case = $request->input('price_case');
+         $beverages->price_solo = $request->input('price_solo');
+         $beverages->date_expire = $request->input('date_expire');
+         $beverages->badorder = $request->input('badorder');
        
 
-        // $beverages->save();
+         $beverages->save();
 
-        // return redirect('/beverages')->with('success', 'Inserted Successfully');
+         return redirect('/beverages_list')->with('success', 'Inserted Successfully');
     }
 
     /**

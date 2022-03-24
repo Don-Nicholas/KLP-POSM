@@ -126,13 +126,10 @@ $number++;
                                                         </tr>
 
                                                         <tr>
-                                                            <td>
-                                                                <label>Beverage Name</label>
-                                                            </td>
 
                                                             <td>
                                                                 <select name="purchase" style="width: 200px;">
-                                                                    <option>-- Select --</option>
+                                                                    <option>-- Select  Beverage Name--</option>
                                                                     <?php 
 
 					$result = $mysqli->query("SELECT

@@ -91,9 +91,9 @@ if ($result->num_rows > 0) {
                                                 <td><?php echo $user['cus_name']; ?></td>
                                                 <td><?php echo $user['cus_add']; ?></td>
                                                 <td><?php echo $user['contact']; ?></td>
-                                                <td><a href="customer_update.php?update=<?php echo $user['cus_id'];?>"
+                                                <td><a href="CustomersController@update?update=<?php echo $user['cus_id'];?>"
                                                         class="fa fa-list" style="color:blue"></a></td>
-                                                <td><a href="process_customerdelete.php?delete=<?php echo $user['cus_id'];?>"
+                                                <td><a href="CustomersController@destroy?delete=<?php echo $user['cus_id'];?>"
                                                         class="fa fa-trash" style="color:red"></a></td>
                                             </tr>
                                             <?php } ?>
