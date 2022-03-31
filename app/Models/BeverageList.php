@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class BeverageList extends Model
 {
     use HasFactory;
+
+    
 }

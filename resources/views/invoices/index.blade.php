@@ -25,7 +25,7 @@
                         <div class="user-menu dropdown-menu">
 
                             <!--  <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
-                                   <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a> -->
+                                               <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a> -->
 
                             <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
@@ -56,68 +56,88 @@
                                             <tr>
                                                 <td>
                                                     <!-- Table 1 -->
-                                                    <form action="process_purchase.php" method="POST">
-                                                        <table>
+                                                    {!! Form::open(['action' => 'PurchasesController@store', 'method' => 'POST']) !!}
 
+                                                         <table>
+                                                    
                                                             <tr>
                                                                 <td>
                                                                     <label>Purchase Order #</label>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" value="4" name="ponum"
+                                                                    <input type="text" value="0" name="productname"
                                                                         style="width: 200px;" readonly>
                                                                 </td>
                                                             </tr>
-
+                                                    
                                                             <tr>
                                                                 <td>
                                                                     <label>Beverage Name</label>
-                                                                </td>
-
-                                                                <td>
-                                                                    <select name="purchase" style="width: 200px;">
-                                                                        <option>-- Select --</option>
-                                                                        <tr>
-                                                                            <td colspan="2">
-                                                                                <select name="mop" style="width: 200px;">
-                                                                                    @if (count($beverages) > 0)
-                                                                                        @foreach ($beverages as $beverages_list)
-                                                                                            <option value="{{ $beverages_list->p_name }}">
-                                                                                                {{ $beverages_list->mode }}</option>
-                                                                                        @endforeach
-                                                                                        <option disabled selected>-- Beverages Name --
-                                                                                        </option>
-                                                                                    @else
-                                                                                        <option disabled selected>-- Beverages Name --
-                                                                                        </option>
-                                                                                    @endif
-                
-                
-                
-                                                                                </select>
-                                                                            </td>
+                                                                <td colspan="2">
+                                                                    <select name="beverage" style="width: 200px;">
+                                                                        @if(count($beverages) > 0)
+                                                                            @foreach ($beverages as $beverages_list)
+                                                                                <option
+                                                                                    value="{{ $beverages_list->id }}">
+                                                                                    {{ $beverages_list->product_name }}
+                                                                                </option>
+                                                                            @endforeach
+                                                                            <option disabled selected>-- Select Beverage  --
+                                                                            </option>
+                                                                        @else
+                                                                            <option disabled selected>-- Select Beverage --
+                                                                            </option>
+                                                                        @endif
                                                                     </select>
                                                                 </td>
+                                                                </select>
+                                                    </td>
+                                                    </tr>
+                                                    
+            
+                                            <tr>
+                                                <td>
+                                                    <label>Category Name</label>
+                                                <td colspan="2">
+                                                    <select name="category" style="width: 200px;">
+                                                        @if (count($categories) > 0)
+                                                            @foreach ($categories as $category)
+                                                                <option
+                                                                    value="{{ $category->id }}">
+                                                                    {{ $category->cat_name }}
+                                                                </option>
+                                                            @endforeach
+                                                            <option disabled selected>-- Select Category  --
+                                                            </option>
+                                                        @else
+                                                            <option disabled selected>-- Select Category --
+                                                            </option>
+                                                        @endif
+                                                    </select>
+                                                </td>
+                                                </select>
+                                </td>
+                            </tr>
 
-                                                            <tr>
-                                                                <td>
-                                                                    <label>Quantity(Cases)</label>
-                                                                </td>
-                                                                <td>
-                                                                    <input type="text" name="case" style="width: 200px;">
-                                                                </td>
-                                                            </tr>
 
-                                                            <tr>
-                                                                <td>
-                                                                    <button type="submit" class="btn btn-primary"
-                                                                        name="save">Add</button>
-                                                                </td>
-                                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label>Quantity(Cases)</label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="case" style="width: 200px;">
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <button type="submit" class="btn btn-primary" name="save">Add</button>
+                                                </td>
+                                            </tr>
 
                                             </tr>
                                         </table>
-                                        </form>
+                                        {!! Form::close() !!}
                                         <!-- end of Table 1 -->
                                         </td>
                                         </tr>
@@ -125,30 +145,12 @@
                                     </div>
 
                                     <div class="container">
-                                        {{-- <?php //include('connection.php');
-//            $myDate = date('Y-m-d');
 
-//            $result = $mysqli->query("SELECT
-//    product.p_name,
-//    category.cat_name,
-//    purchase.pur_id,
-//    purchase.total,
-//    purchase.discount,
-//    purchase.quant,
-//    beverages.b_id,
-//    beverages.price_case
-//    FROM
-//    purchase
-//    INNER JOIN beverages ON purchase.b_id = beverages.b_id
-//    INNER JOIN product ON beverages.p_id = product.p_id
-//    INNER JOIN category ON beverages.c_id = category.c_id
-//    ") or die ($mysqli->error);
-?> --}}
                                         <div class="card-header py-3">
                                             <h4 class="m-2 font-weight-bold text-primary">Purchase Details&nbsp;</h4>
                                         </div>
 
-                                        <table class="table " id="dataTable" width="100%" cellspacing="0">
+                                        <table class="table " id="Datatables" width="100%" cellspacing="0">
                                             <tr>
                                                 <td>
                                                     <!-- Table 1 -->
@@ -158,26 +160,29 @@
                                                             <th>Category</th>
                                                             <th>Quantity (Case)</th>
                                                             <th>Price Per Case</th>
+                                                            <th>Price Per Solo</th>
                                                             <th>Total</th>
                                                             <th>Action</th>
                                                         </tr>
 
-                                                            @foreach ($beverages as $beverage_list)
-                                                            {{-- <tr>
-                                                                <td><?php echo $row['p_name']; ?></td>
-                                                                <td><?php echo $row['cat_name']; ?></td>
-                                                                <td><?php echo $row['quant']; ?></td>
-                                                                <td><?php echo $row['price_case']; ?></td>
-                                                                <td><?php echo $row['total']; ?></td>
-                                                                <td><a href="SalesInvoiceController@destroy?delete=<?php echo $row['pur_id']; ?>"
+                                                        @foreach ($purchases as $purchase)
+                                                            <tr>
+                                                                <td>{{$purchase->beverage->product_name}}</td>
+                                                                <td>{{$purchase->category->cat_name}}</td>
+                                                                <td>{{$purchase->quantity}}</td>
+                                                                <td>{{$purchase->beverage->price_case}}</td>
+                                                                <td>{{$purchase->beverage->price_solo}}</td>
+                                                                <td>{{$purchase->total}}</td>
+                                                                <td><a href="SalesInvoiceController@destroy?delete=<php echo $row['pur_id']; ?>"
                                                                         class="btn btn-danger" style="width: 90px;">Cancel</a>
                                                                 </td>
-                                                            </tr> --}}
-                                                            @endforeach
-                                                        
+                                                            </tr>
+                                                        @endforeach
 
 
-                                                        <?php //endwhile;	?>
+
+                                                        {{-- <php //endwhile;
+                                                        ?> --}}
 
 
                                                     </table>
@@ -194,13 +199,15 @@
                                                             <th colspan="2">Customer Name</th>
                                                         </tr>
                                                         <tr>
-                                                            <form action="process_mop.php" method="POST">
+                                                            <form action="CustomersController@show" method="POST">
                                                                 <td colspan="2">
                                                                     <select name="customer" style="width: 200px;">
 
-                                                                        @if (count($customers) > 0)
+                                                                        
+
+                                                                        @if(count($customers) > 0)
                                                                             @foreach ($customers as $customer)
-                                                                                <option value="{{ $customer->name }}">
+                                                                                <option value="{{ $customer->id }}">
                                                                                     {{ $customer->name }}</option>
                                                                             @endforeach
                                                                             <option disabled selected>-- Select Customer --
@@ -216,7 +223,7 @@
                                                                     <a href="#myModal" role="button"
                                                                         class="btn btn-lg btn-primary"
                                                                         data-bs-toggle="modal"><i
-                                                                            class="fas fa-fw fa-plus"></i></a>
+                                                                            class=""></i>ADD</a>
                                                                 </td>
                                                         </tr>
 
@@ -231,23 +238,12 @@
                                                                             <option value="{{ $bayadform->mode }}">
                                                                                 {{ $bayadform->mode }}</option>
                                                                         @endforeach
-                                                                        <option disabled selected>-- Mode of Payment --
+                                                                        <option disabled selected>-- Select Payment --
                                                                         </option>
                                                                     @else
-                                                                        <option disabled selected>-- Mode of Payment --
+                                                                        <option disabled selected>-- Select Payment --
                                                                         </option>
                                                                     @endif
-
-
-
-                                                                    {{-- <?php
-
-//    $result3 = $mysqli->query("SELECT * FROM mop")
-//    or die($mysqli->error);
-//    while ($row = $result3->fetch_assoc()):
-//    echo "<option value='" . $row['pay_id'] . "'>".$row['mode']."</option>";
-//    endwhile;
-?> --}}
                                                                 </select>
                                                             </td>
                                                         </tr>
@@ -262,7 +258,7 @@
                                                             </td>
                                                             <td>
                                                                 <input type="text" border="none" value="4" name="gtotal"
-                                                                    id="txt1" style="width: 100px;" readonly>
+                                                                    id="txt1" style="width: 200px;" readonly>
                                                             </td>
                                                         </tr>
 
@@ -308,7 +304,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form role="form" method="post" action="process_customerpurchase.php">
+                    <form role="form" method="post" action="CustomersController@store">
                         <div class="form-group">
                             <input class="form-control" placeholder="Name" name="custname" required>
                         </div>

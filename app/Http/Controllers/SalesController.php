@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 
 class SalesController extends Controller
 {
+// FOR DASHBOARD MONIROING 
+
     /**
+     *
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -74,7 +77,6 @@ class SalesController extends Controller
         return redirect('/sales')->with('success', 'Inserted Successfully');
  
     }
-
     /**
      * Display the specified resource.
      *

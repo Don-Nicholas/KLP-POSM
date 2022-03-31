@@ -129,7 +129,7 @@ $number++;
 
                                                             <td>
                                                                 <select name="purchase" style="width: 200px;">
-                                                                    <option>-- Select  Beverage Name--</option>
+                                                                    <option>-- Select Beverage Name--</option>
                                                                     <?php 
 
 					$result = $mysqli->query("SELECT

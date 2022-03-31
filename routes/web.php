@@ -29,4 +29,5 @@ Route::resource('/userlogs', 'UserLogsController' );
 Route::resource('/account_payables', 'AccountPayablesController' );
 Route::resource('/controller', 'Controller' );
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::resource('/purchases', 'PurchasesController');
 ?>
