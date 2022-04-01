@@ -58,41 +58,29 @@
                     <div class="content">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h4 class="m-2 font-weight-bold text-primary">Stocks&nbsp;</h4>
+                                <h4 class="m-2 font-weight-bold text-primary">Stocks Inventories&nbsp;</h4>
                             </div>
 
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="userTable">
+                                    <table class="table table-bordered data-table">
                                         <thead>
-
-                                            <th>Beverage Name</th>
-                                            <th>Category</th>
-                                            <th>Cases</th>
-                                            <th>Price Per Case</th>
-                                            <th>Price Per Liter</th>
-
-                                        </thead>
-                                        <tbody>
                                             <tr>
-                                                <td>1</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                                <td>1</td>
-
+                                                <th>No</th>
+                                                <th>Product Name</th>
+                                                <th>Category ID</th>
+                                                <th>Quantity</th>
+                                                <th>Date Expire</th>
+                                                <th>Bad Order</th>
+                                                <th>Actions</th>
                                             </tr>
-                                        </tbody>
+                                            
+                                        </thead>
+                                             <tbody>
+                                            </tbody>
                                     </table>
-                                    <script src="datatable/jquery.min.js"></script>
-                                    <script type="text/javascript" src="datatable/jquery.dataTables.min.js"></script>
-
-                                    <script>
-                                        $(document).ready(function () {
-                                            $('#userTable').DataTable();
-                                        });
-
-                                    </script>
+                                    
+                                      
                                 </div>
                             </div>
                         </div>
@@ -102,12 +90,26 @@
             </div><!-- .animated -->
         </div><!-- .content -->
         <!--/.col-->
-
-
-        <!-- Right Panel -->
-
-
-</html>
+        <script type="text/javascript">
+            $(function () {
+                
+              var table = $('.data-table').DataTable({
+                  processing: true,
+                  serverSide: true,
+                  ajax: "{{ route('inventories.index') }}",
+                  columns: [
+                      {data: 'id', name: 'id'}
+                      {data: 'product_name', name: 'product_name'}
+                      {data: 'category_id', name: 'category_id'}
+                      {data: 'quantity', name: 'quantity'}
+                      {data: 'date_expire', name: 'date_expire'},
+                      {data: 'badorder', name: 'badorder'},
+                      {data: 'action', name: 'action', orderable: false, searchable: false},
+                  ]
+              });
+                
+            });
+          </script>
 
 
 @endsection

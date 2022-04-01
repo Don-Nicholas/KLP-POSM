@@ -14,7 +14,7 @@ class CustomersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request) 
     {
         if ($request->ajax()) {
             $data = Customer::select('*');
@@ -23,7 +23,8 @@ class CustomersController extends Controller
                     ->addColumn('action', function($row){
        
                             $btn = '<a href="/customers/'.$row->id.'" class="edit btn btn-primary btn-sm">View</a>
-                                    <a href="/customers/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>';
+                            <a href="/customers/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
+                            ';
       
                             return $btn;
                     })
@@ -33,7 +34,7 @@ class CustomersController extends Controller
 
         return view('customers.index');
 
-    }
+    } 
 
     /**
      * Show the form for creating a new resource.
@@ -57,7 +58,7 @@ class CustomersController extends Controller
             'name'=> 'required',
             'address' => 'required',
             'contact' => 'required'
-        ]);
+                                 ]);
 
         $customer = new Customer;
 
@@ -67,7 +68,7 @@ class CustomersController extends Controller
 
         $customer->save();
 
-        return redirect('/customers')->with('sucess', 'Inserted Successfully');
+        return redirect('/customers')->with('success', 'Inserted Successfully');
     }
 
     /**
@@ -129,6 +130,9 @@ class CustomersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $customer = Customer::find($id);
+        $customer->delete();
+
+        return redirect('/customers')->with('success', 'Deleted Successfully!');
     }
 }

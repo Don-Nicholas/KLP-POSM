@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AccountPayablesController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,21 +14,22 @@ class AccountPayablesController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Customer::select('*');
+            $data = Order::select('*');
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
        
-                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>
+                            <a href="/orders/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
+                            ';
       
                             return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
-        }
-        return view('payables.index');
 
     }
+    return view('orders.index');
 
     /**
      * Show the form for creating a new resource.
@@ -50,6 +50,22 @@ class AccountPayablesController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'id'=> 'required',
+            'order_number' => 'required',
+           
+                                 ]);
+
+        $order = new Order;
+
+        $order->id = $request->input('id');
+        $order->order_number = $request->input('order_number');
+        
+
+        $order->save();
+
+        return redirect('/orders')->with('success', 'Inserted Successfully');
+   
     }
 
     /**
@@ -60,7 +76,9 @@ class AccountPayablesController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::find($id);
+        return view('orders.show')->with('order', $order);
+   
     }
 
     /**
@@ -71,7 +89,8 @@ class AccountPayablesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $order = Order::find($id);
+        return view('orders.edit')->with('order', $order);
     }
 
     /**
@@ -83,7 +102,22 @@ class AccountPayablesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'id'=> 'required',
+            'order_number' => 'required',
+           
+                                 ]);
+
+        $order = new Order;
+
+        $order->id = $request->input('id');
+        $order->order_number = $request->input('order_number');
+        
+
+        $order->save();
+
+        return redirect('/orders')->with('success', 'Updated Successfully');
+   
     }
 
     /**
@@ -94,6 +128,10 @@ class AccountPayablesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::find($id);
+        $order->delete();
+
+        return redirect('/orders')->with('success', 'Deleted Successfully!');
+    
     }
 }

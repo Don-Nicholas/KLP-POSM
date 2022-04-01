@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/img/apple-icon.png')}}">
   <link rel="icon" type="image/png" href="{{asset('assets/img/favicon.png')}}">
-  <title>
+  <title tyle="color:red;font-size:60px;">
     KLP POS Monitoring System
   </title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -47,6 +47,7 @@
               {{ Request::is('purchases') ? 'Purchases' : ''}}
               {{ Request::is('beverages_list') ? 'Beverages List' : ''}}
               {{ Request::is('inventory') ? 'Inventory' : ''}}
+              {{ Request::is('account_payables') ? 'Account Payables' : ''}}
               </li>
           </ol>
           <h6 class="font-weight-bolder mb-0">
@@ -56,6 +57,7 @@
             {{ Request::is('purchases') ? 'Purchases' : ''}}
             {{ Request::is('beverages_list') ? 'Beverages List' : ''}}
             {{ Request::is('inventory') ? 'Inventory' : ''}}
+            {{ Request::is('account_payables') ? 'Account Payables' : ''}}
           </h6>
 
         </nav>

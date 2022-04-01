@@ -3,32 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Datatables;
 
-class AccountPayablesController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
+        //
         if ($request->ajax()) {
-            $data = Customer::select('*');
+            $data = Category::select('*');
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
        
-                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>
+                            <a href="/categories/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
+                            ';
       
                             return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('payables.index');
 
+        return view('category.index');
     }
 
     /**
@@ -49,7 +54,22 @@ class AccountPayablesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, 
+        [
+            'cat_id' => 'required',
+            'cat_name'=> 'required',
+           
+        ]);
+
+        $category = new Category;
+
+        $category->cat_id = $request->input('cat_id');
+        $category->cat_name = $request->input('cat_name');
+       
+        $category->save();
+
+        return redirect('/category')->with('success', 'Inserted Successfully');
+   
     }
 
     /**
@@ -60,7 +80,8 @@ class AccountPayablesController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::find($cat_id);
+        return view('category.show')->with('category', $category);
     }
 
     /**
@@ -71,7 +92,8 @@ class AccountPayablesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($cat_id);
+        return view('category.edit')->with('category', $category);
     }
 
     /**
@@ -83,7 +105,22 @@ class AccountPayablesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, 
+        [
+            'cat_id' => 'required',
+            'cat_name'=> 'required',
+           
+        ]);
+
+        $category = new Category;
+
+        $category->cat_id = $request->input('cat_id');
+        $category->cat_name = $request->input('cat_name');
+       
+        $category->save();
+
+        return redirect('/category')->with('success', 'Updated Successfully');
+   
     }
 
     /**
@@ -94,6 +131,10 @@ class AccountPayablesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+
+        return redirect('/category')->with('success', 'Deleted Successfully!');
+  
     }
 }

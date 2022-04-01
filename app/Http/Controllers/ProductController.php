@@ -4,30 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use Datatables;
 
-class AccountPayablesController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         if ($request->ajax()) {
-            $data = Customer::select('*');
+            $data = Product::select('*');
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
        
-                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>
+                            <a href="/products/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
+                            ';
       
                             return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('payables.index');
+
+        return view('products.index');
 
     }
 
@@ -49,7 +54,21 @@ class AccountPayablesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, 
+        [
+            'id' => 'required',
+            'prod_name'=> 'required',
+           
+        ]);
+
+        $products = new Product;
+
+        $products->id = $request->input('id');
+        $products->prod_name = $request->input('prod_name');
+       
+        $products->save();
+
+        return redirect('/products')->with('success', 'Inserted Successfully');
     }
 
     /**
@@ -61,6 +80,8 @@ class AccountPayablesController extends Controller
     public function show($id)
     {
         //
+        $products = Product::find($id);
+        return view('products.show')->with('product', $products);
     }
 
     /**
@@ -72,6 +93,8 @@ class AccountPayablesController extends Controller
     public function edit($id)
     {
         //
+        $products = Product::find($id);
+        return view('products.edit')->with('product', $products);
     }
 
     /**
@@ -84,6 +107,22 @@ class AccountPayablesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'id' => 'required',
+            'prod_name'=> 'required',
+            
+           
+        ]);
+
+        $products = new Product;
+
+        $products->id = $request->input('id');
+        $products->prod_name = $request->input('prod_name');
+       
+        $products->save();
+
+        return redirect('/products')->with('success', 'Updated Successfully');
+    
     }
 
     /**
@@ -94,6 +133,10 @@ class AccountPayablesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect('/products')->with('success', 'Deleted Successfully!');
+    
     }
 }

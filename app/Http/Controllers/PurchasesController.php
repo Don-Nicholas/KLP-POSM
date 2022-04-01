@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer;
-use App\Models\MOP;
 use App\Models\Beverage;
 use App\Models\Category;
 use App\Models\Purchase;
 
 
-class SalesInvoicesController extends Controller
+class PurchasesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,17 +17,8 @@ class SalesInvoicesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { 
-        
-        $customers = Customer::all();
-        //return $customers; 
-        $mops = MOP::all();
-        $beverageslist = Beverage::all();
-        $categories = Category::all();
-        $purchases = Purchase::all();
-        return view('invoices.index')->with('customers', $customers)->with('m_o_p_s', $mops)->with('beverages',$beverageslist)->with('categories', $categories)
-        ->with('purchases',$purchases );
-
+    {
+        //
     }
 
     /**
@@ -50,30 +39,28 @@ class SalesInvoicesController extends Controller
      */
     public function store(Request $request)
     {
-
-        return $request;
         $this->validate($request, [
             'productname'=> 'required',
+            'beverage' => 'required',
             'category' => 'required',
-            'mop' => 'required',
-            'case' =>'required',
-                       ]);
+            'case' =>'required']);
 
-            $salesinvoices = new BeverageList;
 
-        $beverages->product_name = $request->input('p_name');
-        $beverages->supplier_id = $request->input('supplier_id');
-        $beverages->quantity = $request->input('quantity');
-        $beverages->price_case = $request->input('price_case');
-        $beverages->price_solo = $request->input('price_solo');
-        $beverages->date_expire = $request->input('date_expire');
-        $beverages->badorder = $request->input('badorder');
-      
+        $beverage = Beverage::find($request->input('beverage'));
+        $total =  $beverage->price_case * $request->input('case');
 
-        $beverages->save();
+         $purchases = new Purchase;
 
-        return redirect('/beverages_list')->with('success', 'Inserted Successfully');
-  
+        $purchases->order_id = $request->input('productname');
+        $purchases->beverage_id = $request->input('beverage');
+        $purchases->quantity = $request->input('case');
+        $purchases->category_id = $request->input('category');
+        $current_date = date('Y-m-d H:i:s');
+        $purchases->date_purchase = $current_date;
+        $purchases->total = $total;
+        $purchases->save();
+
+        return redirect('/purchase')->with('success', 'Inserted Successfully');
     }
 
     /**
@@ -84,7 +71,7 @@ class SalesInvoicesController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -119,8 +106,5 @@ class SalesInvoicesController extends Controller
     public function destroy($id)
     {
         //
-        $post = posts::find($id);
-        $post->delete();
-        return redirect('/');
     }
 }

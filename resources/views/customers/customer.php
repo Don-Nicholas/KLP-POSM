@@ -3,14 +3,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Datatable</title>
+<title>Customer's Information</title>
 <link rel="stylesheet" type="text/css" href="datatable/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 <script src="script/bootstrap.bundle.min.js"></script>
 
 <?php 
 	include 'header/main-header.php'; 
 	include('connection.php');
-	$result = $mysqli->query("SELECT * from customer
+	$result = $mysqli->query("SELECT * from customers
 ") or die ($mysqli->error);
 $arr_users = [];
 if ($result->num_rows > 0) {
@@ -91,9 +91,9 @@ if ($result->num_rows > 0) {
                                                 <td><?php echo $user['cus_name']; ?></td>
                                                 <td><?php echo $user['cus_add']; ?></td>
                                                 <td><?php echo $user['contact']; ?></td>
-                                                <td><a href="customer_update.php?update=<?php echo $user['cus_id'];?>"
+                                                <td><a href="CustomersController@update?update=<?php echo $user['cus_id'];?>"
                                                         class="fa fa-list" style="color:blue"></a></td>
-                                                <td><a href="process_customerdelete.php?delete=<?php echo $user['cus_id'];?>"
+                                                <td><a href="CustomersController@destroy?delete=<?php echo $user['cus_id'];?>"
                                                         class="fa fa-trash" style="color:red"></a></td>
                                             </tr>
                                             <?php } ?>
