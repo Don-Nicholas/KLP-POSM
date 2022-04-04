@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Customer;
+use App\Models\MOP;
+use App\Models\Beverage;
+use App\Models\Category;
+use App\Models\Purchase;
 
 class AccountPayablesController extends Controller
 {
@@ -12,22 +17,21 @@ class AccountPayablesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->ajax()) {
-            $data = Customer::select('*');
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
+         //return from models; 
+        $customers = Customer::all();
        
-                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-      
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
+        $mops = MOP::all();
+        $beverageslist = Beverage::all();
+        $categories = Category::all();
+        $purchases = Purchase::all();
+
+        
+
         return view('payables.index');
+        return view('invoices.index')->with('customers', $customers)->with('m_o_p_s', $mops)->with('beverages',$beverageslist)->with('categories', $categories)
+        ->with('purchases',$purchases );
 
     }
 
@@ -49,7 +53,31 @@ class AccountPayablesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'id'=> 'required',
+            'name' => 'required',
+            'contact' => 'required',
+            'total' =>'required',
+            'bank_name' => 'required',
+            'date_purchase' => 'required']);
+
+
+         
+         $total = Purchase::find($request->input('total'));
+         $purchase = Purchase::find($request->input('beverage'));
+
+         $payables = new Purchased;
+
+
+        $payables->id = $request->input('id');
+        $payables->name = $request->input('name');
+        $payables->contact = $request->input('contact');
+        $payables->total = $request->input('total');
+        $payables->bank_name = date('bank_name');
+        $payables->date_purchase = $current_date;
+        $payables->total = $total;
+        $payables->amount_due = $amount_due;
+        $payables->save();
     }
 
     /**
@@ -71,7 +99,17 @@ class AccountPayablesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $supplier = Supplier::find($id);
+        $customers = Customer::find($id);
+        //return $customers; 
+        $mops = MOP::find($id);
+        $beverageslist = Beverage::find($id);
+        $categories = Category::find($id);
+        $purchases = Purchase::all($id);
+        return view('suppliers.edit')->with('customers', $customers)->with('m_o_p_s', $mops)->with('beverages',$beverageslist)->with('categories', $categories)
+        ->with('purchases',$purchases );
+
+    
     }
 
     /**
