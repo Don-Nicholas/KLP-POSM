@@ -16,23 +16,9 @@ class CustomersController extends Controller
      */
     public function index(Request $request) 
     {
-        if ($request->ajax()) {
-            $data = Customer::select('*');
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-       
-                            $btn = '<a href="/customers/'.$row->id.'" class="edit btn btn-primary btn-sm">View</a>
-                            <a href="/customers/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
-                            ';
-      
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
+        $customers = Customer::all();
 
-        return view('customers.index');
+        return view('customers.index')->with('customers', $customers);
 
     } 
 

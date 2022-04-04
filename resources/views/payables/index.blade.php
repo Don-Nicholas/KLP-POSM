@@ -62,40 +62,6 @@
                       </tr>
                   </thead>
                   <tbody>
-                   {{-- <?php
-				//    $myDate = date('Y-m-d');
-		//$result = $mysqli->query("SELECT * FROM beverages where d_date = '$myDate'") or die ($mysqli->error);
-		//pre_r($result);
-// 		$result = $mysqli->query("SELECT
-// 		customer.cus_id,
-// customer.cus_name,
-// customer.cus_add,
-// customer.contact,
-// customersales.order_id,
-// customersales.amount,
-// customersales.s_id,
-// `status`.`status`,
-// customersales.bankname,
-// customersales.check_date,
-// customersales.checknum
-// FROM
-// customersales
-// INNER JOIN customer ON customersales.cus_id = customer.cus_id
-// INNER JOIN `status` ON customersales.s_id = `status`.s_id
-// where customersales.s_id = 2
-//  ") or die ($mysqli->error);
-// 			while ($row = $result->fetch_assoc()):
-		?> --}}
-					<tr>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td><a href="process_flagcustomer.php?customer=1"
-								class="btn btn-primary bg-gradient-primary" style="width: 90px;">View</a></td>
-					</tr>
-		
                   </tbody>
                 </table>
               </div>
@@ -108,26 +74,4 @@
         </div><!-- .content -->
  <!--/.col-->
     
-
-    <!-- Right Panel -->
-
-
-
-    <script src="vendors/jquery/dist/jquery.min.js"></script>
-    <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
-    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="assets/js/main.js"></script>
-
-
-    <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-    <script src="vendors/jszip/dist/jszip.min.js"></script>
-    <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
-    <script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-    <script src="assets/js/init-scripts/data-table/datatables-init.js"></script>
 @endsection

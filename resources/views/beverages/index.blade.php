@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table id="userTable">
+                                        <table id="userTable" class="table">
                                             <thead>
 
                                                 <th>Beverages Name</th>
@@ -64,7 +64,7 @@
                                                 <th>Price per Case</th>
                                                 <th>Price per Solo</th>
                                             </thead>
-                                            <tbody>
+                                            <tbody> 
                                                 @foreach ($beverages as $beverage)
                                                     <tr>
                                                         <td>{{$beverage->product_name}}</td>

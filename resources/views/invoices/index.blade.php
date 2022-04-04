@@ -215,8 +215,8 @@
                                                                         @endif
                                                                     </select>   
                                                                     <a href="#myModal" r    ole="button"
-                                                                        class="btn btn-lg btn-primary"
-                                                                        data-bs-toggle="modal"><i>  
+                                                                        class="btn btn-md btn-primary"
+                                                                        data-bs-toggle="modal"  
                                                                             class=""></i>ADD</a>
                                                                 </td>
                                                         </tr>
