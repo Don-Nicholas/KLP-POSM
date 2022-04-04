@@ -23,28 +23,6 @@
                         <tbody>
                         </tbody>
                     </table>
-=======
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table table-bordered data-table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th>Email</th>
-                                    <th>Created_at</th>
-                                    <th width="100px">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 <!-- Button HTML (to Trigger Modal) -->
    

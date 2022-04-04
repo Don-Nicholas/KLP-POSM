@@ -112,10 +112,10 @@
                         <div class="form-group">
                             <input class="form-control" placeholder="Beverages Name" name="p_name" required>
                         </div>
-                        <select name="supplier_id" class="custom-select" id="inputGroupSelect01">
+                        <select name="category_id" class="custom-select" id="inputGroupSelect01">
                           <option selected>Select Category</option>
                           @foreach ($category as $category)
-                          <option value="{{$category->cat_id}}">{{$category->cat_name}}</option>
+                          <option value="{{$category->id}}">{{$category->cat_name}}</option>
                           @endforeach
                       </select>
                       <!--  <div class="form-group">

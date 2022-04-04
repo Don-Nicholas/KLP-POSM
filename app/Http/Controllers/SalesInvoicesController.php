@@ -27,8 +27,14 @@ class SalesInvoicesController extends Controller
         $beverageslist = Beverage::all();
         $categories = Category::all();
         $purchases = Purchase::all();
+
+        $totals = 0;
+        foreach($purchases as $purchase) {
+            $totals += $purchase->total;
+        }
+
         return view('invoices.index')->with('customers', $customers)->with('m_o_p_s', $mops)->with('beverages',$beverageslist)->with('categories', $categories)
-        ->with('purchases',$purchases );
+        ->with('purchases',$purchases )->with('grandTotal', $totals);
 
     }
 

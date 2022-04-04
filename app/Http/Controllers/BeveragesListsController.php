@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\BeverageList;
+use App\Models\Beverage;
 use App\Models\Supplier;
 use App\Models\Product;
 use App\Models\Category;
@@ -19,7 +19,7 @@ class BeveragesListsController extends Controller
     public function index()
     {
 
-        $beverages = BeverageList::all();
+        $beverages = Beverage::all();
         $suppliers = Supplier::all(); 
         $products = Product::all();
         $category = Category::all();
@@ -53,19 +53,20 @@ class BeveragesListsController extends Controller
              'quantity' => 'required',
              'price_case' => 'required',
              'price_solo' => 'required',
+             'category_id' => 'required',
              'date_expire' => 'required',
-             'badorder' => 'required'
-                        ]);
+             'badorder' => 'required']);
 
-             $beverages = new BeverageList;
+             $beverages = new Beverage;
 
          $beverages->product_name = $request->input('p_name');
          $beverages->supplier_id = $request->input('supplier_id');
+         $beverages->category_id = $request->input('category_id');
          $beverages->quantity = $request->input('quantity');
          $beverages->price_case = $request->input('price_case');
          $beverages->price_solo = $request->input('price_solo');
          $beverages->date_expire = $request->input('date_expire');
-         $beverages->badorder = $request->input('badorder');
+         $beverages->barorder = $request->input('badorder');
        
 
          $beverages->save();

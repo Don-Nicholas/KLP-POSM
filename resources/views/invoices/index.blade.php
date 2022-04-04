@@ -58,8 +58,8 @@
                                                     <!-- Table 1 -->
                                                     {!! Form::open(['action' => 'PurchasesController@store', 'method' => 'POST']) !!}
 
-                                                         <table>
-                                                    
+                                                         <table> 
+                                                     
                                                             <tr>
                                                                 <td>
                                                                     <label>Purchase Order #</label>
@@ -199,12 +199,9 @@
                                                             <th colspan="2">Customer Name</th>
                                                         </tr>
                                                         <tr>
-                                                            <form action="CustomersController@show" method="POST">
+                                                            <form action="purchased/0" method="GET">
                                                                 <td colspan="2">
                                                                     <select name="customer" style="width: 200px;">
-
-                                                                        
-
                                                                         @if(count($customers) > 0)
                                                                             @foreach ($customers as $customer)
                                                                                 <option value="{{ $customer->id }}">
@@ -216,13 +213,10 @@
                                                                             <option disabled selected>-- Select Customer --
                                                                             </option>
                                                                         @endif
-
-
-
-                                                                    </select>
-                                                                    <a href="#myModal" role="button"
+                                                                    </select>   
+                                                                    <a href="#myModal" r    ole="button"
                                                                         class="btn btn-lg btn-primary"
-                                                                        data-bs-toggle="modal"><i
+                                                                        data-bs-toggle="modal"><i>  
                                                                             class=""></i>ADD</a>
                                                                 </td>
                                                         </tr>
@@ -257,7 +251,7 @@
                                                                 <label>Grand Total</label>
                                                             </td>
                                                             <td>
-                                                                <input type="text" border="none" value="4" name="gtotal"
+                                                                <input type="text" border="none" value="{{$grandTotal}}" name="gtotal"
                                                                     id="txt1" style="width: 200px;" readonly>
                                                             </td>
                                                         </tr>
@@ -265,7 +259,7 @@
                                                         <tr>
                                                             <td colspan="2">
                                                                 <button type="submit" class="btn btn-primary"
-                                                                    name="purchased" style="width: 90px;">
+                                                                     style="width: 90px;">
                                                                     <center>Proceed</center>
                                                                 </button>
                                                             </td>
