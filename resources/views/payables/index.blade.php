@@ -171,9 +171,13 @@
         </div><!-- .content -->
  <!--/.col-->
     
+<<<<<<< HEAD
+@endsection
+=======
 
     <!-- Right Panel -->
 
 
   
     @endsection
+>>>>>>> cf9491e284ea369e8338da1deab49bd77af7e291

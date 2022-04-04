@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('purchaseds', function (Blueprint $table) {
             $table->id();
-            $table->integer('order_id');
-            $table->integer('beverage_id');
-            $table->double('quantity', 10, 2);
-            $table->double('total', 10, 2);
+            $table->string('customer_name');
+            $table->integer('amount_due');
             $table->double('discount', 10, 2);
-            $table->date('date_purchase');
+            $table->integer('total_quantity');
+            $table->double('total_cash', 10, 2);
+            $table->date('date_purchased');
             $table->timestamps();
         });
     }

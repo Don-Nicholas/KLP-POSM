@@ -31,6 +31,8 @@ class OrderController extends Controller
     }
     return view('orders.index');
 
+}
+
     /**
      * Show the form for creating a new resource.
      *

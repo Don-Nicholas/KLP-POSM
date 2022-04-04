@@ -5,30 +5,41 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <h2>Customer Information&nbsp;
-             <a href="#myModal" role="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"><i class="fas fa-fw fa-plus">Add</i></a></h2>
+             <a href="#myModal" role="button" class="btn btn-md btn-primary" data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i>Add</a></h2>
                 </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table table-bordered data-table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th>Email</th>
-                                    <th>Created_at</th>
-                                    <th width="100px">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+                <div class="container">
+                    <h3>Customers</h3>
+                    
+                            @if (count($customers) > 0)
+                            <table class="table table-bordered data-table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Contact</th>
+                                        <th>Created_at</th>
+                                        <th width="100px" colspan="2">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($customers as $customer)
+                                        <tr>
+                                            <td>{{$customer->id}}</td>
+                                            <td>{{$customer->name}}</td>
+                                            <td>{{$customer->address}}</td>
+                                            <td>{{$customer->contact}}</td>
+                                            <td>{{$customer->created_at}}</td>
+                                            <td><a href="/customers/{{$customer->id}}">View</a></td>
+                                            <td><a href="/customers/{{$customer->id}}/edit">Edit</a></td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            @else
+                                <h1>No Customer's Data Avaiable.</h1>
+                            @endif
+                        
 <!-- Button HTML (to Trigger Modal) -->
    
     <!-- Modal HTML -->
@@ -60,26 +71,5 @@
           </div>
       </div>
   </div>
-
-       
-<script type="text/javascript">
-    $(function () {
-        
-      var table = $('.data-table').DataTable({
-          processing: true,
-          serverSide: true,
-          ajax: "{{ route('customers.index') }}",
-          columns: [
-              {data: 'id', name: 'id'},
-              {data: 'name', name: 'name'},
-              {data: 'address', name: 'address'},
-              {data: 'contact', name: 'contact'},
-              {data: 'created_at', name: 'created_at'},
-              {data: 'action', name: 'action', orderable: false, searchable: false},
-          ]
-      });
-        
-    });
-  </script>
 
 @endsection
