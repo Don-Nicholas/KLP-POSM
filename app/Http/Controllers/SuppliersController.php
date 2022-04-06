@@ -121,10 +121,10 @@ class SuppliersController extends Controller
      */
     public function destroy($id)
     {
-        $inventory = Inventory::find($id);
-        $inventory->delete();
+        $supplier = Supplier::find($id);
+        $supplier->delete();
 
-        return redirect('/inventories')->with('success', 'Deleted Successfully!');
+        return redirect('/suppliers')->with('success', 'Deleted Successfully!');
  
     }
 }

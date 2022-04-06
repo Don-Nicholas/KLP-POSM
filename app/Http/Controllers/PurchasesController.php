@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Beverage;
 use App\Models\Category;
 use App\Models\Purchase;
+use App\Models\Order;
 
 
 class PurchasesController extends Controller
@@ -39,8 +40,9 @@ class PurchasesController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
-            'productname'=> 'required',
+            'orderNumber'=> 'required',
             'beverage' => 'required',
             'category' => 'required',
             'case' =>'required']);
@@ -51,7 +53,7 @@ class PurchasesController extends Controller
 
          $purchases = new Purchase;
 
-        $purchases->order_id = $request->input('productname');
+        $purchases->order_id = $request->input('orderNumber');
         $purchases->beverage_id = $request->input('beverage');
         $purchases->quantity = $request->input('case');
         $purchases->category_id = $request->input('category');
@@ -59,6 +61,11 @@ class PurchasesController extends Controller
         $purchases->date_purchase = $current_date;
         $purchases->total = $total;
         $purchases->save();
+
+        $orderID = (int)$request->input('orderID');
+        $order = Order::find($orderID);
+        $order->order_number = $request->input('orderNumber');
+        $order->save();
 
         return redirect('/purchase')->with('success', 'Inserted Successfully');
     }

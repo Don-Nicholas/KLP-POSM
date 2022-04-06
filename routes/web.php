@@ -19,8 +19,11 @@ Route::get('/', function () {
 });
 #route for sales transaction monitoring
 Route::resource('/customers', 'CustomersController');
+Route::resource('/categories', 'CategoriesController');
+Route::resource('/customer_sales', 'CustomerSalesController');
 Route::resource('/inventories', 'InventoryController' );
 Route::resource('/sales', 'SalesController' );
+Route::resource('/mops', 'ModeofPaymentController' );
 Route::resource('/beverages_list', 'BeveragesListsController' );
 Route::resource('/purchase', 'SalesInvoicesController' );
 Route::resource('/suppliers', 'SuppliersController' );
@@ -31,5 +34,7 @@ Route::resource('/controller', 'Controller' );
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::resource('/purchases', 'PurchasesController');
 Route::resource('/purchased', 'PurchasedController');
+Route::resource('/account_payables', 'AccountPayablesController');
+Route::resource('/status', 'StatusController');
 ?>
 

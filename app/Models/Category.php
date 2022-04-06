@@ -15,4 +15,8 @@ class Category extends Model
     public function purchases() {
         return $this->hasMany('App\Models\Purchase');
     }
+
+    public function beverages() {
+        return $this->hasMany('App\Models\Beverage');
+    }
 }

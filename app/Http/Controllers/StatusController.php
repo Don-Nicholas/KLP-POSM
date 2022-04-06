@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Product;
-use Datatables;
+use App\Models\Status;
 
-class ProductController extends Controller
+class StatusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-       $products = Product::all();
-        return view('products.index')->with('products', $products);
+        $statuses = Status::all();
 
+        return view('status.index')->with('statuses', $statuses);
     }
 
     /**
@@ -39,21 +38,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, 
-        [
-            'id' => 'required',
-            'prod_name'=> 'required',
-           
+
+        $this->validate($request, [
+            'status' => 'required'
         ]);
 
-        $products = new Product;
 
-        $products->id = $request->input('id');
-        $products->prod_name = $request->input('prod_name');
-       
-        $products->save();
+        $status = new Status;
+        $status->status = $request->input('status');
+        $status->save();
 
-        return redirect('/products')->with('success', 'Inserted Successfully');
+        return redirect('/status')->with('success', 'Inserted Successfully!');
     }
 
     /**
@@ -64,9 +59,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
-        $products = Product::find($id);
-        return view('products.show')->with('product', $products);
+        $status = Status::find($id);
+
+        return view('status.show')->with('status', $status);
     }
 
     /**
@@ -77,9 +72,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
-        $products = Product::find($id);
-        return view('products.edit')->with('product', $products);
+        $status = Status::find($id);
+
+        return view('status.edit')->with('status', $status);
     }
 
     /**
@@ -91,23 +86,18 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
         $this->validate($request, [
-            'id' => 'required',
-            'prod_name'=> 'required',
-            
-           
+            'status' => 'required'
         ]);
 
-        $products = new Product;
 
-        $products->id = $request->input('id');
-        $products->prod_name = $request->input('prod_name');
-       
-        $products->save();
 
-        return redirect('/products')->with('success', 'Updated Successfully');
-    
+        $status = Status::find($id);
+        $status->status = $request->input('status');
+        $status->save();
+
+        return redirect('/status')->with('success', 'Updated Successfully!');
     }
 
     /**
@@ -118,10 +108,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id);
-        $product->delete();
+        $status = Status::find($id);
+        $status->delete();
 
-        return redirect('/products')->with('success', 'Deleted Successfully!');
-    
+        return redirect('/status')->with('success', 'Deleted Successfully!');
     }
 }

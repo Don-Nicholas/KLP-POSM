@@ -15,22 +15,6 @@
 
                 </div>
 
-                <div class="col-sm-5">
-                    <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            <strong style="color: #007bff;" class="mt-2">Welcome!</strong> &nbsp;
-                        </a>
-
-                        <div class="user-menu dropdown-menu">
-
-                            <!--  <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
-                                               <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a> -->
-
-                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
@@ -58,6 +42,7 @@
                                                     <!-- Table 1 -->
                                                     {!! Form::open(['action' => 'PurchasesController@store', 'method' => 'POST']) !!}
 
+                                                        <input type="hidden" name="orderID" value="{{$orderID}}">
                                                          <table> 
                                                      
                                                             <tr>
@@ -65,7 +50,7 @@
                                                                     <label>Purchase Order #</label>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" value="0" name="productname"
+                                                                    <input type="text" class="" value="0000{{$orderNumber}}" name="orderNumber"
                                                                         style="width: 200px;" readonly>
                                                                 </td>
                                                             </tr>

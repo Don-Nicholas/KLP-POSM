@@ -4,11 +4,10 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h2>Customer Information&nbsp;
+                    <h2>Customers&nbsp;
              <a href="#myModal" role="button" class="btn btn-md btn-primary" data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i>Add</a></h2>
                 </div>
                 <div class="container">
-                    <h3>Customers</h3>
                     
                             @if (count($customers) > 0)
                             <table class="table table-bordered data-table">
@@ -23,17 +22,52 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($customers as $customer)
-                                        <tr>
-                                            <td>{{$customer->id}}</td>
-                                            <td>{{$customer->name}}</td>
-                                            <td>{{$customer->address}}</td>
-                                            <td>{{$customer->contact}}</td>
-                                            <td>{{$customer->created_at}}</td>
-                                            <td><a href="/customers/{{$customer->id}}">View</a></td>
-                                            <td><a href="/customers/{{$customer->id}}/edit">Edit</a></td>
-                                        </tr>
-                                    @endforeach
+                                    @if (count($customers) > 0)
+                                        @foreach ($customers as $customer)
+                                            <tr>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">{{$customer->id}}</p>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div>
+                                                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
+                                                                alt="user1">
+                                                        </div>
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">{{$customer->name}}</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">{{$customer->address}}</p>
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    <span class="badge badge-sm bg-gradient-success">{{$customer->contact}}</span>
+                                                </td>
+                                                 <td class="align-middle text-center">
+                                                    <span
+                                                        class="text-secondary text-xs font-weight-bold">{{$customer->created_at}}</span>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <a href="/customers/{{$customer->id}}"
+                                                        class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                        data-original-title="Edit user">
+                                                        View
+                                                    </a>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <a href="/customers/{{$customer->id}}/edit"
+                                                        class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                        data-original-title="Edit user">
+                                                        Edit
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <h1>No suppliers information.</h1>
+                                    @endif
                                 </tbody>
                             </table>
                             @else

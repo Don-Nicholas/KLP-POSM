@@ -13,32 +13,11 @@ class InventoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        // return view('inventories.index')->with('inventories', $inventory);
-        if ($request->ajax()) {
-            $data = Inventory::select('*');
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-       
-                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>
-                            <a href="/inventories/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
-                            ';
-      
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
+        $inventories = Inventory::all();
         
-        // $inventories = Inventory::all();
-
-        // return $inventories;
-          
-        return view('inventories.index');
-    
-        
+        return view('inventories.index')->with('inventories', $inventories);
     }
 
     /**

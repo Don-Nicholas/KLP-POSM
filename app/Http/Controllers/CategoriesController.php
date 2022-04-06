@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use Illuminate\Http\Request;
-use Datatables;
+use App\Models\Category;
 
-class CategoryController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,24 +15,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
-        if ($request->ajax()) {
-            $data = Category::select('*');
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-       
-                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>
-                            <a href="/categories/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
-                            ';
-      
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
+        $categories = Category::all();
 
-        return view('category.index');
+        return view('categories.index')->with('categories', $categories);
     }
 
     /**
@@ -54,22 +38,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, 
-        [
-            'cat_id' => 'required',
-            'cat_name'=> 'required',
-           
+        $this->validate($request, [
+            'cat_name' => 'required'
         ]);
 
         $category = new Category;
-
-        $category->cat_id = $request->input('cat_id');
         $category->cat_name = $request->input('cat_name');
-       
         $category->save();
 
-        return redirect('/category')->with('success', 'Inserted Successfully');
-   
+        return redirect('/categories')->with('success', 'Inserted Successfully!');
     }
 
     /**
@@ -80,8 +57,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::find($cat_id);
-        return view('category.show')->with('category', $category);
+        $category = Category::find($id);
+
+        return view('categories.show')->with('category', $category);
     }
 
     /**
@@ -92,8 +70,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($cat_id);
-        return view('category.edit')->with('category', $category);
+        $category = Category::find($id);
+
+        return view('categories.edit')->with('category', $category);
     }
 
     /**
@@ -105,22 +84,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, 
-        [
-            'cat_id' => 'required',
-            'cat_name'=> 'required',
-           
+        $this->validate($request, [
+            'cat_name' => 'required'
         ]);
 
-        $category = new Category;
-
-        $category->cat_id = $request->input('cat_id');
+        $category = Category::find($id);
         $category->cat_name = $request->input('cat_name');
-       
         $category->save();
 
-        return redirect('/category')->with('success', 'Updated Successfully');
-   
+        return redirect('/categories')->with('success', 'Updated Successfully!');
     }
 
     /**
@@ -132,9 +104,9 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
+
         $category->delete();
 
-        return redirect('/category')->with('success', 'Deleted Successfully!');
-  
+        return redirect('/categories')->with('success', 'Deleted Successfully!');
     }
 }
