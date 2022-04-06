@@ -9,7 +9,7 @@
 
                 <div class="col-sm-7">
                     <h2>
-                        <center>KLP BEVERAGES TRADING</center>
+                        <center>Customer Sales</center>
                     </h2>
 
                 </div>
@@ -30,7 +30,7 @@
                         <div class="content">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h4 class="m-2 font-weight-bold text-primary">Beverages List&nbsp;
+                                    <h4 class="m-2 font-weight-bold text-primary">Customer Sales&nbsp;
                                         <!-- MODAL for ADDING BEVERAGES-->
                                         <a href="#myModal" role="button" class="btn btn-md btn-primary"
                                             data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i>Add</a>
@@ -41,12 +41,13 @@
                                         <table id="userTable" class="table">
                                             <thead>
 
-                                                <th>Beverages Name</th>
-                                                <th>Category</th>
-                                                <th>Supplier</th>
-                                                <th>Cases</th>
-                                                <th>Price per Case</th>
-                                                <th>Price per Solo</th>
+                                                <th>id</th>
+                                                <th>Customer Name</th>
+                                                <th>Order</th>
+                                                <th>Mode of Payment</th>
+                                                <th>Date</th>
+                                                <th>Amount</th>
+                                                <th>Amount</th>
                                                 <th colspan="2">Actions</th>
                                             </thead>
                                             <tbody> 
@@ -149,26 +150,4 @@
         </div>
 
         </html>
-
-        <!-- Right Panel -->
-
-
-
-        <script src="vendors/jquery/dist/jquery.min.js"></script>
-        <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
-        <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="assets/js/main.js"></script>
-
-
-        <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <script src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-        <script src="vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-        <script src="vendors/jszip/dist/jszip.min.js"></script>
-        <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
-        <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
-        <script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-        <script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-        <script src="vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-        <script src="assets/js/init-scripts/data-table/datatables-init.js"></script>
     @endsection

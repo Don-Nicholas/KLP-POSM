@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer;
@@ -9,6 +10,7 @@ use App\Models\MOP;
 use App\Models\Beverage;
 use App\Models\Category;
 use App\Models\Purchase;
+use App\Models\Order;
 
 
 class SalesInvoicesController extends Controller
@@ -20,7 +22,14 @@ class SalesInvoicesController extends Controller
      */
     public function index()
     { 
+        $getOrderRecentOrderNumber = DB::select('SELECT * FROM orders ORDER BY id DESC');
         
+        $orderID = $getOrderRecentOrderNumber[0]->id;
+
+
+        $orderNumber = $getOrderRecentOrderNumber[0]->order_number + 1;
+
+
         $customers = Customer::all();
         //return $customers; 
         $mops = MOP::all();
@@ -34,7 +43,7 @@ class SalesInvoicesController extends Controller
         }
 
         return view('invoices.index')->with('customers', $customers)->with('m_o_p_s', $mops)->with('beverages',$beverageslist)->with('categories', $categories)
-        ->with('purchases',$purchases )->with('grandTotal', $totals);
+        ->with('purchases',$purchases )->with('grandTotal', $totals)->with('orderNumber', $orderNumber)->with('orderID', $orderID);
 
     }
 
@@ -58,6 +67,7 @@ class SalesInvoicesController extends Controller
     {
 
         return $request;
+
         $this->validate($request, [
             'productname'=> 'required',
             'category' => 'required',
@@ -77,6 +87,8 @@ class SalesInvoicesController extends Controller
       
 
         $beverages->save();
+
+        $order = Order::find();
 
         return redirect('/beverages_list')->with('success', 'Inserted Successfully');
   

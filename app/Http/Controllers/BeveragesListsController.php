@@ -82,8 +82,13 @@ class BeveragesListsController extends Controller
      */
     public function show($id)
     {
-        $beverages= Beverage::find($id);
-        return view('beverages.show')->with('beverage', $beverages);
+        $beverages = Beverage::find($id);
+        $suppliers = Supplier::all(); 
+        $products = Product::all();
+        $category = Category::all();
+
+        return view('beverages.show')->with('beverages', $beverages)->with('suppliers', $suppliers)
+        ->with('product', $products)->with('category',$category);
     }
 
     /**
@@ -94,7 +99,13 @@ class BeveragesListsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $beverages = Beverage::find($id);
+        $suppliers = Supplier::all(); 
+        $products = Product::all();
+        $category = Category::all();
+
+        return view('beverages.edit')->with('beverages', $beverages)->with('suppliers', $suppliers)
+        ->with('product', $products)->with('category',$category);
     }
 
     /**
@@ -106,8 +117,31 @@ class BeveragesListsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $beverages= Beverage::find($id);
-        return view('beverages.edit')->with('beverage', $beverages);
+        $this->validate($request, [
+            'p_name'=> 'required',
+            'supplier_id' => 'required',
+            'quantity' => 'required',
+            'price_case' => 'required',
+            'price_solo' => 'required',
+            'category_id' => 'required',
+            'date_expire' => 'required',
+            'badorder' => 'required']);
+
+            $beverages = Beverage::find($id);
+
+        $beverages->product_name = $request->input('p_name');
+        $beverages->supplier_id = $request->input('supplier_id');
+        $beverages->category_id = $request->input('category_id');
+        $beverages->quantity = $request->input('quantity');
+        $beverages->price_case = $request->input('price_case');
+        $beverages->price_solo = $request->input('price_solo');
+        $beverages->date_expire = $request->input('date_expire');
+        $beverages->barorder = $request->input('badorder');
+      
+
+        $beverages->save();
+
+        return redirect('/beverages_list')->with('success', 'Updated Successfully');
     }
 
     /**
@@ -118,6 +152,9 @@ class BeveragesListsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $beverage = Beverage::find($id);
+        $beverage->delete();
+
+        return redirect('/beverages_list')->with("success","Deleted Successfuly!");
     }
 }

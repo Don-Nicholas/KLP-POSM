@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Product;
-use Datatables;
+use App\Models\CustomerSale;
 
-class ProductController extends Controller
+
+class CustomerSalesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-       $products = Product::all();
-        return view('products.index')->with('products', $products);
+        $customer_sales = CustomerSale::all();
 
+        return view('customersales.index')->with('customersales', $customer_sales);
     }
 
     /**
@@ -39,21 +39,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, 
-        [
-            'id' => 'required',
-            'prod_name'=> 'required',
-           
-        ]);
-
-        $products = new Product;
-
-        $products->id = $request->input('id');
-        $products->prod_name = $request->input('prod_name');
-       
-        $products->save();
-
-        return redirect('/products')->with('success', 'Inserted Successfully');
+        //
     }
 
     /**
@@ -65,8 +51,6 @@ class ProductController extends Controller
     public function show($id)
     {
         //
-        $products = Product::find($id);
-        return view('products.show')->with('product', $products);
     }
 
     /**
@@ -78,8 +62,6 @@ class ProductController extends Controller
     public function edit($id)
     {
         //
-        $products = Product::find($id);
-        return view('products.edit')->with('product', $products);
     }
 
     /**
@@ -92,22 +74,6 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request, [
-            'id' => 'required',
-            'prod_name'=> 'required',
-            
-           
-        ]);
-
-        $products = new Product;
-
-        $products->id = $request->input('id');
-        $products->prod_name = $request->input('prod_name');
-       
-        $products->save();
-
-        return redirect('/products')->with('success', 'Updated Successfully');
-    
     }
 
     /**
@@ -118,10 +84,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id);
-        $product->delete();
+        $customer = Customer::find($id);
+        $customer->delete();
 
-        return redirect('/products')->with('success', 'Deleted Successfully!');
-    
+        return redirect('/customers')->with('success', 'Deleted Successfully!');
     }
 }
