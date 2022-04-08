@@ -15,22 +15,6 @@
 
                 </div>
 
-                <div class="col-sm-5">
-                    <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            <strong style="color: #007bff;" class="mt-2">Welcome!</strong> &nbsp;
-                        </a>
-
-                        <div class="user-menu dropdown-menu">
-
-                            <!--  <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
-                                               <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a> -->
-
-                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
@@ -58,14 +42,15 @@
                                                     <!-- Table 1 -->
                                                     {!! Form::open(['action' => 'PurchasesController@store', 'method' => 'POST']) !!}
 
-                                                         <table>
-                                                    
+                                                        <input type="hidden" name="orderID" value="{{$orderID}}">
+                                                         <table> 
+                                                     
                                                             <tr>
                                                                 <td>
                                                                     <label>Purchase Order #</label>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" value="0" name="productname"
+                                                                    <input type="text" class="" value="0000{{$orderNumber}}" name="orderNumber"
                                                                         style="width: 200px;" readonly>
                                                                 </td>
                                                             </tr>
@@ -199,12 +184,9 @@
                                                             <th colspan="2">Customer Name</th>
                                                         </tr>
                                                         <tr>
-                                                            <form action="CustomersController@show" method="POST">
+                                                            <form action="purchased/0" method="GET">
                                                                 <td colspan="2">
                                                                     <select name="customer" style="width: 200px;">
-
-                                                                        
-
                                                                         @if(count($customers) > 0)
                                                                             @foreach ($customers as $customer)
                                                                                 <option value="{{ $customer->id }}">
@@ -216,13 +198,10 @@
                                                                             <option disabled selected>-- Select Customer --
                                                                             </option>
                                                                         @endif
-
-
-
-                                                                    </select>
-                                                                    <a href="#myModal" role="button"
-                                                                        class="btn btn-lg btn-primary"
-                                                                        data-bs-toggle="modal"><i
+                                                                    </select>   
+                                                                    <a href="#myModal" r    ole="button"
+                                                                        class="btn btn-md btn-primary"
+                                                                        data-bs-toggle="modal"  
                                                                             class=""></i>ADD</a>
                                                                 </td>
                                                         </tr>
@@ -257,7 +236,7 @@
                                                                 <label>Grand Total</label>
                                                             </td>
                                                             <td>
-                                                                <input type="text" border="none" value="4" name="gtotal"
+                                                                <input type="text" border="none" value="{{$grandTotal}}" name="gtotal"
                                                                     id="txt1" style="width: 200px;" readonly>
                                                             </td>
                                                         </tr>
@@ -265,7 +244,7 @@
                                                         <tr>
                                                             <td colspan="2">
                                                                 <button type="submit" class="btn btn-primary"
-                                                                    name="purchased" style="width: 90px;">
+                                                                     style="width: 90px;">
                                                                     <center>Proceed</center>
                                                                 </button>
                                                             </td>

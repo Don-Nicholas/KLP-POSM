@@ -13,23 +13,6 @@
                     </h2>
 
                 </div>
-
-                <div class="col-sm-5">
-                    <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            <strong style="color: #007bff;" class="mt-2">Welcome!</strong> &nbsp;
-                        </a>
-
-                        <div class="user-menu dropdown-menu">
-                            <!--                            <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
-
-                                            <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a> -->
-
-                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
@@ -49,29 +32,46 @@
                                 <div class="card-header py-3">
                                     <h4 class="m-2 font-weight-bold text-primary">Beverages List&nbsp;
                                         <!-- MODAL for ADDING BEVERAGES-->
-                                        <a href="#myModal" role="button" class="btn btn-lg btn-primary"
-                                            data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i></a>
+                                        <a href="#myModal" role="button" class="btn btn-md btn-primary"
+                                            data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i>Add</a>
                                     </h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table id="userTable">
+                                        <table id="userTable" class="table">
                                             <thead>
 
                                                 <th>Beverages Name</th>
                                                 <th>Category</th>
+                                                <th>Supplier</th>
                                                 <th>Cases</th>
                                                 <th>Price per Case</th>
                                                 <th>Price per Solo</th>
+                                                <th colspan="2">Actions</th>
                                             </thead>
-                                            <tbody>
+                                            <tbody> 
                                                 @foreach ($beverages as $beverage)
-                                                    <tr>
+                                                    <tr class="text-center">
                                                         <td>{{$beverage->product_name}}</td>
-                                                        <td>{{$beverage->supplier_id}}</td>
+                                                        <td>{{$beverage->category->cat_name}}</td>
+                                                        <td>{{$beverage->supplier->name}}</td>
                                                         <td>{{$beverage->quantity}}</td>
                                                         <td>{{$beverage->price_case}}</td>
                                                         <td>{{$beverage->price_solo}}</td>
+                                                        <td class="align-middle">
+                                                            <a href="/beverages_list/{{$beverage->id}}"
+                                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                                data-original-title="Edit user">
+                                                                View
+                                                            </a>
+                                                        </td>
+                                                        <td class="align-middle">
+                                                            <a href="/beverages_list/{{$beverage->id}}/edit"
+                                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
+                                                                data-original-title="Edit user">
+                                                                Edit
+                                                            </a>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -112,10 +112,10 @@
                         <div class="form-group">
                             <input class="form-control" placeholder="Beverages Name" name="p_name" required>
                         </div>
-                        <select name="supplier_id" class="custom-select" id="inputGroupSelect01">
+                        <select name="category_id" class="custom-select" id="inputGroupSelect01">
                           <option selected>Select Category</option>
                           @foreach ($category as $category)
-                          <option value="{{$category->cat_id}}">{{$category->cat_name}}</option>
+                          <option value="{{$category->id}}">{{$category->cat_name}}</option>
                           @endforeach
                       </select>
                       <!--  <div class="form-group">

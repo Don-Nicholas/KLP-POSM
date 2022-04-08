@@ -50,7 +50,7 @@
             
             <div class="card-body">
               <div class="table-responsive">
-                {!! Form::open(['action' => 'AccountPayables@store', 'method' => 'POST']) !!}
+                {!! Form::open(['action' => 'AccountPayablesController@store', 'method' => 'POST']) !!}
                 <table class="table align-items-center mb-0">
                     <thead>
                       <tr>
@@ -58,6 +58,7 @@
                         </th>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer's Name
+                           
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                 Contact Number</th>

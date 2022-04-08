@@ -16,23 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        if ($request->ajax()) {
-            $data = Product::select('*');
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-       
-                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>
-                            <a href="/products/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
-                            ';
-      
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-
-        return view('products.index');
+       $products = Product::all();
+        return view('products.index')->with('products', $products);
 
     }
 

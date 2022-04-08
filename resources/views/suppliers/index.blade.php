@@ -4,8 +4,8 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>Supplier Information&nbsp;
-             <a href="#myModal" role="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i></a></h6>
+                    <h2>Suppliers &nbsp;
+             <a href="#myModal" role="button" class="btn btn-md btn-primary" data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i>Add</a></h2>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -26,8 +26,6 @@
                                         <th class="text-secondary opacity-7" colspan="2">
                                             Actions
                                         </th>
-                                        
-                                        
 
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
