@@ -21,7 +21,7 @@ Route::get('/', function () {
 Route::resource('/customers', 'CustomersController');
 Route::resource('/inventories', 'InventoryController' );
 Route::resource('/sales', 'SalesController' );
-Route::resource('/beverages_list', 'BeveragesListsController' );
+Route::resource('/beverages', 'BeveragesListsController' );
 Route::resource('/purchase', 'SalesInvoicesController' );
 Route::resource('/suppliers', 'SuppliersController' );
 Route::resource('/products', 'ProductController');

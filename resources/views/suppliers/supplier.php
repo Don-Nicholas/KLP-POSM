@@ -55,7 +55,7 @@
                             <h4 class="m-2 font-weight-bold text-primary">Supplier&nbsp;<a href="#" data-toggle="modal"
                                     data-target="#supplierModal" type="button"
                                     class="btn btn-primary bg-gradient-primary" style="border-radius: 0px;"><i
-                                        class="fas fa-fw fa-plus"></i></a></h4>
+                                        class="">ADD</i></a></h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
