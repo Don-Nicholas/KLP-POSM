@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Beverage;
 use App\Models\Category;
 use App\Models\Purchase;
 use App\Models\Order;
+use App\Models\Inventory;
 
 
 class PurchasesController extends Controller
@@ -41,6 +43,8 @@ class PurchasesController extends Controller
     public function store(Request $request)
     {
 
+        
+
         $this->validate($request, [
             'orderNumber'=> 'required',
             'beverage' => 'required',
@@ -48,6 +52,7 @@ class PurchasesController extends Controller
             'case' =>'required']);
 
 
+            return $request;
         $beverage = Beverage::find($request->input('beverage'));
         $total =  $beverage->price_case * $request->input('case');
 
@@ -61,6 +66,12 @@ class PurchasesController extends Controller
         $purchases->date_purchase = $current_date;
         $purchases->total = $total;
         $purchases->save();
+
+        $result = DB::table('beverages')->where('product_name', 'Coke')->orderBy('id', 'DESC')->get();
+
+        $quantity =  (int)$result[0]->quantity;
+
+        
 
         $orderID = (int)$request->input('orderID');
         $order = Order::find($orderID);

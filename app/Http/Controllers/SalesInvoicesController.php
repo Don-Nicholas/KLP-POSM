@@ -66,7 +66,6 @@ class SalesInvoicesController extends Controller
     public function store(Request $request)
     {
 
-        return $request;
 
         $this->validate($request, [
             'productname'=> 'required',
