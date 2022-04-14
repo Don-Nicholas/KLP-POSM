@@ -32,7 +32,7 @@
                                 <h5 class="m-2 font-weight-bold text-primary">Sales Invoice&nbsp;</h5>
                             </div>
 
-                            <div class="card-body">
+                            <div class="card-body"> 
                                 <div class="row justify-content-center">
                                     <div class="table-responsive">
 

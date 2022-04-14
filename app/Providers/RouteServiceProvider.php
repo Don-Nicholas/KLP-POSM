@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void
-     */
+     */ 
     public function boot()
     {
         $this->configureRateLimiting();

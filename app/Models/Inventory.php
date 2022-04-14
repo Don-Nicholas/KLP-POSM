@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Inventory extends Model
 {
     use HasFactory;
+    protected $table = 'inventories';
+    public $primaryKey = 'id';
+    public $timestamps = true;
+
+    public function category() {
+        return $this->belongsTo('App\Models\Category');
+    }
 }

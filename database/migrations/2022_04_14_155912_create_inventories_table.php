@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inventory', function (Blueprint $table) {
+        Schema::create('inventories', function (Blueprint $table) {
             $table->id();
             $table->integer('supplier_id');
             $table->string('product_name', 50);
@@ -26,7 +26,6 @@ return new class extends Migration
             $table->integer('piece');
             $table->integer('barorder');
             $table->timestamps();
-            
         });
     }
 

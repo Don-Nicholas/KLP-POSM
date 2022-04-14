@@ -4,8 +4,9 @@
         <h3>Cash Payment Method</h3>
 
         <div class="row mt-5">
+            @if ($mop === 'Cash')
             <div class="col-sm-6">
-                {!! Form::open(['action' => 'PurchasedController@store', 'method' => 'POST']) !!}
+                {!! Form::open(['action' => 'CustomerSalesController@store', 'method' => 'POST']) !!}
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Total Quantity</span>
                     <input type="text" class="form-control ps-3"  name="total_quantity" value="{{$total_quantity}}" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
@@ -34,10 +35,47 @@
                     <span class="input-group-text" id="basic-addon1">Change</span>
                     <input type="text" name="change" id="change" class="form-control ps-3"  placeholder="Change" readonly aria-label="Username"  aria-describedby="basic-addon1">
                 </div>
-
+                <input type="hidden" name="mop" value="Cash">
                 <button class="btn btn-primary" type="submit">Submit</button>
                 {!! Form::close() !!}
             </div>
+            @else
+            <div class="col-sm-6">
+                {!! Form::open(['action' => 'CustomerSalesController@store', 'method' => 'POST']) !!}
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Total Quantity</span>
+                    <input type="text" class="form-control ps-3"  name="total_quantity" value="{{$total_quantity}}" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Customer Name</span>
+                    <input type="text" class="form-control ps-3" value="{{$customerName}}" readonly name="customer_name" placeholder="Customer Name" aria-label="CustomerName" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Amount Due</span>
+                    <input type="text" class="form-control ps-3" id="amountDue" value="{{$grandTotal}}" name="amount_due" placeholder="Amount Due"  aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1" >Post Date</span>
+                    <input type="date" class="form-control ps-3" name="postDate" placeholder="Post Date" aria-label="discount" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Check No.</span>
+                    <input type="text" class="form-control ps-3" name="checkNumber"  placeholder="Check Number"  aria-label="discounted amout" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Bank Name</span>
+                    <input type="text" class="form-control ps-3" name="bankName" placeholder="Bank Name" aria-label="Cash" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Check Amount</span>
+                    <input type="text" name="checkAmount" class="form-control ps-3"  placeholder="Check Amount" aria-label="Username"  aria-describedby="basic-addon1">
+                </div>
+
+                <input type="hidden" name="mop" value="Check">
+                <button class="btn btn-primary" type="submit">Submit</button>
+                {!! Form::close() !!}
+            </div>
+            @endif
         </div>
     </div>
 
