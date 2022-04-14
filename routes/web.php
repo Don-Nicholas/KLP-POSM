@@ -15,8 +15,9 @@ use App\Http\Controllers\UserController;
 */
 #route for dashboard or home
 Route::get('/', function () {
-    return view('dashboards.dashboard');
+    return view('welcome');
 });
+Route::resource('/dashboard', 'DashboardController');
 #route for sales transaction monitoring
 Route::resource('/customers', 'CustomersController');
 Route::resource('/categories', 'CategoriesController');

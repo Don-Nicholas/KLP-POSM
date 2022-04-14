@@ -52,7 +52,7 @@
                 <div class="container">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h4 class="m-2 font-weight-bold text-primary">Supplier&nbsp;<a href="#" data-toggle="modal"
+                            <h4 class="m-2 font-weight-bold text-primary">Supplier's Information&nbsp;<a href="#" data-toggle="modal"
                                     data-target="#supplierModal" type="button"
                                     class="btn btn-primary bg-gradient-primary" style="border-radius: 0px;"><i
                                         class="">ADD</i></a></h4>

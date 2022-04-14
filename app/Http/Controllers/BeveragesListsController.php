@@ -23,6 +23,7 @@ class BeveragesListsController extends Controller
         $suppliers = Supplier::all(); 
         $products = Product::all();
         $category = Category::all();
+
         return view('beverages.index')->with('beverages', $beverages)->with('suppliers', $suppliers)
         ->with('product', $products)->with('category',$category);
 
