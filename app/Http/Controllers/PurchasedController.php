@@ -92,9 +92,7 @@ class PurchasedController extends Controller
         }
 
         $customerName = Customer::find($customer);
-
-            return view('invoices.show')->with('customerName', $customerName->name)->with('grandTotal', $request->input('gtotal'))->with('total_quantity', $total_quantity)->with('mop', $request->input('mop'));
-        
+        return view('invoices.show')->with('customerName', $customerName->name)->with('grandTotal', $request->input('gtotal'))->with('total_quantity', $total_quantity)->with('mop', $request->input('mop'));
     }
 
     /**

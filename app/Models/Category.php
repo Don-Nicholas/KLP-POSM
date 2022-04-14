@@ -19,4 +19,8 @@ class Category extends Model
     public function beverages() {
         return $this->hasMany('App\Models\Beverage');
     }
+
+    public function inventories() {
+        return $this->hasMany('App\Models\Inventory');
+    }
 }

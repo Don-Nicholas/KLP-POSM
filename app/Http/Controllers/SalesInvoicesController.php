@@ -25,10 +25,7 @@ class SalesInvoicesController extends Controller
         $getOrderRecentOrderNumber = DB::select('SELECT * FROM orders ORDER BY id DESC');
         
         $orderID = $getOrderRecentOrderNumber[0]->id;
-
-
         $orderNumber = $getOrderRecentOrderNumber[0]->order_number + 1;
-
 
         $customers = Customer::all();
         //return $customers; 

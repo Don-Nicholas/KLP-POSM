@@ -52,7 +52,6 @@ class PurchasesController extends Controller
             'case' =>'required']);
 
 
-            return $request;
         $beverage = Beverage::find($request->input('beverage'));
         $total =  $beverage->price_case * $request->input('case');
 
@@ -69,7 +68,23 @@ class PurchasesController extends Controller
 
         $result = DB::table('beverages')->where('product_name', 'Coke')->orderBy('id', 'DESC')->get();
 
-        $quantity =  (int)$result[0]->quantity;
+        $quantity =  (int)$result[0]->quantity - (int)$request->input('case');
+        // return $result[0];
+
+        $inventory = new Inventory;
+        $inventory->supplier_id = $result[0]->supplier_id;
+        $inventory->product_name = $result[0]->product_name;
+        $inventory->category_id = $result[0]->category_id;
+        $inventory->quantity = $quantity;
+        $inventory->price_case = $result[0]->price_case;
+        $inventory->price_solo = $result[0]->price_solo;
+        $inventory->date_expire = $result[0]->date_expire;
+        $inventory->barorder = $result[0]->barorder;
+        $inventory->save();
+
+        $beverageOne = Beverage::find($result[0]->id);
+        $beverageOne->quantity = $quantity;
+        $beverageOne->save();
 
         
 

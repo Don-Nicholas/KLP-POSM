@@ -44,6 +44,7 @@
 
                             <div class="card-body">
                                 <div class="table-responsive">
+                                    @if (count($inventories) > 0)
                                     <table class="table table-bordered data-table">
                                         <thead>
                                             <tr>
@@ -53,15 +54,25 @@
                                                 <th>Quantity</th>
                                                 <th>Date Expire</th>
                                                 <th>Bad Order</th>
-                                                <th>Actions</th>
                                             </tr>
                                             
                                         </thead>
                                              <tbody>
+                                                 @foreach ($inventories as $inventory)
+                                                 <tr class="">
+                                                    <td>{{$inventory->id}}</td>
+                                                    <td>{{$inventory->product_name}}</td>
+                                                    <td>{{$inventory->category->cat_name}}</td>
+                                                    <td>{{$inventory->quantity}}</td>
+                                                    <td>{{$inventory->date_expire}}</td>
+                                                    <td>{{$inventory->barorder}}</td>
+                                                </tr>
+                                                 @endforeach
                                             </tbody>
                                     </table>
-                                    
-                                      
+                                    @else
+                                        <h1>No Inventories Information Available.</h1>
+                                    @endif
                                 </div>
                             </div>
                         </div>
