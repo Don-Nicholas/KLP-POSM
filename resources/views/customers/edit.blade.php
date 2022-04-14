@@ -2,7 +2,7 @@
 @section('content')
     {!! Form::open(['action' => ['CustomersController@update', $customer->id], 'method' => 'POST']) !!}
     <div class="form-group">
-        <input class="form-control" placeholder="Supplier's Name" name="name" value="{{$customer->name}}" required>
+        <input class="form-control" placeholder="Customer's Name" name="name" value="{{$customer->name}}" required>
     </div>
     <div class="form-group">
         <input class="form-control" placeholder="Address" name="address" value="{{$customer->address}}" required>
