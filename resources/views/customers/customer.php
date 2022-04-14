@@ -130,10 +130,10 @@ if ($result->num_rows > 0) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Customer Info</h5>
+                    <h5 class="modal-title">Customer's Information</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
+                <!-- <div class="modal-body">
                     <form role="form" method="post" action="process_customer.php">
                         <div class="form-group">
                             <input class="form-control" placeholder="Name" name="custname" required>
@@ -143,14 +143,27 @@ if ($result->num_rows > 0) {
                         </div>
                         <div class="form-group">
                             <input class="form-control" placeholder="Contact Number" name="custnum" required>
-                        </div>
+                        </div> -->
+                <div class="modal-body">
+                    {!! Form::open(['action' => 'CustomersController@store', 'method' => 'POST']) !!}
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Customer's Name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Address" name="address" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Contact Number" name="contact" required>
+                    </div>
+
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary" name="save">Add</button>
                 </div>
-                </form>
+                <!-- </form> -->
+                {!! Form::close() !!}
             </div>
         </div>
     </div>

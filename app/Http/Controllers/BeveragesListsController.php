@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Beverage;
 use App\Models\Supplier;
-use App\Models\Product;
+// use App\Models\Product;
 use App\Models\Category;
 
 class BeveragesListsController extends Controller
@@ -21,11 +21,11 @@ class BeveragesListsController extends Controller
 
         $beverages = Beverage::all();
         $suppliers = Supplier::all(); 
-        $products = Product::all();
+        // $products = Product::all();
         $category = Category::all();
 
         return view('beverages.index')->with('beverages', $beverages)->with('suppliers', $suppliers)
-        ->with('product', $products)->with('category',$category);
+       ->with('category',$category);
 
     }
 
@@ -85,11 +85,11 @@ class BeveragesListsController extends Controller
     {
         $beverages = Beverage::find($id);
         $suppliers = Supplier::all(); 
-        $products = Product::all();
+        // $products = Product::all();
         $category = Category::all();
 
         return view('beverages.show')->with('beverages', $beverages)->with('suppliers', $suppliers)
-        ->with('product', $products)->with('category',$category);
+        ->with('category',$category);
     }
 
     /**
@@ -102,11 +102,11 @@ class BeveragesListsController extends Controller
     {
         $beverages = Beverage::find($id);
         $suppliers = Supplier::all(); 
-        $products = Product::all();
+        // $products = Product::all();
         $category = Category::all();
 
         return view('beverages.edit')->with('beverages', $beverages)->with('suppliers', $suppliers)
-        ->with('product', $products)->with('category',$category);
+        ->with('category',$category);
     }
 
     /**

@@ -18,6 +18,10 @@
     <div class="form-group">
         <input class="form-control" placeholder="Beverages Name" value="{{$beverages->product_name}}" name="p_name" required>
     </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Category Name</label>
+        </div>
     <select name="category_id" class="custom-select" id="inputGroupSelect01">
         @if (!is_null($beverages->category))
             <option selected value="{{$beverages->category->id}}">{{$beverages->category->cat_name}}</option>
@@ -26,6 +30,7 @@
       <option value="{{$category->id}}">{{$category->cat_name}}</option>
       @endforeach
   </select>
+    </div>
   <!--  <div class="form-group">
         <input class="form-control" placeholder="Category" name="cat_name" required>
     </div> -->

@@ -89,7 +89,7 @@
                   <tbody>
      
                     <tbody>
-                      @if (count($payabless) > 0)
+                      @if (count($payables) > 0)
                           @foreach ($payables as $payables)
                               <tr>
                                   <td>
