@@ -5,7 +5,7 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <h2>Customer Information&nbsp;
-             <a href="#myModal" role="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i></a></h2>
+             <a href="#myModal" role="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"><i class="">ADD</i></a></h2>
                 </div>
                 <div class="container">
                     

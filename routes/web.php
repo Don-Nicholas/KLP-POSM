@@ -28,7 +28,7 @@ Route::resource('/mops', 'ModeofPaymentController' );
 Route::resource('/beverages_list', 'BeveragesListsController' );
 Route::resource('/purchase', 'SalesInvoicesController' );
 Route::resource('/suppliers', 'SuppliersController' );
-Route::resource('/products', 'ProductController');
+Route::resource('/orders', 'OrderController');
 Route::resource('/userlogs', 'UserLogsController' );
 Route::resource('/account_payables', 'AccountPayablesController' );
 Route::resource('/controller', 'Controller' );

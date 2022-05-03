@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Inventory;
-use App\Models\BeverageList;
+use App\Models\Beverage;
+use App\Models\Category;
+use App\Models\Purchase;
+use App\Models\Order;
+
 class InventoryController extends Controller
 {
     /**
@@ -15,9 +19,26 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        $inventories = Inventory::all();
+        $getOrderRecentOrderNumber = DB::select('SELECT * FROM orders ORDER BY id DESC');
         
-        return view('inventories.index')->with('inventories', $inventories);
+        $orderID = $getOrderRecentOrderNumber[0]->id;
+
+
+        $orderNumber = $getOrderRecentOrderNumber[0]->order_number + 1;
+
+        $inventories = Inventory::all();
+        $beverageslist = Beverage::all();
+        $categories = Category::all();
+        $purchases = Purchase::all();
+        
+        $recentbeverage = 0;
+        foreach($purchases as $purchase) {
+            $totals += $purchase->total;
+        }
+
+
+        return view('inventories.index')->with('inventories', $inventories)->with('beverages',$beverageslist)->with('categories', $categories)
+        ->with('purchases',$purchases )->with('grandTotal', $totals)->with('orderNumber', $orderNumber)->with('orderID', $orderID);
     }
 
     /**
@@ -40,7 +61,7 @@ class InventoryController extends Controller
     {
         $this->validate($request, [
             'product_name'=> 'required',
-            'category-id' => 'required',
+            'category_id' => 'required',
             'quantity' => 'required',
             'date_expire' => 'required',
             'badorder' => 'required'

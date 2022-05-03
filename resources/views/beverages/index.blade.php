@@ -148,7 +148,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary" name="save">Add</button>
                 </div>
-                </form>
+                 {!! Form::close() !!}
             </div>
         </div>
     </div>

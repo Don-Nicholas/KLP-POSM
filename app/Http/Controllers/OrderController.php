@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Supplier;
+use App\Models\Beverage;
+use App\Models\Category;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
@@ -13,23 +17,30 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $data = Order::select('*');
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
+    //     if ($request->ajax()) {
+    //         $data = Order::select('*');
+    //         return Datatables::of($data)
+    //                 ->addIndexColumn()
+    //                 ->addColumn('action', function($row){
        
-                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>
-                            <a href="/orders/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
-                            ';
+    //                         $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>
+    //                         <a href="/orders/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
+    //                         ';
       
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+    //                         return $btn;
+    //                 })
+    //                 ->rawColumns(['action'])
+    //                 ->make(true);
 
-    }
-    return view('orders.index');
+    // }
+    // return view('orders.index');
+    $orders = Order::all();
+    $beverages = Beverage::all();
+    $suppliers = Supplier::all(); 
+    $category = Category::all();
+
+    return view('orders.index')->with('orders', $orders)->with('beverages.index')->with('beverages', $beverages)->with('suppliers', $suppliers)
+   ->with('category',$category);
 
 }
 
@@ -54,17 +65,27 @@ class OrderController extends Controller
         //
         $this->validate($request, [
             'id'=> 'required',
-            'order_number' => 'required',
-           
-                                 ]);
+            'orderNumber' => 'required',
+            'supplier_id'=> 'required',
+            'address' => 'required',
+            'number'=> 'required',
+            'product_name'=> 'required',
+            'category' => 'required',
+            'quantity'=> 'required']);
 
-        $order = new Order;
+        $orders = new Order;
 
-        $order->id = $request->input('id');
-        $order->order_number = $request->input('order_number');
+        $orders->id = $request->input('id');
+        $orders->order_number = $request->input('orderNumber');
+        $orders->supplier_id = $request->input('supplier_id');
+        $orders->address = $request->input('address');
+        $orders->number = $request->input('number');
+        $orders->product_name = $request->input('product_name');
+        $orders->category_id = $request->input('category_id');
+        $orders->quantity = $request->input('quantity');
         
 
-        $order->save();
+        $orders->save();
 
         return redirect('/orders')->with('success', 'Inserted Successfully');
    
@@ -78,8 +99,8 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = Order::find($id);
-        return view('orders.show')->with('order', $order);
+        $orders = Order::find($id);
+        return view('orders.show')->with('order', $orders);
    
     }
 
@@ -91,8 +112,8 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        $order = Order::find($id);
-        return view('orders.edit')->with('order', $order);
+        $orders = Order::find($id);
+        return view('orders.edit')->with('order', $orders);
     }
 
     /**
@@ -106,19 +127,29 @@ class OrderController extends Controller
     {
         $this->validate($request, [
             'id'=> 'required',
-            'order_number' => 'required',
-           
-                                 ]);
+            'orderNumber' => 'required',
+            'supplier_id'=> 'required',
+            'address' => 'required',
+            'number'=> 'required',
+            'product_name'=> 'required',
+            'category' => 'required',
+            'quantity'=> 'required']);
 
-        $order = new Order;
+        $orders = new Order;
 
-        $order->id = $request->input('id');
-        $order->order_number = $request->input('order_number');
+        $orders->id = $request->input('id');
+        $orders->order_number = $request->input('orderNumber');
+        $orders->supplier_id = $request->input('supplier_id');
+        $orders->address = $request->input('address');
+        $orders->number = $request->input('number');
+        $orders->product_name = $request->input('product_name');
+        $orders->category_id = $request->input('category_id');
+        $orders->quantity = $request->input('quantity');
         
 
-        $order->save();
+        $orders->save();
 
-        return redirect('/orders')->with('success', 'Updated Successfully');
+        return redirect('/orders')->with('success', 'Inserted Successfully');
    
     }
 
@@ -130,8 +161,8 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        $order = Order::find($id);
-        $order->delete();
+        $orders = Order::find($id);
+        $orders->delete();
 
         return redirect('/orders')->with('success', 'Deleted Successfully!');
     
