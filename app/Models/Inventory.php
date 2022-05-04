@@ -26,4 +26,7 @@ class Inventory extends Model
     public function order() {
         return $this->belongsTo('App\Models\Order');
     }
+    // public function category() {
+    //     return $this->belongsTo('App\Models\Category');
+    // }
 }

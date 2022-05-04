@@ -17,25 +17,46 @@ class SalesController extends Controller
      */
     public function index()
     {
-        if ($request->ajax()) {
-            $data = CustomerSales::select('*');
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
+        // if ($request->ajax()) {
+        //     $data = CustomerSales::select('*');
+        //     return Datatables::of($data)
+        //             ->addIndexColumn()
+        //             ->addColumn('action', function($row){
        
-                            $btn = '<a href="/sales/'.$row->id.'" class="edit btn btn-primary btn-sm">View</a>
-                            <a href="/sales/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
-                            ';
+        //                     $btn = '<a href="/sales/'.$row->id.'" class="edit btn btn-primary btn-sm">View</a>
+        //                     <a href="/sales/'.$row->id.'/edit" class="edit btn btn-primary btn-sm">Edit</a>
+        //                     ';
       
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
+        //                     return $btn;
+        //             })
+        //             ->rawColumns(['action'])
+        //             ->make(true);
+        // }
 
   
 
-        return view('sales.index');
+        // return view('sales.index');
+        $todayDates= Carbon::now()->format('Y-m-d');
+    $todaysales=DB::table('sales')
+      ->select(DB::raw('sum(sales.quantity) as $qty,MAX(products.product_name) as product_name'))
+    ->where(function ($query) use ($todayDates) {
+        $query->where('sales.purchase_date, $todayDates);
+    })
+    ->join('products', 'sales.product_id','=', 'products.id')
+    ->groupBy('sales.product_id')
+    ->get();
+    $endTo =  date('Y-m-d', strtotime(Carbon::now()));
+    $startFrom =  date('Y-m-d', strtotime(Carbon::now()->subYear()));
+
+
+    $yealrySales=DB::table('sales')
+          ->select(DB::raw('sum(sales.quantity) as $qty,MAX(products.product_name) as product_name'))
+        ->where(function ($query) use ($endTo,$startFrom) {
+            $query->whereBetween('sales.purchase_date,[$startFrom, $endTo);
+        })
+        ->join('products', 'sales.product_id','=', 'products.id')
+         ->groupBy('sales.product_id')
+        ->get();
     }
 
     /**

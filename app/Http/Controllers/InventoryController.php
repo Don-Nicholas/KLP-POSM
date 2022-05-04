@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Inventory;
 use App\Models\Beverage;
@@ -32,7 +33,9 @@ class InventoryController extends Controller
         $purchases = Purchase::all();
         
         $recentbeverage = 0;
-        foreach($purchases as $purchase) {
+        $totals = 0;
+        foreach($purchases as $purchase) 
+        {
             $totals += $purchase->total;
         }
 

@@ -38,6 +38,7 @@ class PurchasedController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'total_quantity' => 'required',
             'customer_name' => 'required',
@@ -73,6 +74,15 @@ class PurchasedController extends Controller
      */
     public function show(Request $request)
     {
+
+        // return $request;
+
+        $this->validate($request, [
+            'customer'=>'required',
+            'mop'=>'required',
+            'gtotal'=>'required'
+        ]);
+
         $customer = $request->input('customer');
         $purchases = Purchase::all();
         $total_quantity = 0;
@@ -82,7 +92,7 @@ class PurchasedController extends Controller
         }
 
         $customerName = Customer::find($customer);
-        return view('invoices.show')->with('customerName', $customerName->name)->with('grandTotal', $request->input('gtotal'))->with('total_quantity', $total_quantity);
+        return view('invoices.show')->with('customerName', $customerName->name)->with('grandTotal', $request->input('gtotal'))->with('total_quantity', $total_quantity)->with('mop', $request->input('mop'));
     }
 
     /**
