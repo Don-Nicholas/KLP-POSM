@@ -96,7 +96,6 @@ class SuppliersController extends Controller
                 'number' => 'required'
             ]);
 
-            return $request;
     
             $supplier = Supplier::find($id);
     

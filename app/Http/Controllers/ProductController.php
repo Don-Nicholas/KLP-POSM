@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Supplier;
+use App\Models\Beverage;
+use App\Models\Category;
 use Datatables;
 
 class ProductController extends Controller
@@ -17,7 +20,10 @@ class ProductController extends Controller
     public function index()
     {
        $products = Product::all();
-        return view('products.index')->with('products', $products);
+       $suppliers = Supplier::all();
+       $beverages = Beverage::all();
+       $categories =Category::all();
+        return view('products.index')->with('products', $products)->with('suppliers', $suppliers)->with('beverages', $beverages)->with('categories', $categories);
 
     }
 
@@ -42,15 +48,31 @@ class ProductController extends Controller
         $this->validate($request, 
         [
             'id' => 'required',
-            'prod_name'=> 'required',
+            'beverage_name'=> 'required',
+            'category_id'=> 'required',
+            'new_quantity' => 'required',
+            'total_quantity' => 'required',
+            'price_case' => 'required',
+            'price_solo' => 'required',
+            'date_expire' => 'required',
+            'badorder' => 'required'
+            
            
         ]);
 
         $products = new Product;
+        $total_quantity =  $beverage->price_case * $request->input('case') + $new_quantity;
 
         $products->id = $request->input('id');
-        $products->prod_name = $request->input('prod_name');
-       
+        $products->beverage_name = $request->input('beverage_name');
+        $products->category_id = $request->input('cat_name');
+        $products->new_quantity = $request->input('new_quantity');
+        $products->total_quantity = $request->input('total_quantity');
+        $products->price_case = $request->input('price_case');
+        $products->price_solo = $request->input('price_solo');
+        $products->date_expire = $request->input('date_expire');
+        $products->badorder = $request->input('badorder');
+
         $products->save();
 
         return redirect('/products')->with('success', 'Inserted Successfully');
@@ -92,21 +114,37 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request, [
+        $this->validate($request, 
+        [
             'id' => 'required',
-            'prod_name'=> 'required',
+            'beverage_name'=> 'required',
+            'category_id'=> 'required',
+            'new_quantity' => 'required',
+            'total_quantity' => 'required',
+            'price_case' => 'required',
+            'price_solo' => 'required',
+            'date_expire' => 'required',
+            'badorder' => 'required'
             
            
         ]);
 
         $products = new Product;
+        $total_quantity =  $beverage->price_case * $request->input('case') + $new_quantity;
 
         $products->id = $request->input('id');
-        $products->prod_name = $request->input('prod_name');
-       
+        $products->beverage_name = $request->input('beverage_name');
+        $products->category_id = $request->input('cat_name');
+        $products->new_quantity = $request->input('new_quantity');
+        $products->total_quantity = $request->input('total_quantity');
+        $products->price_case = $request->input('price_case');
+        $products->price_solo = $request->input('price_solo');
+        $products->date_expire = $request->input('date_expire');
+        $products->badorder = $request->input('badorder');
+
         $products->save();
 
-        return redirect('/products')->with('success', 'Updated Successfully');
+        return redirect('/products')->with('success', 'Inserted Successfully');
     
     }
 

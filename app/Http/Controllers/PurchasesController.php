@@ -9,6 +9,7 @@ use App\Models\Beverage;
 use App\Models\Category;
 use App\Models\Purchase;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\Inventory;
 
 
@@ -21,7 +22,16 @@ class PurchasesController extends Controller
      */
     public function index()
     {
-        //
+        $beverages = Beverage::all();
+        $suppliers = Supplier::all(); 
+        $products = Product::select('beverage_name')->distinct()->get();
+
+        // $products = Product::orderByDesc('beverage_name', 'desc')->distinct('beverage_name')->get();
+        $category = Category::all();
+
+        return view('purchase.index')->with('beverages', $beverages)->with('suppliers', $suppliers)
+       ->with('category',$category)->with('products', $products);
+
     }
 
     /**
@@ -51,13 +61,13 @@ class PurchasesController extends Controller
             'case' =>'required']);
 
 
-        $beverage = Beverage::find($request->input('beverage'));
+        $products = Beverage::find($request->input('beverage'));
         $total =  $beverage->price_case * $request->input('case');
 
          $purchases = new Purchase;
 
         $purchases->order_id = $request->input('orderNumber');
-        $purchases->beverage_id = $request->input('beverage');
+        $purchases->beverage_id = $request->input('beverage_name');
         $purchases->quantity = $request->input('case');
         $purchases->category_id = $request->input('category');
         $current_date = date('Y-m-d H:i:s');
@@ -65,7 +75,8 @@ class PurchasesController extends Controller
         $purchases->total = $total;
         $purchases->save();
 
-        $result = DB::table('beverages')->where('product_name', 'Coke')->orderBy('id', 'DESC')->get();
+        $result = DB::table('beverages')->where('id', (int)$request->input('beverage'))->orderBy('id', 'DESC')->get();
+
 
         $quantity =  (int)$result[0]->quantity - (int)$request->input('case');
         // return $result[0];
@@ -88,6 +99,7 @@ class PurchasesController extends Controller
         
 
         $orderID = (int)$request->input('orderID');
+
         $order = Order::find($orderID);
         $order->order_number = $request->input('orderNumber');
         $order->save();

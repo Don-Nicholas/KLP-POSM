@@ -13,7 +13,7 @@
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="\customers" class="btn btn-secondary">Cancel</a>
         <button type="submit" class="btn btn-primary" name="save">Update</button>
     </div>
     <input type="hidden" name="_method" value="PUT">

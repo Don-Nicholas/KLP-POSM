@@ -10,6 +10,7 @@ use App\Models\Beverage;
 use App\Models\Category;
 use App\Models\Purchase;
 use App\Models\Order;
+use App\Models\Product;
 
 class InventoryController extends Controller
 {
@@ -20,18 +21,19 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        $getOrderRecentOrderNumber = DB::select('SELECT * FROM orders ORDER BY id DESC');
+        // $getOrderRecentOrderNumber = DB::select('SELECT * FROM orders ORDER BY id DESC');
         
-        $orderID = $getOrderRecentOrderNumber[0]->id;
+        // $orderID = $getOrderRecentOrderNumber[0]->id;
 
 
-        $orderNumber = $getOrderRecentOrderNumber[0]->order_number + 1;
+        // $orderNumber = $getOrderRecentOrderNumber[0]->order_number + 1;
 
         $inventories = Inventory::all();
-        $beverageslist = Beverage::all();
-        $categories = Category::all();
+        $beverages = Beverage::all();
+        $category = Category::all();
         $purchases = Purchase::all();
-        
+        $products = Product::select('beverage_name')->distinct()->get();
+
         $recentbeverage = 0;
         $totals = 0;
         foreach($purchases as $purchase) 
@@ -40,8 +42,8 @@ class InventoryController extends Controller
         }
 
 
-        return view('inventories.index')->with('inventories', $inventories)->with('beverages',$beverageslist)->with('categories', $categories)
-        ->with('purchases',$purchases )->with('grandTotal', $totals)->with('orderNumber', $orderNumber)->with('orderID', $orderID);
+        return view('inventories.index')->with('inventories', $inventories)->with('beverages',$beverages)->with('category', $category)
+        ->with('purchases',$purchases )->with('grandTotal', $totals)->with('products', $products);
     }
 
     /**
@@ -63,25 +65,75 @@ class InventoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'product_name'=> 'required',
-            'category_id' => 'required',
+            'supplier_id' => 'required',
+            'product_id' =>'required',
             'quantity' => 'required',
-            'date_expire' => 'required',
-            'badorder' => 'required'
-                                 ]);
+            'price_case' => 'required',
+            'price_solo' => 'required',
+            'category_id' => 'required',
+            'date_expiry' => 'required',
+            'badorder' => 'required']);
 
-        $inventory = new Inventory;
 
-        $inventory->product_name = $request->input('product_name');
-        $inventory->category_id = $request->input('category_id');
-        $inventory->quantity = $request->input('quantity');
-        $inventory->date_expire = $request->input('date_expire');
-        $inventory->badorder= $request->input('badorder');
+       if($request->input('yesno') == "isExisting") {
 
-        $inventory->save();
+           $product = Product::orderByDesc('id')->where('beverage_name', $request->input('product_id'))->get()[0];
+           $beverage_name = $product->beverage_name;
+           $total_quantity = $product->total_quantity + ((double)$request->input('quantity'));
 
-        return redirect('/inventories')->with('success', 'Inserted Successfully');
-     
+           $inventories = new Inventory;
+           $inventories->beverage_name = $beverage_name;
+           $inventories->new_quantity = $request->input('quantity');
+           $inventories->total_quantity = $total_quantity;
+           $inventories->price_case = $request->input('price_case');
+           $inventories->price_solo = $request->input('price_solo');
+           $inventories->date_expire = $request->input('date_expiry');
+           $inventories->badorder = $request->input('badorder');
+           $inventories->save();
+
+           $recentProduct = Product::all();
+           $num = count($recentProduct) - 1;
+           $product_id = $recentProduct[$num]->id;
+           
+           $beverage = new Beverage;
+           $beverage->supplier_id = $request->input('supplier_id');
+           $beverage->beverage_id = $request->input('beverage_id');
+           $beverage->category_id = $request->input('category_id');
+           $beverage->product_id = $product_id;
+           $beverage->save();
+
+           return redirect('/inventories')->with('success', 'Inserted Successfully');
+       }
+       else {
+           $this->validate($request, [
+               'newBeverageName' => 'required'
+           ]);
+           
+           $product = new Product;
+           $product->beverage_name = $request->input('newBeverageName');
+           
+           $product->new_quantity = $request->input('quantity');
+           $product->total_quantity = $request->input('quantity');
+           $product->price_case = $request->input('price_case');
+           $product->price_solo = $request->input('price_solo');
+           $product->date_expire = $request->input('date_expiry');
+           $product->badorder = $request->input('badorder');
+
+           $product->save();
+
+           $recentProduct = Product::all();
+           $num = count($recentProduct) - 1;
+           $product_id = $recentProduct[$num]->id;
+           
+           $beverage = new Beverage;
+           $beverage->supplier_id = $request->input('supplier_id');
+           $beverage->category_id = $request->input('category_id');
+           $beverage->product_id = $product_id;
+           $beverage->save();
+
+           return redirect('/inventories')->with('success', 'Inserted Successfully');
+       }
+
     }
 
     /**
@@ -92,11 +144,14 @@ class InventoryController extends Controller
      */
     public function show($id)
     {
-        //
-        $inventory = Inventory::all();
-        return view('inventory.inventory')->with('inventory', $inventory);
-    }
+        $inventories = Inventory::find($id);
+        $beverages = Beverage::all();
+        $suppliers = Supplier::all(); 
+        $category = Category::all();
 
+        return view('inventories.show')->with('inventories', $inventories)->with('suppliers', $suppliers)
+        ->with('category',$category);
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -105,9 +160,13 @@ class InventoryController extends Controller
      */
     public function edit($id)
     {
-        $inventory = Inventory::find($id);
-        return view('inventory.edit')->with('inventory', $inventory);
-   
+        $inventories = Inventory::find($id);
+        $beverages = Beverage::all();
+        $suppliers = Supplier::all(); 
+        $category = Category::all();
+
+        return view('inventories.edit')->with('inventories', $inventories)->with('suppliers', $suppliers)
+        ->with('category',$category);
     }
 
     /**
@@ -120,25 +179,31 @@ class InventoryController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'product_name'=> 'required',
-            'category-id' => 'required',
+            'beverage_name'=> 'required',
+            'supplier_id' => 'required',
             'quantity' => 'required',
-            'date_expire' => 'required',
-            'badorder' => 'required'
-                                 ]);
+            'price_case' => 'required',
+            'price_solo' => 'required',
+            'category_id' => 'required',
+            'date_expiry' => 'required',
+            'badorder' => 'required']);
 
-        $inventory = new Inventory;
+            $beverages = Beverage::find($id);
 
-        $inventory->product_name = $request->input('product_name');
-        $inventory->category_id = $request->input('category_id');
-        $inventory->quantity = $request->input('quantity');
-        $inventory->date_expire = $request->input('date_expire');
-        $inventory->badorder= $request->input('badorder');
+        $beverages->beverage_name = $request->input('beverage_name');
+        $beverages->supplier_id = $request->input('supplier_id');
+        $beverages->category_id = $request->input('category_id');
+        $beverages->quantity = $request->input('quantity');
+        $beverages->price_case = $request->input('price_case');
+        $beverages->price_solo = $request->input('price_solo');
+        $beverages->date_expiry = $request->input('date_expiry');
+        $beverages->barorder = $request->input('badorder');
+      
 
-        $inventory->save();
+        $beverages->save();
 
-        return redirect('/inventories')->with('success', 'Inserted Successfully');
-     
+        return redirect('/inventories')->with('success', 'Updated Successfully');
+      
     }
 
     /**

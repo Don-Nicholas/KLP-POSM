@@ -8,13 +8,13 @@
         <input class="form-control" placeholder="Address" name="address" value="{{$supplier->address}}" required>
     </div>
     <div class="form-group">
-        <input class="form-control" placeholder="Contact Number" name="contact" value="{{$supplier->number}}" required>
+        <input class="form-control" placeholder="Contact Number" name="number" value="{{$supplier->number}}" required>
     </div>
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary" name="save">Add</button>
+        <a href="\suppliers" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary" name="save">Update</button>
     </div>
     <input type="hidden" name="_method" value="PUT">
     {!! Form::close() !!}

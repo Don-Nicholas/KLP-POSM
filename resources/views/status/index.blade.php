@@ -1,11 +1,27 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row">
+<div id="right-panel" class="right-panel">
+
+<!-- Header-->
+<header id="header" class="header">
+
+    <div class="header-menu">
+
+        <div class="col-sm-10">
+            <h2>
+                <center>KLP BEVERAGE TRADING</center>
+            </h2>
+
+        </div>
+
+    </div>
+</div>
+<div class="row">
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h2>Status &nbsp;
-             <a href="#myModal" role="button" class="btn btn-md btn-primary" data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i>Add</a></h2>
+                    <h3 class="m-2 font-weight-bold text-primary">Status &nbsp;
+             <a href="#myModal" role="button" class="btn btn-md btn-primary" data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i>ADD</a></h3>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">

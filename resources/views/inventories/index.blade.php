@@ -9,19 +9,16 @@
 
             <div class="header-menu">
 
-                <div class="col-sm-7">
+                <div class="col-sm-10">
                     <h2>
-                        <center>Inventory</center>
+                        <center>KLP BEVERAGES TRADING</center>
                     </h2>
-
                 </div>
                 </div>
             </div>
 
         </header><!-- /header -->
         <!-- Header-->
-
-
 
         <div class="content mt-3">
             <div class="animated fadeIn">
@@ -32,18 +29,14 @@
                         <div class="content">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h4 class="m-2 font-weight-bold text-primary">INVENTORIES&nbsp;
-                                        <!-- MODAL for ADDING BEVERAGES-->
-                                        {{-- <a href="#myModal" role="button" class="btn btn-md btn-primary"
-                                            data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i>Add</a> --}}
-                                    </h4> 
+                                    <h3 class="m-2 font-weight-bold text-primary">Inventories&nbsp;
+                                    </h3> 
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table id="userTable" class="table">
                                             <thead>
-
-                                                <th>Product ID</th>
+                                                <th>Beverages Information</th>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     @if (count($inventories) > 0)
@@ -54,56 +47,30 @@
                                                 <th>Product Name</th>
                                                 <th>Category Name</th>
                                                 <th>Quantity </th>
+                                                <th>Price per Case </th>
+                                                <th>Price per Solo  </th>
                                                 <th>Date of Expiry</th>
                                                 <th>Bad Order</th>
-                                                 <th colspan="2">Actions</th>
                                          
                                            </thead>
                                             <tbody> 
                                                 @foreach ($inventories as $inventory)
                                                     <tr>
                                                         <td>{{$inventory->id}}</td>
-                                                        <td>{{$inventory->product_name}}</td>
-                                                        <td>{{$inventory->categories->category_id}}</td>
-                                                        <td>{{$inventory->quantity}}</td>
-                                                        <td>{{$inventory->date_expire}}</td>
-                                                        <td>{{$inventory->badorder}}</td>
+                                                        <td>{{$inventory->product->beverage_name}}</td>
+                                                        <td>{{$inventory->category->cat_name}}</td>
+                                                        <td>{{$inventory->product->total_quantity}}</td>
+                                                        <td>{{$inventory->product->price_case}}</td>
+                                                        <td>{{$inventory->product->price_solo}}</td>
+                                                        <td>{{$inventory->product->date_expire}}</td>
+                                                        <td>{{$inventory->product->badorder}}</td>
 
-                                                        <td class="align-middle">
-                                                            <a href="/inventories/{{$inventory->id}}"
-                                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                                data-original-title="Edit category">
-                                                                View
-                                                            </a>
-                                                        </td>
-                                                        <td class="align-middle">
-                                                            <a href="/inventories/{{$inventory->id}}/edit"
-                                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                                data-original-title="Edit user">
-                                                                Edit
-                                                            </a>
-                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
                                     </div>
-                                            </tr>
                                             
-                                        </thead>
-                                             <tbody>
-                                                 @foreach ($inventories as $inventory)
-                                                 <tr class="">
-                                                    <td>{{$inventory->id}}</td>
-                                                    <td>{{$inventory->product_name}}</td>
-                                                    <td>{{$inventory->category->cat_name}}</td>
-                                                    <td>{{$inventory->quantity}}</td>
-                                                    <td>{{$inventory->date_expire}}</td>
-                                                    <td>{{$inventory->barorder}}</td>
-                                                </tr>
-                                                 @endforeach
-                                            </tbody>
-                                    </table>
                                     @else
                                         <h1>No Inventories Information Available.</h1>
                                     @endif
@@ -127,7 +94,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        {!! Form::open(['action' => 'CategoriesController@store', 'method' => 'POST']) !!}
+                        {!! Form::open(['action' => 'InventoryController@store', 'method' => 'POST']) !!}
                         <div class="form-group">
                             <input class="form-control" placeholder="Category Name" name="cat_name" required>
                         </div>

@@ -22,17 +22,18 @@ class SalesInvoicesController extends Controller
      */
     public function index()
     { 
-        $getOrderRecentOrderNumber = DB::select('SELECT * FROM orders ORDER BY id DESC');
+        // $getOrderRecentOrderNumber = DB::select('SELECT * FROM orders ORDER BY id DESC');
         
-        $orderID = $getOrderRecentOrderNumber[0]->id;
-        $orderNumber = $getOrderRecentOrderNumber[0]->order_number + 1;
+        // $orderID = $getOrderRecentOrderNumber[0]->id;
+        // $orderNumber = $getOrderRecentOrderNumber[0]->order_number + 1;
 
         $customers = Customer::all();
-        //return $customers; 
         $mops = MOP::all();
         $beverages = Beverage::all();
         $categories = Category::all();
         $purchases = Purchase::all();
+        $orderID = Order::all();
+
 
         $totals = 0;
         foreach($purchases as $purchase) {
@@ -40,7 +41,7 @@ class SalesInvoicesController extends Controller
         }
 
         return view('invoices.index')->with('customers', $customers)->with('m_o_p_s', $mops)->with('beverages',$beverages)->with('categories', $categories)
-        ->with('purchases',$purchases )->with('grandTotal', $totals)->with('orderNumber', $orderNumber)->with('orderID', $orderID);
+        ->with('purchases',$purchases);
 
     }
 
@@ -65,10 +66,10 @@ class SalesInvoicesController extends Controller
 
 
         $this->validate($request, [
-            'productname'=> 'required',
+            'product_name'=> 'required',
             'category' => 'required',
             'mop' => 'required',
-            'case' =>'required',
+            'case' =>'required'
                        ]);
 
             $salesinvoices = new Beverage;
@@ -86,7 +87,7 @@ class SalesInvoicesController extends Controller
 
         $order = Order::find();
 
-        return redirect('/beverages_list')->with('success', 'Inserted Successfully');
+        return redirect('/purchase')->with('success', 'Inserted Successfully');
   
     }
 

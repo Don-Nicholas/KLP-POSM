@@ -72,7 +72,7 @@ class CustomerSalesController extends Controller
         $current_date = date('Y-m-d H:i:s');
 
         if($request->input('mop') === 'Cash'){
-            $customerSale->discount = $request->input('discount');
+            // $customerSale->discount = $request->input('discount');
             $customerSale->total_cash = $request->input('cash');
             $customerSale->checknum ="N/A";
             $customerSale->check_date = $current_date;

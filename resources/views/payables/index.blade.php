@@ -1,180 +1,92 @@
+
 @extends('layouts.app')
 @section('content')
+<div id="right-panel" class="right-panel">
 
-    <div id="right-panel" class="right-panel">
+    <!-- Header-->
+    <header id="header" class="header">
 
-        <!-- Header-->
-        <header id="header" class="header">
+        <div class="header-menu">
 
-            <div class="header-menu">
+            <div class="col-sm-10">
+                <h2>
+                    <center>KLP BEVERAGE TRADING</center>
+                </h2>
 
-                <div class="col-sm-7">
-                 <h2> <center>KLP BEVERAGES TRADING</center></h2>
-   
-                </div>
-
-                <div class="col-sm-5">
-                    <div class="user-area dropdown float-right">
-                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             <strong style="color: #007bff;" class="mt-2">Welcome!</strong> &nbsp;
-                        </a>
-
-                        <div class="user-menu dropdown-menu">
- <!--                            <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a> -->
-
-                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
-                        </div>
-                    </div>
-
-                </div>
             </div>
 
-        </header><!-- /header -->
-        <!-- Header-->
-
-       
-
-        <div class="content mt-3">
-            <div class="animated fadeIn">
-                <div class="row">
-				
-<div class ="container">
-		
-<div class="content">
- <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h4 class="m-2 font-weight-bold text-primary">Account Payables&nbsp;</h4>
+        </div>
+</div>
+{{-- end of HEADER --}}
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+                <h3 class=""m-2 font-weight-bold text-primary>Account Payables Information&nbsp;
+                    <a href="#myModal" role="button" class="btn btn-lg btn-primary" data-bs-toggle="modal">
+                            ADD</a>
+                </h3>
             </div>
-            
-            <div class="card-body">
-              <div class="table-responsive">
-                {!! Form::open(['action' => 'AccountPayablesController@store', 'method' => 'POST']) !!}
-                <table class="table align-items-center mb-0">
-                    <thead>
-                      <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Purchase No.
-                        </th>
-                        <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Customer's Name
-                           
-                            </th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                Contact Number</th>
-                            <th
-                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Amount Due</th>
-                            <th
-                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                To Pay</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                  Bank Name</th>
-                              <th
-                                  class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                  Purchase Date</th>
-                              <th
-                                  class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                  Created At</th>
-                                <th class="text-secondary opacity-7" colspan="2">
-                                    Actions
-                                </th>
-                                
-                                
+<div class="clearfix"></div>
+<div class="table-stats order-table ov-h">
+    <table class="table ">
+        <thead>
+            <tr>
+                <th>NO</th>
+                <th>Customer Name</th>
+                <th>Bank Name</th>
+                <th>Check Number</th>
+                <th>Amount Due</th>
+                <th>Check Amount</th>
+                <th>Post Date</th>
+                <th>Status</th>
+                <th><center>Actions</center></th>
+            </tr>
+        </thead>
+        <tbody>
 
-                            <th class="text-secondary opacity-7"></th>
-                        </tr>
-                    </thead>
-               
-                  <tbody>
-     
-                    <tbody>
-                      @if (count($payables) > 0)
-                          @foreach ($payables as $payables)
-                              <tr>
-                                  <td>
-                                      <div class="d-flex px-2 py-1">
-                                          <div>
-                                              <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
-                                                  alt="user1">
-                                          </div>
-                                          <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">{{$payables->id}}</h6>
-                                        </div>
-                                          <div class="d-flex flex-column justify-content-center">
-                                              <h6 class="mb-0 text-sm">{{$payables->name}}</h6>
-                                          </div>
-                                      </div>
-                                  </td>
-                                  <td>
-                                      <p class="text-xs font-weight-bold mb-0">{{$payables->contact}}</p>
-                                  </td>
-                                  {{-- amount due --}}
-                                  <td class="align-middle text-center text-sm">
-                                      <span class="badge badge-sm bg-gradient-success">{{$payables->total}}</span>
-                                  </td>
-                                  {{-- to pay --}}
-                                   <td class="align-middle text-center">
-                                      <span
-                                          class="text-secondary text-xs font-weight-bold">{{ $payables->total }}</span>
-                                  </td>
-                                  <td class="align-middle text-center">
-                                    <span
-                                        class="text-secondary text-xs font-weight-bold">{{ $payables->bank_name }}</span>
-                                </td>
-                                {{-- purchase date or transaction date --}}
-                                <td class="align-middle text-center">
-                                  <span
-                                      class="text-secondary text-xs font-weight-bold">{{ $payables->date_purchase }}</span>
-                              </td>
-                                  <td class="align-middle">
-                                      <a href="/payables/{{ $payables->id }}"
-                                          class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                          data-original-title="Edit user">
-                                          View
-                                      </a>
-                                  </td>
-                                  <td class="align-middle">
-                                      <a href="/payables/{{ $suppliers->id }}/view"
-                                          class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                          data-original-title="Edit user">
-                                          VIEW
-                                      </a>
-                                  </td>
-                                  <td class="align-middle">
-                                    <a href="/payables/{{ $suppliers->id }}/edit"
-                                        class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                        data-original-title="Edit user">
-                                        RECEIVED
-                                    </a>
-                                </td>
-                                <td class="align-middle">
-                                  <a href="/payables/{{ $suppliers->id }}/edit"
-                                      class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                      data-original-title="Edit user">
-                                      OVER DUE
-                                  </a>
-                              </td>
-                              </tr>
-                          @endforeach
-                      @else
-                          <h1>No Account's Payables with Information.</h1>
-                      @endif
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-		   </div>
-	</div>
-	
-            </div><!-- .animated -->
-        </div><!-- .content -->
- <!--/.col-->
+            @foreach ($payables as $payable)
+                <tr>
+                    <td class="serial">{{ $payable->id }}</td>
+                
+                    <td>
+                         <span class="name">{{ $payable->customer->name }}</span>
+                    </td>
+                    <td> 
+                        <span class="name">{{ $payable->bank_name }}</span>
+                    </td>
+                    <td>
+                        <span class="count">{{ $payable->check_number }}</span></td>
+                    <td> 
+                        <span class="name">{{ $payable->total_purchase }}</span>
+                    </td>
+                    <td>
+                         <span class="name">{{ $payable->check_amount }}</span>
+                    </td>
+                    <td><span class="count">{{ $payable->check_postdate }}</span></td>
     
+                    <td>
+                        <span class="badge badge-complete">Complete</span>
+                    </td>
+                    <td class="align-middle">
+                        <a href="/payables/{{ $payable->id }}" class="btn btn-primary mx-2"
+                            data-toggle="tooltip" data-original-title="Edit user">
+                            View
+                        </a>
+                    </td>
 
-    <!-- Right Panel -->
+                    <td class="align-middle">
+                        <a href="/employees/{{ $payable->id }}/edit" class="btn btn-primary mx-2"
+                            data-toggle="tooltip" data-original-title="Edit user">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div> <!-- /.table-stats -->
+</div>
 
 
-  
-    @endsection
+@endsection

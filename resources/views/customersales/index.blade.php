@@ -8,9 +8,9 @@
             <div class="header-menu">
 
                 <div class="col-sm-7">
-                    <h2>
+                    <h3 class="m-2 font-weight-bold text-primary">
                         <center>Customer Sales</center>
-                    </h2>
+                    </h3>
 
                 </div>
                 </div>

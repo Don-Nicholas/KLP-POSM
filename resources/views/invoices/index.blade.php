@@ -8,8 +8,8 @@
 
             <div class="header-menu">
 
-                <div class="col-sm-7">
-                    <h2>
+                <div class="col-sm-10">
+                    <h2 class="text-center">
                         <center>KLP BEVERAGE TRADING</center>
                     </h2>
 
@@ -29,7 +29,7 @@
                 <div class="container">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h5 class="m-2 font-weight-bold text-primary">Sales Invoice&nbsp;</h5>
+                            <h3 class="m-2 font-weight-bold text-primary">Sales Invoice&nbsp;</h3>
                         </div>
 
                         <div class="card-body">
@@ -42,7 +42,7 @@
                                                 <!-- Table 1 -->
                                                 {!! Form::open(['action' => 'PurchasesController@store', 'method' => 'POST']) !!}
 
-                                                <input type="hidden" name="orderID" value="{{ $orderNumber }}">
+                                                <input type="hidden" name="orderID" value="">
                                                 <table>
 
                                                     <tr>
@@ -51,7 +51,7 @@
                                                         </td>
                                                         <td>
                                                             <input type="text" class=""
-                                                                value="0000{{ $orderNumber }}" name="orderNumber"
+                                                                value="0000" name="orderNumber"
                                                                 style="width: 200px;" readonly>
                                                         </td>
                                                     </tr>
@@ -62,9 +62,9 @@
                                                         <td colspan="2">
                                                             <select name="beverage" style="width: 200px;">
                                                                 @if (count($beverages) > 0)
-                                                                    @foreach ($beverages as $beverages_list)
-                                                                        <option value="{{ $beverages_list->id }}">
-                                                                            {{ $beverages_list->product_name }}
+                                                                    @foreach ($beverages as $beverages)
+                                                                        <option value="{{ $beverages->id }}">
+                                                                            {{ $beverages->product->beverage_name }}
                                                                         </option>
                                                                     @endforeach
                                                                     <option disabled selected>-- Select Beverage --
@@ -116,6 +116,7 @@
                                         <tr>
                                             <td>
                                                 <button type="submit" class="btn btn-primary" name="save">Add</button>
+                                                
                                             </td>
                                         </tr>
 
@@ -151,9 +152,9 @@
 
                                                     @foreach ($purchases as $purchase)
                                                         <tr>
-                                                            <td>{{ $purchase->beverage->product_name }}</td>
+                                                            <td>{{ $purchase->beverage_name }}</td>
                                                             <td>{{ $purchase->category->cat_name }}</td>
-                                                            <td>{{ $purchase->quantity }}</td>
+                                                            <td>{{ $purchase->beverage->case }}</td>
                                                             <td>{{ $purchase->beverage->price_case }}</td>
                                                             <td>{{ $purchase->beverage->price_solo }}</td>
                                                             <td>{{ $purchase->total }}</td>
@@ -234,7 +235,7 @@
                                                             <label>Grand Total</label>
                                                         </td>
                                                         <td>
-                                                            <input type="text" border="none" value="{{ $grandTotal }}"
+                                                            <input type="text" border="none" value=""
                                                                 name="gtotal" id="txt1" style="width: 200px;" readonly>
                                                         </td>
                                                     </tr>

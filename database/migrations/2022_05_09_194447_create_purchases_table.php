@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('supplier_stocks', function (Blueprint $table) {
+        Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->integer('beverages_id');
-            $table->integer('supplier_id');
+            $table->integer('order_id');
+            $table->integer('beverage_id');
             $table->integer('category_id');
-            $table->double('quantity', 10, 2);
-            $table->double('price_case', 10, 2);
-            $table->double('price_solo');
-            $table->date('date_expire');
-            $table->integer('piece');
-            $table->integer('barorder');
+            $table->double('quantity', 10,2);
+            $table->double('total', 10,2);
+            $table->date('date_purchase');
             $table->timestamps();
         });
     }
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supplier_stocks');
+        Schema::dropIfExists('purchases');
     }
 };

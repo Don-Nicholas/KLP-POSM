@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Supplier;
 use App\Models\Purchase;
 use App\Models\Beverage;
+use App\Models\Category;
 use App\Models\Customer;
 use App\Models\MOP;
 use App\Models\CustomerSale;
+use App\Models\Payable;
 use App\Models\User;
 class DashboardController extends Controller
 {
@@ -21,13 +23,15 @@ class DashboardController extends Controller
     {
         //
         $supplier = Supplier::all();
-        $purchased = Purchase::all();
+        $purchased = Purchase::all();   
         $beverages = Beverage::all();
+        $categories = Category::all();
         $customers = Customer::all();
         $m_o_p_s = MOP::all();
         $sales = CustomerSale::all();
+        $payables = Payable::all();
         $users = User::all();
-        return view("dashboards.dashboard")->with('suppliers', $supplier)->with('invoices', $purchased)->with('beverages', $beverages)->with('customers', $customers)->with('m_o_p_s', $m_o_p_s)->with('sales', $sales)->with('users', $users);
+        return view("dashboards.dashboard")->with('suppliers', $supplier)->with('invoices', $purchased)->with('beverages', $beverages)->with('categories', $categories)->with('customers', $customers)->with('payables', $payables)->with('m_o_p_s', $m_o_p_s)->with('sales', $sales)->with('users', $users);
     }
 
     /**

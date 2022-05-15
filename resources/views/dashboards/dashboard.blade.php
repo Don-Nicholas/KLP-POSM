@@ -2,6 +2,24 @@
    
 @extends('layouts.app')
 @section('content')
+
+<div id="right-panel" class="right-panel">
+
+    <!-- Header-->
+    <header id="header" class="header">
+
+        <div class="header-menu">
+
+            <div class="col-sm-10">
+                <h2>
+                    <center>KLP BEVERAGES TRADING</center>
+                </h2>
+            </div>
+            </div>
+        </div>
+
+    </header>
+    {{-- END OF HEADER --}}
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -32,10 +50,10 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Customer's </p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        2,300
-                                        <span class="text-success text-sm font-weight-bolder">+3%</span>
+                                        {{count($customers)}}
+                                        <span class="text-success text-sm font-weight-bolder"></span>
                                     </h5>
                                 </div>
                             </div>
@@ -170,9 +188,9 @@
                                                 </g>
                                             </svg>
                                         </div>
-                                        <p class="text-xs mt-1 mb-0 font-weight-bold">Clicks</p>
+                                        <p class="text-xs mt-1 mb-0 font-weight-bold">MOPS</p>
                                     </div>
-                                    <h4 class="font-weight-bolder">2m</h4>
+                                    <h4 class="font-weight-bolder">{{count($categories)}}</h4>
                                     <div class="progress w-75">
                                         <div class="progress-bar bg-dark w-90" role="progressbar" aria-valuenow="90"
                                             aria-valuemin="0" aria-valuemax="100"></div>
@@ -203,9 +221,9 @@
                                                 </g>
                                             </svg>
                                         </div>
-                                        <p class="text-xs mt-1 mb-0 font-weight-bold">Sales</p>
+                                        <p class="text-xs mt-1 mb-0 font-weight-bold">Categories</p>
                                     </div>
-                                    <h4 class="font-weight-bolder">435$</h4>
+                                    <h4 class="font-weight-bolder"> {{count($categories)}}</h4>
                                     <div class="progress w-75">
                                         <div class="progress-bar bg-dark w-30" role="progressbar" aria-valuenow="30"
                                             aria-valuemin="0" aria-valuemax="100"></div>
@@ -241,7 +259,7 @@
                                         </div>
                                         <p class="text-xs mt-1 mb-0 font-weight-bold">Beverages</p>
                                     </div>
-                                    <h4 class="font-weight-bolder">43</h4>
+                                    <h4 class="font-weight-bolder"> {{count($beverages)}}</h4>
                                     <div class="progress w-75">
                                         <div class="progress-bar bg-dark w-50" role="progressbar" aria-valuenow="50"
                                             aria-valuemin="0" aria-valuemax="100"></div>
@@ -269,332 +287,69 @@
                 </div>
             </div>
         </div>
-        <div class="row my-4">
-            <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
-                <div class="card">
+        {{-- customer accpay --}}
+        
+
+            {{-- account payables statuses --}}
+            <div class="row my-4">
+            
+                <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
+                    <div class="card">
                     <div class="card-header pb-0">
-                        <div class="row">
-                            <div class="col-lg-6 col-7">
-                                <h6>Projects</h6>
-                                <p class="text-sm mb-0">
-                                    <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                    <span class="font-weight-bold ms-1">30 done</span> this month
-                                </p>
-                            </div>
-                            <div class="col-lg-6 col-5 my-auto text-end">
-                                <div class="dropdown float-lg-end pe-4">
-                                    <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="fa fa-ellipsis-v text-secondary"></i>
-                                    </a>
-                                    <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
-                                                action</a></li>
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else
-                                                here</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body px-0 pb-2">
-                        <div class="table-responsive">
-                            <table class="table align-items-center mb-0">
+                        <h5 class="m-2 font-weight-bold text-primary text-center fw-bold" >
+                           <strong> Customer's Account Payables  </strong>
+                        </h5>
+                        <div class="clearfix"></div>
+                        <div class="table-stats order-table ov-h">
+                            <table class="table ">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Supplier's</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Members</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Budget</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Completion</th>
+                                       
+                                        <th>Customer Name</th>
+                                        <th>Bank Name</th>
+                                        <th>Amount Due</th>
+                                        <th>Post Date</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+    
+                                    @foreach ($payables as $payable)
                                     <tr>
+                                        <td class="serial">{{ $payable->id }}</td>
+                                    
                                         <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="../assets/img/small-logos/logo-xd.svg"
-                                                        class="avatar avatar-sm me-3" alt="xd">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Soft UI XD Version</h6>
-                                                </div>
-                                            </div>
+                                             <span class="name">{{ $payable->customer->name }}</span>
+                                        </td>
+                                        <td> 
+                                            <span class="name">{{ $payable->bank_name }}</span>
+                                        </td>
+                                        {{-- <td>
+                                            <span class="count">{{ $payable->check_number }}</span></td>
+                                        <td>  --}}
+                                            <span class="name">{{ $payable->total_purchase }}</span>
                                         </td>
                                         <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Ryan Tompson">
-                                                    <img src="../assets/img/team-1.jpg" alt="team1">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Romina Hadid">
-                                                    <img src="../assets/img/team-2.jpg" alt="team2">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Alexander Smith">
-                                                    <img src="../assets/img/team-3.jpg" alt="team3">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                                                    <img src="../assets/img/team-4.jpg" alt="team4">
-                                                </a>
-                                            </div>
+                                             <span class="name">{{ $payable->check_amount }}</span>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> $14,000 </span>
+                                        <td><span class="count">{{ $payable->check_postdate }}</span></td>
+                        
+                                        <td>
+                                            <span class="badge badge-complete">Complete</span>
                                         </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">60%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info w-60" role="progressbar"
-                                                        aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </td>
+                                       
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="../assets/img/small-logos/logo-atlassian.svg"
-                                                        class="avatar avatar-sm me-3" alt="atlassian">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Add Progress Track</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Romina Hadid">
-                                                    <img src="../assets/img/team-2.jpg" alt="team5">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                                                    <img src="../assets/img/team-4.jpg" alt="team6">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> $3,000 </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">10%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info w-10" role="progressbar"
-                                                        aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="../assets/img/small-logos/logo-slack.svg"
-                                                        class="avatar avatar-sm me-3" alt="team7">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Fix Platform Errors</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Romina Hadid">
-                                                    <img src="../assets/img/team-3.jpg" alt="team8">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                                                    <img src="../assets/img/team-1.jpg" alt="team9">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> Not set </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">100%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-success w-100" role="progressbar"
-                                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="../assets/img/small-logos/logo-spotify.svg"
-                                                        class="avatar avatar-sm me-3" alt="spotify">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Launch our Mobile App</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Ryan Tompson">
-                                                    <img src="../assets/img/team-4.jpg" alt="user1">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Romina Hadid">
-                                                    <img src="../assets/img/team-3.jpg" alt="user2">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Alexander Smith">
-                                                    <img src="../assets/img/team-4.jpg" alt="user3">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                                                    <img src="../assets/img/team-1.jpg" alt="user4">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> $20,500 </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">100%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-success w-100" role="progressbar"
-                                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="../assets/img/small-logos/logo-jira.svg"
-                                                        class="avatar avatar-sm me-3" alt="jira">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Add the New Pricing Page</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Ryan Tompson">
-                                                    <img src="../assets/img/team-4.jpg" alt="user5">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> $500 </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">25%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info w-25" role="progressbar"
-                                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="25"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="../assets/img/small-logos/logo-invision.svg"
-                                                        class="avatar avatar-sm me-3" alt="invision">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Redesign New Online Shop</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Ryan Tompson">
-                                                    <img src="../assets/img/team-1.jpg" alt="user6">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                                                    <img src="../assets/img/team-4.jpg" alt="user7">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> $2,000 </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">40%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info w-40" role="progressbar"
-                                                        aria-valuenow="40" aria-valuemin="0" aria-valuemax="40"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
-                        </div>
+                        </div> <!-- /.table-stats -->
                     </div>
-                </div>
+                </div> <!-- /.card -->
             </div>
-            <div class="col-lg-4 col-md-6">
+             {{-- <div class="col-lg-4 col-md-6">
                 <div class="card h-100">
                     <div class="card-header pb-0">
-                        <h6>Orders overview</h6>
+                        <h6>Recent Products</h6>
                         <p class="text-sm">
                             <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
                             <span class="font-weight-bold">24%</span> this month
@@ -661,8 +416,77 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
+            {{-- <div class="col-lg-4 col-md-6">
+                <div class="card h-100">
+                
+                    <div class="card-header pb-0">
+                        <h3 class="box-title">
+                            <center><bold>Customer's Account Payables</bold></center>
+                        </h3>
+                        <div class="clearfix"></div>
+                        <div class="table-stats order-table ov-h">
+                            <table class="table ">
+                                <thead>
+                                    <tr>
+                                        <th>Beverages Name</th>
+                                        <th>Category</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+    
+                                    @foreach ($beverages as $beverage)
+                                    <tr class="text-center">
+                                        <td>{{ $beverage->product_name }}</td>
+                                        <td>{{ $beverage->category->cat_name }}</td>  
+                                       
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div> <!-- /.table-stats -->
+                    </div>
+                </div> <!-- /.card -->
+            </div> --}}
+
+             <div class="col-lg-4 col-md-6">
+                <div class="card h-100">
+                    <div class="card-header pb-0">
+                        <h6 class="m-2 font-weight-bold text-primary text-center fw-bold"><strong> RECENT PRODUCTS</strong></h6>
+                    </div>
+                    <div class="card-body p-3">
+                        <div class="timeline timeline-one-side">
+                           
+                            <table class="table ">
+                                <thead>
+                                    <tr>
+                                        <th>Beverages Name</th>
+                                        <th>Category</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+    
+                                    @foreach ($beverages as $beverage)
+                                    <tr class="text-center">
+                                        <td>{{ $beverage->product_name }}</td>
+                                        <td>{{ $beverage->category->cat_name }}</td>  
+                                       
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            
+                           
+                            
+                           
+                        </div>
+                    </div>
+                </div>
+            </div> 
         </div>
+
+       
+
         
     </div>
 @endsection

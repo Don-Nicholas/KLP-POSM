@@ -17,6 +17,13 @@ class Purchase extends Model
         return $this->belongsTo('App\Models\Beverage');
     }
 
+    public function customer() {
+        return $this->belongsTo('App\Models\Customer');
+    }
+    public function mop() {
+        return $this->belongsTo('App\Models\MOP');
+    }
+
     public function category() {
         return $this->belongsTo('App\Models\Category');
     }

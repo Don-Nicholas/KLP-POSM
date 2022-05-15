@@ -13,8 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('payables', function (Blueprint $table) {
             $table->id();
+            $table->integer('customer_id');
+            $table->string('bank_name');
+            $table->string('check_number');
+            $table->double('total_purchase', 10,2);
+            $table->double('check_amount', 10,2);
+            $table->date('check_postdate');
             $table->timestamps();
         });
     }
@@ -26,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('payables');
     }
 };

@@ -7,6 +7,6 @@
 
     {!!Form::open(["action"=>["CategoriesController@destroy", $category->id], "method"=>"POST"])!!}
     {{Form::hidden('_method', 'DELETE')}}
-    <button type="submit" class="btn btn-danger">Delete</button>
+    {{-- <button type="submit" class="btn btn-danger">Delete</button> --}}
     {!!Form::close()!!}
 @endsection

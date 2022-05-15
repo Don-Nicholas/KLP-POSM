@@ -13,18 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('beverage_lists', function (Blueprint $table) {
+        Schema::create('supplierstocks', function (Blueprint $table) {
             $table->id();
+            $table->integer('beverage_id');
             $table->integer('supplier_id');
-            $table->string('product_name', 50);
-            $table->string('category_name', 50);
-            $table->integer('category_unit');
-            $table->double('quantity', 5, 2);
-            $table->double('price_case', 10, 2);
-            $table->double('price_solo', 10, 0);
+            $table->integer('category_id');
+            $table->double('quantity',10,2);
+            $table->double('price_case',10,2);
+            $table->double('price_solo',10,2);
             $table->date('date_expire');
             $table->integer('piece');
-            $table->integer('barorder');
+            $table->integer('badorder');
             $table->timestamps();
         });
     }
@@ -36,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('beverage_lists');
+        Schema::dropIfExists('supplierstocks');
     }
 };

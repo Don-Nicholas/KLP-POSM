@@ -1,11 +1,28 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row">
+<div id="right-panel" class="right-panel">
+
+    <!-- Header-->
+    <header id="header" class="header">
+
+        <div class="header-menu">
+
+            <div class="col-sm-10">
+                <h2>
+                    <center>KLP BEVERAGE TRADING</center>
+                </h2>
+
+            </div>
+
+        </div>
+</div>
+{{-- End of HEADER --}}
+<div class="row">
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h2>Suppliers &nbsp;
-             <a href="#myModal" role="button" class="btn btn-md btn-primary" data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i>Add</a></h2>
+                    <h3 class="m-2 font-weight-bold text-primary">Suppliers &nbsp;
+             <a href="#myModal" role="button" class="btn btn-md btn-primary" data-bs-toggle="modal"><i class="fas fa-fw fa-plus"></i>Add</a></h3>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -23,8 +40,8 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Created At</th>
-                                        <th class="text-secondary opacity-7" colspan="2">
-                                            Actions
+                                        <th class="text-secondary opacity-7" colspan="4">
+                                           <center> Actions </center>
                                         </th>
 
                                     <th class="text-secondary opacity-7"></th>
@@ -36,10 +53,7 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
-                                                            alt="user1">
-                                                    </div>
+                                                    
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <h6 class="mb-0 text-sm">{{$suppliers->name}}</h6>
                                                     </div>
@@ -57,15 +71,15 @@
                                             </td>
                                             <td class="align-middle">
                                                 <a href="/suppliers/{{ $suppliers->id }}"
-                                                    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                    data-original-title="Edit user">
+                                                    class="btn btn-primary mx-2"
+                                                    data-toggle="tooltip" data-original-title="Edit user">
                                                     View
                                                 </a>
                                             </td>
                                             <td class="align-middle">
                                                 <a href="/suppliers/{{ $suppliers->id }}/edit"
-                                                    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                    data-original-title="Edit user">
+                                                    class="btn btn-primary mx-2"
+                                                    data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
                                                 </a>
                                             </td>

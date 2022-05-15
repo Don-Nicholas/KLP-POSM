@@ -37,5 +37,6 @@ Route::resource('/purchases', 'PurchasesController');
 Route::resource('/purchased', 'PurchasedController');
 Route::resource('/account_payables', 'AccountPayablesController');
 Route::resource('/status', 'StatusController');
+Route::resource('/products', 'ProductController');
 ?>
 

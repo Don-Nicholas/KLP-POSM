@@ -16,16 +16,14 @@ return new class extends Migration
         Schema::create('customer_sales', function (Blueprint $table) {
             $table->id();
             $table->integer('customer_id');
-            $table->integer('order_id');
             $table->integer('m_o_p_id');
-            $table->date('date');
-            $table->double('amount', 10, 2);
-            $table->double('discount', 10, 2);
+            $table->double('amount', 10,2);
+            $table->string('check_num');
+            $table->string('check_date');
+            $table->date('bankname');
+            $table->double('discount');
+            $table->double('check_amount',10,2);
             $table->integer('status_id');
-            $table->string('checknum');
-            $table->date('check_date');
-            $table->string('bankname');
-            $table->double('check_amount', 10, 2);
             $table->timestamps();
         });
     }

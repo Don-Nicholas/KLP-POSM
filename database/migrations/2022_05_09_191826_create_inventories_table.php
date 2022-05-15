@@ -13,20 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inventory', function (Blueprint $table) {
+        Schema::create('inventories', function (Blueprint $table) {
             $table->id();
             $table->integer('supplier_id');
-            $table->string('product_name', 50);
-            $table->string('category_name', 50);
-            $table->integer('category_unit');
-            $table->double('quantity', 5, 2);
-            $table->double('price_case', 10, 2);
-            $table->double('price_solo', 10, 0);
-            $table->date('date_expire');
-            $table->integer('piece');
-            $table->integer('barorder');
+            $table->integer('category_id');
+            $table->string('beverage_name');
+            $table->double('quantity', 5,2);
+            $table->double('price_case', 10,2);
+            $table->double('price_solo', 10,2);
+            $table->date('date_expiry');
+            $table->integer('badorder');
             $table->timestamps();
-            
         });
     }
 

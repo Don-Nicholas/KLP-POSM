@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+Use App\Models\Payable;
 use App\Models\Customer;
 use App\Models\MOP;
 use App\Models\Beverage;
@@ -20,8 +21,8 @@ class AccountPayablesController extends Controller
     public function index()
     {
          //return from models; 
+        $payables = Payable::all();
         $customers = Customer::all();
-       
         $mops = MOP::all();
         $beverageslist = Beverage::all();
         $categories = Category::all();
@@ -29,8 +30,7 @@ class AccountPayablesController extends Controller
 
         
 
-        return view('payables.index');
-        return view('invoices.index')->with('customers', $customers)->with('m_o_p_s', $mops)->with('beverages',$beverageslist)->with('categories', $categories)
+        return view('payables.index')->with('payables', $payables)->with('customers', $customers)->with('m_o_p_s', $mops)->with('beverages',$beverageslist)->with('categories', $categories)
         ->with('purchases',$purchases );
 
     }
@@ -55,11 +55,12 @@ class AccountPayablesController extends Controller
     {
         $this->validate($request, [
             'id'=> 'required',
-            'name' => 'required',
-            'contact' => 'required',
-            'total' =>'required',
+            'customer_id' => 'required',
             'bank_name' => 'required',
-            'date_purchase' => 'required']);
+            'check_number' =>'required',
+            'total_purchase' => 'required',
+            'check_amount' => 'required',
+            'check_postdate' => 'required']);
 
 
          
@@ -70,14 +71,15 @@ class AccountPayablesController extends Controller
 
 
         $payables->id = $request->input('id');
-        $payables->name = $request->input('name');
-        $payables->contact = $request->input('contact');
-        $payables->total = $request->input('total');
-        $payables->bank_name = date('bank_name');
-        $payables->date_purchase = $current_date;
-        $payables->total = $total;
-        $payables->amount_due = $amount_due;
+        $payables->customer_name = $request->input('name');
+        $payables->bank_name = $request->input('bank_name');
+        $payables->check_number = $request->input('check_number');
+        $payables->total_purchase = $request->input('total_purchase');
+        $payables->check_amount = $request->input('check_amount');
+        $payables->check_postdate = $request->date('check_postdate');
+        
         $payables->save();
+        return redirect('/payables')->with('success', 'Inserted Successfully');
     }
 
     /**
@@ -88,7 +90,15 @@ class AccountPayablesController extends Controller
      */
     public function show($id)
     {
-        //
+        $payables = Payable::all();
+        $customers = Customer::all();
+        $mops = MOP::all();
+        $beverageslist = Beverage::all();
+        $categories = Category::all();
+        $purchases = Purchase::all();
+
+        return view('payables.show')->with('payables',$payables)->with('customers', $customers)->with('m_o_p_s', $mops)->with('beverages',$beverageslist)->with('categories', $categories)
+        ->with('purchases',$purchases );
     }
 
     /**
@@ -99,17 +109,15 @@ class AccountPayablesController extends Controller
      */
     public function edit($id)
     {
-        $supplier = Supplier::find($id);
-        $customers = Customer::find($id);
-        //return $customers; 
-        $mops = MOP::find($id);
-        $beverageslist = Beverage::find($id);
-        $categories = Category::find($id);
-        $purchases = Purchase::all($id);
-        return view('suppliers.edit')->with('customers', $customers)->with('m_o_p_s', $mops)->with('beverages',$beverageslist)->with('categories', $categories)
-        ->with('purchases',$purchases );
+        $payables = Payable::find();
+        $customers = Customer::all();
+        $mops = MOP::all();
+        $beverageslist = Beverage::all();
+        $categories = Category::all();
+        $purchases = Purchase::all();
 
-    
+        return view('payables.edit')->with('payables',$payables)->with('customers', $customers)->with('m_o_p_s', $mops)->with('beverages',$beverageslist)->with('categories', $categories)
+        ->with('purchases',$purchases );
     }
 
     /**
@@ -121,7 +129,34 @@ class AccountPayablesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'id'=> 'required',
+            'customer_id' => 'required',
+            'bank_name' => 'required',
+            'check_number' =>'required',
+            'total_purchase' => 'required',
+            'check_amount' => 'required',
+            'check_postdate' => 'required']);
+
+
+         
+         $total = Purchase::find($request->input('total'));
+         $purchase = Purchase::find($request->input('beverage'));
+
+         $payables = new Purchased;
+
+
+        $payables->id = $request->input('id');
+        $payables->customer_name = $request->input('name');
+        $payables->bank_name = $request->input('bank_name');
+        $payables->check_number = $request->input('check_number');
+        $payables->total_purchase = $request->input('total_purchase');
+        $payables->check_amount = $request->input('check_amount');
+        $payables->check_postdate = $request->date('check_postdate');
+        
+        $payables->save();
+        return redirect('/payables')->with('success', 'Updated Successfully');
+    
     }
 
     /**
@@ -132,6 +167,10 @@ class AccountPayablesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $payables = Payable::find();
+        $payables->delete();
+        
+        return redirect('/payables')->with("success","Deleted Successfuly!");
+
     }
 }
