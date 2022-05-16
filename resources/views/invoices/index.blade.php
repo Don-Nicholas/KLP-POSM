@@ -35,7 +35,7 @@
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="table-responsive">
-
+ 
                                     <table class="table " id="dataTable" width="100%" cellspacing="0">
                                         <tr>
                                             <td>
@@ -44,17 +44,6 @@
 
                                                 <input type="hidden" name="orderID" value="">
                                                 <table>
-
-                                                    <tr>
-                                                        <td>
-                                                            <label>Purchase Order #</label>
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class=""
-                                                                value="0000" name="orderNumber"
-                                                                style="width: 200px;" readonly>
-                                                        </td>
-                                                    </tr>
 
                                                     <tr>
                                                         <td>
