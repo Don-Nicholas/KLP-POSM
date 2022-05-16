@@ -11,6 +11,7 @@ use App\Models\Purchase;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Inventory;
+use App\Models\Supplier;
 
 
 class PurchasesController extends Controller
@@ -21,16 +22,16 @@ class PurchasesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $beverages = Beverage::all();
-        $suppliers = Supplier::all(); 
-        $products = Product::select('beverage_name')->distinct()->get();
+    { 
+    //     $beverages = Beverage::all();
+    //     $suppliers = Supplier::all(); 
+    //     $products = Product::select('beverage_name')->distinct()->get();
 
-        // $products = Product::orderByDesc('beverage_name', 'desc')->distinct('beverage_name')->get();
-        $category = Category::all();
+    //     // $products = Product::orderByDesc('beverage_name', 'desc')->distinct('beverage_name')->get();
+    //     $category = Category::all();
 
-        return view('purchase.index')->with('beverages', $beverages)->with('suppliers', $suppliers)
-       ->with('category',$category)->with('products', $products);
+    //     return view('purchase.index')->with('beverages', $beverages)->with('suppliers', $suppliers)
+    //    ->with('category',$category)->with('products', $products);
 
     }
 
@@ -55,19 +56,18 @@ class PurchasesController extends Controller
 
         
         $this->validate($request, [
-            'orderNumber'=> 'required',
             'beverage' => 'required',
             'category' => 'required',
             'case' =>'required']);
 
 
-        $products = Beverage::find($request->input('beverage'));
+        $beverage = Beverage::find($request->input('beverage'));
         $total =  $beverage->price_case * $request->input('case');
 
          $purchases = new Purchase;
 
-        $purchases->order_id = $request->input('orderNumber');
-        $purchases->beverage_id = $request->input('beverage_name');
+        $purchases->order_id = 0;
+        $purchases->beverage_id = $request->input('beverage');
         $purchases->quantity = $request->input('case');
         $purchases->category_id = $request->input('category');
         $current_date = date('Y-m-d H:i:s');
@@ -75,34 +75,28 @@ class PurchasesController extends Controller
         $purchases->total = $total;
         $purchases->save();
 
-        $result = DB::table('beverages')->where('id', (int)$request->input('beverage'))->orderBy('id', 'DESC')->get();
-
-
-        $quantity =  (int)$result[0]->quantity - (int)$request->input('case');
-        // return $result[0];
-
-        $inventory = new Inventory;
-        $inventory->supplier_id = $result[0]->supplier_id;
-        $inventory->product_name = $result[0]->product_name;
-        $inventory->category_id = $result[0]->category_id;
-        $inventory->quantity = $quantity;
-        $inventory->price_case = $result[0]->price_case;
-        $inventory->price_solo = $result[0]->price_solo;
-        $inventory->date_expire = $result[0]->date_expire;
-        $inventory->barorder = $result[0]->barorder;
-        $inventory->save();
-
-        $beverageOne = Beverage::find($result[0]->id);
-        $beverageOne->quantity = $quantity;
-        $beverageOne->save();
-
+        $result = Beverage::find((int)$request->input('beverage'));
         
 
-        $orderID = (int)$request->input('orderID');
+        $quantity =  $result->product->total_quantity - (int)$request->input('case');
 
-        $order = Order::find($orderID);
-        $order->order_number = $request->input('orderNumber');
-        $order->save();
+        $inventory = new Inventory;
+        $inventory->supplier_id = $result->supplier_id;
+        $inventory->beverage_name = $result->product->beverage_name;
+        $inventory->category_id = $result->category_id;
+        $inventory->quantity = $quantity;
+        $inventory->price_case = $result->product->price_case;
+        $inventory->price_solo = $result->product->price_solo;
+        $inventory->date_expiry = $result->product->date_expire;
+        $inventory->badorder = $result->product->badorder;
+        $inventory->save();
+
+        
+        $product = Product::find($result->product->id);
+        $product->total_quantity = $quantity;
+        $product->save();
+
+        
 
         return redirect('/purchase')->with('success', 'Inserted Successfully');
     }

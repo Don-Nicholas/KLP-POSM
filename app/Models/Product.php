@@ -12,7 +12,7 @@ class Product extends Model
     public $primaryKey = 'id';
     public $timestamps = true;
 
-    public function beverage() {
+    public function beverages() {
         return $this->hasMany('App\Models\Beverage');
     }
 
