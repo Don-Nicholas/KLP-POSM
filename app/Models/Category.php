@@ -19,6 +19,9 @@ class Category extends Model
     public function beverages() {
         return $this->hasMany('App\Models\Beverage');
     }
+    public function supplier() {
+        return $this->belongsTo('App\Models\Supplier');
+    }
 
     public function inventories() {
         return $this->hasMany('App\Models\Inventory');

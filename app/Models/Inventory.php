@@ -27,14 +27,13 @@ class Inventory extends Model
     public function order() {
         return $this->belongsTo('App\Models\Order');
     }
+
     public function beverage() {
         return $this->hasMany('App\Models\Beverage');
     }
     
     public function product() {
-        return $this->hasMany('App\Models\Product');
+        return $this->belongsTo('App\Models\Product');
     }
-    // public function category() {
-    //     return $this->belongsTo('App\Models\Category');
-    // }
+   
 }

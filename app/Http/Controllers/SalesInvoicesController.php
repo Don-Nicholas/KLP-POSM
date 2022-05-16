@@ -31,18 +31,17 @@ class SalesInvoicesController extends Controller
         $mops = MOP::all();
         $beverages = Beverage::all();
         $categories = Category::all();
-        $purchases = Purchase::all();
+        $purchases = Purchase::orderByDesc("id")->get();
         $orderID = Order::all();
 
 
         $totals = 0;
         foreach($purchases as $purchase) {
-            $totals += $purchase->beverage->product->price_case;
+            $totals += $purchase->total;
         }
 
-
         return view('invoices.index')->with('customers', $customers)->with('m_o_p_s', $mops)->with('beverages',$beverages)->with('categories', $categories)
-        ->with('purchases',$purchases);
+        ->with('purchases',$purchases)->with('totals', $totals);
 
     }
 

@@ -25,4 +25,7 @@ class Product extends Model
     public function purchase() {
         return $this->hasMany('App\Models\Purchase');
     }
+      public function inventories() {
+        return $this->hasMany('App\Models\Inventory');
+    }
 }
