@@ -22,4 +22,7 @@ class Product extends Model
     public function supplier() {
         return $this->hasMany('App\Models\Supplier');
     }
+    public function purchase() {
+        return $this->hasMany('App\Models\Purchase');
+    }
 }

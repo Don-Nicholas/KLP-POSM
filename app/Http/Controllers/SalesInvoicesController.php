@@ -37,8 +37,9 @@ class SalesInvoicesController extends Controller
 
         $totals = 0;
         foreach($purchases as $purchase) {
-            $totals += $purchase->total;
+            $totals += $purchase->beverage->product->price_case;
         }
+
 
         return view('invoices.index')->with('customers', $customers)->with('m_o_p_s', $mops)->with('beverages',$beverages)->with('categories', $categories)
         ->with('purchases',$purchases);

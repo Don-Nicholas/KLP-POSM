@@ -141,11 +141,11 @@
 
                                                     @foreach ($purchases as $purchase)
                                                         <tr>
-                                                            <td>{{ $purchase->beverage_name }}</td>
+                                                            <td>{{ $purchase->beverage->product->beverage_name }}</td>
                                                             <td>{{ $purchase->category->cat_name }}</td>
-                                                            <td>{{ $purchase->beverage->case }}</td>
-                                                            <td>{{ $purchase->beverage->price_case }}</td>
-                                                            <td>{{ $purchase->beverage->price_solo }}</td>
+                                                            <td>{{ $purchase->quantity }}</td>
+                                                            <td>{{ $purchase->beverage->product->price_case }}</td>
+                                                            <td>{{ $purchase->beverage->product->price_solo }}</td>
                                                             <td>{{ $purchase->total }}</td>
                                                             <td><a href="SalesInvoiceController@destroy?delete=<php echo $row['pur_id']; ?>"
                                                                     class="btn btn-danger" style="width: 90px;">Cancel</a>
@@ -228,7 +228,6 @@
                                                                 name="gtotal" id="txt1" style="width: 200px;" readonly>
                                                         </td>
                                                     </tr>
-
                                                     <tr>
                                                         <td colspan="2">
                                                             <button type="submit" class="btn btn-primary"

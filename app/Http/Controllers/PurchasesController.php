@@ -70,6 +70,7 @@ class PurchasesController extends Controller
         $purchases->beverage_id = $request->input('beverage');
         $purchases->quantity = $request->input('case');
         $purchases->category_id = $request->input('category');
+        
         $current_date = date('Y-m-d H:i:s');
         $purchases->date_purchase = $current_date;
         $purchases->total = $total;
