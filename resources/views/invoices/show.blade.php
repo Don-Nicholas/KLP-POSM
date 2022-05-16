@@ -4,12 +4,12 @@
         <h3>Cash Payment Method</h3>
 
         <div class="row mt-5">
-            @if ($mop === 'Cash')
+            @if ($mop->mode === 'cash')
             <div class="col-sm-6">
                 {!! Form::open(['action' => 'CustomerSalesController@store', 'method' => 'POST']) !!}
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Total Quantity</span>
-                    <input type="text" class="form-control ps-3"  name="total_quantity" value="{{$total_quantity}}" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control ps-3"  name="total_quantity" value="{{$total_quantity}}" placeholder="Username" aria-label="Username" readonly aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Customer Name</span>
@@ -27,6 +27,8 @@
                     <span class="input-group-text" id="basic-addon1">Discounted Amount</span>
                     <input type="text" class="form-control ps-3" id="discountedAmount"  placeholder="Discounted Amount" readonly aria-label="discounted amout" aria-describedby="basic-addon1">
                 </div>
+                <input type="hidden" name="customer_id" value="{{$customer_id}}">
+                <input type="hidden" name="m_o_p_id" value="{{$mop_id}}">
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Cash</span>
                     <input type="text" class="form-control ps-3" oninput="calcChange()" id="cash" name="cash" placeholder="Cash" aria-label="Cash" aria-describedby="basic-addon1">
@@ -44,15 +46,17 @@
                 {!! Form::open(['action' => 'CustomerSalesController@store', 'method' => 'POST']) !!}
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Total Quantity</span>
-                    <input type="text" class="form-control ps-3"  name="total_quantity" value="{{$total_quantity}}" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control ps-3"  name="total_quantity" value="{{$total_quantity}}" readonly placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
+                <input type="hidden" name="customer_id" value="{{$customer_id}}">
+                <input type="hidden" name="m_o_p_id" value="{{$mop_id}}">
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Customer Name</span>
                     <input type="text" class="form-control ps-3" value="{{$customerName}}" readonly name="customer_name" placeholder="Customer Name" aria-label="CustomerName" aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Amount Due</span>
-                    <input type="text" class="form-control ps-3" id="amountDue" value="{{$grandTotal}}" name="amount_due" placeholder="Amount Due"  aria-label="Username" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control ps-3" id="amountDue" value="{{$grandTotal}}" name="amount_due" readonly placeholder="Amount Due"  aria-label="Username" aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1" >Post Date</span>

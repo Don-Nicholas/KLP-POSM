@@ -58,13 +58,14 @@ class PurchasesController extends Controller
         $this->validate($request, [
             'beverage' => 'required',
             'category' => 'required',
-            'case' =>'required']);
+            'case' =>'required'
+        ]);
 
 
         $beverage = Beverage::find($request->input('beverage'));
-        $total =  $beverage->price_case * $request->input('case');
+        $total =  $beverage->product->price_case * $request->input('case');
 
-         $purchases = new Purchase;
+        $purchases = new Purchase;
 
         $purchases->order_id = 0;
         $purchases->beverage_id = $request->input('beverage');
@@ -78,6 +79,7 @@ class PurchasesController extends Controller
 
         $result = Beverage::find((int)$request->input('beverage'));
         
+        // return 
 
         $quantity =  $result->product->total_quantity - (int)$request->input('case');
 
@@ -85,6 +87,7 @@ class PurchasesController extends Controller
         $inventory->supplier_id = $result->supplier_id;
         $inventory->beverage_name = $result->product->beverage_name;
         $inventory->category_id = $result->category_id;
+        $inventory->product_id = $result->product->id;
         $inventory->quantity = $quantity;
         $inventory->price_case = $result->product->price_case;
         $inventory->price_solo = $result->product->price_solo;

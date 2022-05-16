@@ -17,9 +17,9 @@ class CustomerSalesController extends Controller
      */
     public function index()
     {
-        $customer_sales = CustomerSale::all();
+        $customerSale = CustomerSale::all();
 
-        return view('customersales.index')->with('customersales', $customer_sales);
+        return view('customersales.index')->with('customerSale', $customerSale);
     }
 
     /**
@@ -50,7 +50,7 @@ class CustomerSalesController extends Controller
                 'discount'=> 'required',
                 'cash' => 'required',
                 'change' => 'required'
-            ]);
+            ]); 
         }
         else {
             $this->validate($request, [
@@ -64,17 +64,21 @@ class CustomerSalesController extends Controller
             ]);
         }
 
+        // return $request->input('mop_id');
+
         $customerSale = new CustomerSale;
-        $customerSale->customer_name = $request->input('customer_name');
-        $customerSale->mop = $request->input('mop');
+        $customerSale->customer_id = $request->input('customer_id');
+        $customerSale->m_o_p_id = $request->input('m_o_p_id');
         $customerSale->amount = $request->input('amount_due');
         $customerSale->total_quantity = $request->input('total_quantity');
         $current_date = date('Y-m-d H:i:s');
 
+        // return $current_date;
+
         if($request->input('mop') === 'Cash'){
-            // $customerSale->discount = $request->input('discount');
+            $customerSale->discount = $request->input('discount');
             $customerSale->total_cash = $request->input('cash');
-            $customerSale->checknum ="N/A";
+            $customerSale->check_num ="N/A";
             $customerSale->check_date = $current_date;
             $customerSale->bankname = "N/A";
             $customerSale->check_amount = 0;
@@ -82,14 +86,12 @@ class CustomerSalesController extends Controller
         else {
             $customerSale->discount = 0;
             $customerSale->total_cash = 0;
-            $customerSale->checknum ="N/A";
+            $customerSale->check_num = $request->input('checkNumber');
             $customerSale->check_date = $request->input('postDate');
             $customerSale->bankname = $request->input('bankName');
             $customerSale->check_amount = $request->input('checkAmount');
         }
 
-        $customerSale->date = $current_date;
-        
         $customerSale->save();
 
         Purchase::query()->truncate();
@@ -105,7 +107,8 @@ class CustomerSalesController extends Controller
      */
     public function show($id)
     {
-        //
+        $customerSale = Customer::find($id);
+        return view('customersales.show')->with('customerSale', $customerSale);
     }
 
     /**
@@ -116,7 +119,8 @@ class CustomerSalesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customerSale = Customer::find($id);
+        return view('customersales.edit')->with('customerSale', $customerSale);
     }
 
     /**

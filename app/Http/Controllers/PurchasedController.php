@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Purchased;
 use App\Models\Purchase;
+use App\Models\MOP;
 
 class PurchasedController extends Controller
 {
@@ -92,7 +93,14 @@ class PurchasedController extends Controller
         }
 
         $customerName = Customer::find($customer);
-        return view('invoices.show')->with('customerName', $customerName->name)->with('grandTotal', $request->input('gtotal'))->with('total_quantity', $total_quantity)->with('mop', $request->input('mop'));
+        $mop = Mop::find($request->input('mop'));
+
+        // return $mop;
+
+        return view('invoices.show')->with('customerName', $customerName->name)
+        ->with('grandTotal', $request->input('gtotal'))->with('total_quantity', $total_quantity)
+        ->with('mop', $mop)->with('customer_id', $request->input('customer'))
+        ->with('mop_id', $request->input('mop'));
     }
 
     /**

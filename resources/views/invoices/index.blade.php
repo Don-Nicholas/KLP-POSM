@@ -202,7 +202,7 @@
                                                             <select name="mop" style="width: 200px;">
                                                                 @if (count($m_o_p_s) > 0)
                                                                     @foreach ($m_o_p_s as $bayadform)
-                                                                        <option value="{{ $bayadform->mode }}">
+                                                                        <option value="{{ $bayadform->id }}">
                                                                             {{ $bayadform->mode }}</option>
                                                                     @endforeach
                                                                     <option disabled selected>-- Select Payment --
@@ -224,7 +224,7 @@
                                                             <label>Grand Total</label>
                                                         </td>
                                                         <td>
-                                                            <input type="text" border="none" value=""
+                                                            <input type="text" border="none" value="{{$totals}}"
                                                                 name="gtotal" id="txt1" style="width: 200px;" readonly>
                                                         </td>
                                                     </tr>
